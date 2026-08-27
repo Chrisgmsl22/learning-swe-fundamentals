@@ -44,6 +44,72 @@ The practical part is the biggest unknown — but a task that says *"do not over
 almost certainly asking him to **read and fix** config, not author modules. Target reading fluency
 and the ~8 resource types that matter, not authorship.
 
+## The four parts, as briefed — keep every term here in scope
+
+This is the topic list he was given, close to verbatim. The spine above is the distillation; this
+is the raw signal. **Do not lose these terms** — they say what is actually likely to come up.
+
+**Part 1 — practical / troubleshooting.** He solves a real problem and writes some config.
+
+> configuration analysis · AWS · linux commands · CloudFormation · web protocols · networking
+> (HTTP, TCP, UDP, SSH) · VPC · subnets · route tables · VPN · security groups · load balancers ·
+> file/group permissions · open configurations · microservices from a DevOps perspective
+>
+> *"Do not overcomplicate your solution, the simplest approach is usually the best."*
+
+He suspects the coding is **CloudFormation and/or Terraform** and has never written either.
+
+**Part 2 — system design, DevOps-flavoured.** Given requirements, design a system.
+
+> system design · DevOps fundamentals · SDLC · monitoring · incidents · availability · Docker ·
+> Kubernetes · Docker images · build times · vulnerabilities · failure modes · CI/CD · pipeline
+> improvements · stashing · parallelisation · caching · Lambda · S3 · CDN
+>
+> *"Choose compatible technologies and justify why you chose them. Detail each phase during the design."*
+
+**Part 3 — experience-based conversation.**
+
+> challenges at work · how he achieved something · what he did to get the result
+
+Approach: **do not memorise answers.** Build 8 stories, and for each know the *key topic* it
+demonstrates, so any question can be routed to the nearest one. He also plans to look up who he
+will be speaking with beforehand — that is a Tuesday task, not a study task.
+
+**Part 4 — case study.** A business simulation to analyse. Effectively parts 1, 2 and 3 combined.
+
+> cloud capacity · migration to the cloud · tradeoffs of being on the cloud · cost · resilience ·
+> performance · efficiency · security · agility · scalability · elasticity · multi-region ·
+> per-VM costs
+>
+> Worked example he was told to expect: *a payment system has unexpected spikes — how do you
+> handle capacity in the cloud?*
+>
+> *"Problem solving, technical ability, a lot of communication, thinking out loud, visual cues.
+> Treat the other person as a partner, not a rival to beat."*
+
+## How he wants to learn — this shapes every session
+
+His words: *"Not sure I should go into each topic linearly, as I think this should be constant
+practice, so let's learn the basics, terraform coding, system design, practice — all in 1 week."*
+
+So: **interleave, do not lecture.** Each evening is a short concept block and then a longer
+producing block. Never a reading list. He has already been through the
+read-a-lot-practise-nothing failure mode with Alex Xu's book, and that is the exact gap this week
+exists to close.
+
+Also his words: *"I want to have fun and enjoy the process"* and *"I do not need to know it all
+nor be perfect."* Both are correct and worth protecting. Anxiety-driven cramming would make
+Thursday worse, not better.
+
+## Starting a session
+
+1. Ask how long he has tonight. Size the session to that, do not assume.
+2. Say which day of the plan it is and what the artifact will be.
+3. Concept block first, kept short. Then he produces. **Never end a session with nothing written.**
+4. Update `PROGRESS.md` at the end: what was covered, what the artifact was, what is still shaky.
+
+Read `PROGRESS.md` before anything else — it is the state of the week.
+
 ## The 7 evenings
 
 | Day | Focus | Ends with |
