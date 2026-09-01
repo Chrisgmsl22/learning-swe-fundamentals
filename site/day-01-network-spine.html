@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Network Spine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+<style>
+:root{
+  --ground:#FBFBFC;
+  --surface:#F1F4F8;
+  --surface-2:#E7ECF3;
+  --ink:#141922;
+  --muted:#596475;
+  --faint:#8A94A3;
+  --rule:#DCE2EA;
+  --accent:#0E7C86;
+  --accent-soft:#DCF0F1;
+  --good:#2C6E49;
+  --good-soft:#DFF0E6;
+  --bad:#A82820;
+  --bad-soft:#FBE6E4;
+  --shadow:0 1px 2px rgba(20,25,34,.05), 0 8px 24px -16px rgba(20,25,34,.28);
+
+  color-scheme:light;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+/* Light theme only — locked by preference. Do not add dark overrides. */
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:17px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+
+.page{max-width:1140px;margin:0 auto;padding:0 28px 120px}
+.col{max-width:65ch}
+.plate{max-width:100%}
+
+/* ---------- masthead ---------- */
+.mast{
+  padding:72px 0 40px;
+  border-bottom:1px solid var(--rule);
+  margin-bottom:56px;
+}
+.kicker{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin:0 0 18px;
+}
+h1{
+  font-family:var(--sans);
+  font-weight:700;
+  font-size:clamp(2.4rem,6vw,3.9rem);
+  line-height:1.02;
+  letter-spacing:-.025em;
+  margin:0 0 20px;
+  text-wrap:balance;
+}
+.standfirst{
+  font-size:1.16rem;
+  color:var(--muted);
+  margin:0;
+  max-width:56ch;
+}
+.mast-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 28px;
+  margin-top:30px;
+  font-family:var(--mono);
+  font-size:12.5px;
+  color:var(--faint);
+}
+.mast-meta b{color:var(--ink);font-weight:500}
+
+/* ---------- sections ---------- */
+section{margin:0 0 76px;scroll-margin-top:24px}
+.sec-head{
+  display:flex;
+  align-items:baseline;
+  gap:16px;
+  margin:0 0 8px;
+  padding-bottom:12px;
+  border-bottom:2px solid var(--ink);
+}
+.sec-num{
+  font-family:var(--mono);
+  font-size:13px;
+  font-weight:700;
+  color:var(--accent);
+  letter-spacing:.06em;
+}
+h2{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:1.62rem;
+  letter-spacing:-.018em;
+  margin:0;
+  text-wrap:balance;
+}
+h3{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:1.12rem;
+  letter-spacing:-.008em;
+  margin:38px 0 12px;
+  text-wrap:balance;
+}
+h4{
+  font-family:var(--mono);
+  font-weight:700;
+  font-size:11.5px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--faint);
+  margin:28px 0 10px;
+}
+p{margin:0 0 16px}
+.lede{color:var(--muted);margin-bottom:26px}
+strong{font-weight:600}
+code{
+  font-family:var(--mono);
+  font-size:.87em;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:.1em .36em;
+  white-space:nowrap;
+}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:0 0 26px;border:1px solid var(--rule);border-radius:8px;background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:14.5px}
+th{
+  text-align:left;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  color:var(--faint);
+  font-weight:700;
+  padding:12px 16px;
+  border-bottom:1px solid var(--rule);
+  white-space:nowrap;
+}
+td{padding:11px 16px;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--ink)}
+tr:last-child td{border-bottom:none}
+td code{background:var(--ground)}
+.num{font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:13.5px;white-space:nowrap}
+
+/* ---------- code blocks ---------- */
+pre{
+  font-family:var(--mono);
+  font-size:13px;
+  line-height:1.66;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:8px;
+  padding:18px 20px;
+  overflow-x:auto;
+  margin:0 0 26px;
+  color:var(--ink);
+}
+pre .c{color:var(--faint)}
+pre .a{color:var(--accent)}
+
+/* ---------- callouts ---------- */
+.note{
+  border-left:3px solid var(--accent);
+  background:var(--accent-soft);
+  padding:16px 20px;
+  border-radius:0 8px 8px 0;
+  margin:0 0 26px;
+}
+.note p:last-child{margin-bottom:0}
+.note .tag{
+  display:block;
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--accent);
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.err{
+  border:1px solid var(--rule);
+  border-radius:8px;
+  overflow:hidden;
+  margin:0 0 18px;
+  background:var(--surface);
+}
+.err-row{display:flex;gap:0;flex-wrap:wrap}
+.err-half{flex:1 1 260px;padding:14px 18px}
+.err-half+.err-half{border-left:1px solid var(--rule)}
+.err .lbl{
+  display:inline-block;
+  font-family:var(--mono);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  padding:2px 7px;
+  border-radius:3px;
+  margin-bottom:8px;
+}
+.err .lbl.no{background:var(--bad-soft);color:var(--bad)}
+.err .lbl.yes{background:var(--good-soft);color:var(--good)}
+.err code{font-size:12.5px;background:var(--ground)}
+.err p{margin:0;font-size:15px;line-height:1.5}
+.err-why{
+  padding:12px 18px;
+  border-top:1px solid var(--rule);
+  background:var(--surface-2);
+  font-size:14.5px;
+  color:var(--muted);
+}
+.err-why b{color:var(--ink)}
+
+/* ---------- VPC diagram ---------- */
+.diagram{
+  border:1px solid var(--rule);
+  border-radius:10px;
+  background:var(--surface);
+  padding:24px;
+  margin:0 0 12px;
+  overflow-x:auto;
+  box-shadow:var(--shadow);
+}
+.dg-inner{min-width:600px}
+.dg-title{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:16px;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.dg-title b{color:var(--ink);font-weight:500}
+
+.igw{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  border:2px solid var(--accent);
+  background:var(--accent-soft);
+  color:var(--accent);
+  border-radius:6px;
+  padding:9px;
+  font-family:var(--mono);
+  font-size:12.5px;
+  font-weight:700;
+  letter-spacing:.06em;
+  margin-bottom:0;
+}
+.stem{
+  width:2px;height:20px;background:var(--accent);
+  margin:0 auto;
+}
+.vpc{
+  border:2px solid var(--ink);
+  border-radius:10px;
+  padding:18px;
+  position:relative;
+}
+.vpc-tag,.az-tag,.sn-tag{
+  font-family:var(--mono);
+  font-size:10.5px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.vpc-tag{color:var(--ink);margin-bottom:14px;display:block}
+.azs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.az{
+  border:1px dashed var(--faint);
+  border-radius:8px;
+  padding:14px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.az-tag{color:var(--faint);display:block}
+.sn{border:1px solid var(--rule);border-radius:7px;padding:12px;background:var(--ground)}
+.sn.pub{border-color:var(--accent)}
+.sn-tag{display:block;margin-bottom:2px}
+.sn.pub .sn-tag{color:var(--accent)}
+.sn.priv .sn-tag{color:var(--muted)}
+.sn-cidr{
+  font-family:var(--mono);
+  font-size:11.5px;
+  color:var(--faint);
+  display:block;
+  margin-bottom:10px;
+  font-variant-numeric:tabular-nums;
+}
+.nodes{display:flex;flex-wrap:wrap;gap:7px}
+.node{
+  font-family:var(--mono);
+  font-size:11.5px;
+  padding:5px 9px;
+  border-radius:5px;
+  background:var(--surface-2);
+  border:1px solid var(--rule);
+  color:var(--ink);
+  white-space:nowrap;
+}
+.node.hl{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:500}
+.node.new{background:var(--good-soft);border-color:var(--good);color:var(--good);font-weight:500}
+.rt-strip{
+  margin-top:12px;
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--muted);
+  border-top:1px dotted var(--rule);
+  padding-top:9px;
+}
+.dg-key{
+  display:flex;flex-wrap:wrap;gap:8px 20px;
+  font-family:var(--mono);font-size:11px;color:var(--faint);
+  margin-bottom:34px;
+}
+.dg-key i{font-style:normal;color:var(--good);font-weight:700}
+
+/* ---------- path strip ---------- */
+.path{
+  display:flex;flex-wrap:wrap;align-items:center;gap:7px;
+  font-family:var(--mono);font-size:12px;
+  padding:16px 18px;border:1px solid var(--rule);border-radius:8px;
+  background:var(--surface);margin:0 0 14px;
+}
+.path .h{padding:4px 9px;border-radius:5px;background:var(--surface-2);border:1px solid var(--rule);white-space:nowrap}
+.path .arrow{color:var(--accent);font-weight:700}
+.path-label{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--faint);font-weight:700;
+  width:100%;margin-bottom:2px;
+}
+
+/* ---------- checklist ---------- */
+ol.check{counter-reset:c;list-style:none;padding:0;margin:0 0 26px}
+ol.check li{
+  counter-increment:c;
+  position:relative;
+  padding:12px 0 12px 46px;
+  border-bottom:1px solid var(--rule);
+}
+ol.check li:last-child{border-bottom:none}
+ol.check li::before{
+  content:counter(c);
+  position:absolute;left:0;top:12px;
+  width:26px;height:26px;border-radius:50%;
+  display:grid;place-items:center;
+  font-family:var(--mono);font-size:12px;font-weight:700;
+  background:var(--accent-soft);color:var(--accent);
+}
+
+ul.plain{padding-left:20px;margin:0 0 22px}
+ul.plain li{margin-bottom:8px}
+
+.foot{
+  border-top:1px solid var(--rule);
+  padding-top:22px;
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--faint);
+}
+@media (max-width:700px){
+  body{font-size:16px}
+  .azs{grid-template-columns:1fr}
+  .page{padding:0 18px 80px}
+  .mast{padding-top:48px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="mast">
+  <p class="kicker">Cloud &amp; DevOps intensive · Day 1</p>
+  <h1>The Network Spine</h1>
+  <p class="standfirst">Addresses, subnets, routes, and doors. Everything the practical part of Thursday's assessment sits on top of.</p>
+  <div class="mast-meta">
+    <span>Covered <b>Thu 27 &amp; Sun 30 Aug</b></span>
+    <span>Assessment <b>Thu 3 Sep</b></span>
+    <span>Source <b>notes/01-networking-spine.md</b></span>
+  </div>
+</header>
+
+<!-- ============ 1 ============ -->
+<section id="private">
+  <div class="sec-head"><span class="sec-num">01</span><h2>Three different things called "private"</h2></div>
+  <div class="col">
+    <p class="lede">This collision caused most of the confusion on Day 1. The three are unrelated. Separate them and the rest falls into place.</p>
+  </div>
+  <div class="tw plate">
+    <table>
+      <thead><tr><th>The thing</th><th>What it means</th><th>Who decides it</th></tr></thead>
+      <tbody>
+        <tr><td><code>0.0.0.0/0</code></td><td><strong>Every address that exists.</strong> A range — not public, not private, but <em>all</em>.</td><td>Nobody. It is arithmetic.</td></tr>
+        <tr><td>A <strong>private IP range</strong><br><code>10.x.x.x</code></td><td>An address the public internet refuses to route.</td><td>A worldwide standard, RFC&nbsp;1918.</td></tr>
+        <tr><td>A <strong>private subnet</strong></td><td>A subnet whose route table has no internet-gateway route.</td><td>You, in the route table.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col">
+    <div class="note">
+      <span class="tag">The line to hold</span>
+      <p><code>0.0.0.0/0</code> is the <em>destination</em> side of a route rule. It never makes anything public. <strong>The internet gateway on the right-hand side does.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section id="cidr">
+  <div class="sec-head"><span class="sec-num">02</span><h2>Reading a CIDR block</h2></div>
+  <div class="col">
+    <p class="lede">An IP address is 32 bits, written as four chunks of 8. Each chunk is an <strong>octet</strong>, 0&ndash;255. The number after the slash says how many bits are locked.</p>
+  </div>
+
+  <pre class="plate">   10   .    0     .    1     .   47
+00001010 . 00000000 . 00000001 . 00101111
+<span class="a">|________________________|</span>
+<span class="a">   the first 24 bits are locked</span>        <span class="c">the last 8 are free</span></pre>
+
+  <div class="col">
+    <p><code>/24</code> means <strong>every address that starts with <code>10.0.1.</code></strong> That is the whole idea. A bigger prefix locks more, so it leaves fewer addresses.</p>
+    <h4>Addresses = 2<sup>(32 − prefix)</sup></h4>
+  </div>
+
+  <div class="tw plate">
+    <table>
+      <thead><tr><th>Prefix</th><th>Octets locked</th><th>Free to change</th><th>Addresses</th></tr></thead>
+      <tbody>
+        <tr><td class="num">/8</td><td><code>10.</code></td><td>last 3 octets</td><td class="num">16,777,216</td></tr>
+        <tr><td class="num">/16</td><td><code>10.0.</code></td><td>last 2 octets</td><td class="num">65,536</td></tr>
+        <tr><td class="num">/24</td><td><code>10.0.1.</code></td><td>last octet</td><td class="num">256</td></tr>
+        <tr><td class="num">/32</td><td><code>10.0.1.47</code></td><td>nothing</td><td class="num">1</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>The four-step range recipe</h3>
+  <div class="col">
+    <p>When the prefix is not a multiple of 8, run this. It always works.</p>
+    <ol class="check">
+      <li><strong>How many addresses?</strong> 2<sup>(32 − prefix)</sup></li>
+      <li><strong>Which octet moves?</strong> /1&ndash;/8 the first · /9&ndash;/16 the second · /17&ndash;/24 the third · /25&ndash;/32 the fourth</li>
+      <li><strong>What is the step in that octet?</strong> 2<sup>(bits free in that octet)</sup>. Blocks start at multiples of the step.</li>
+      <li><strong>Last address = first + size − 1.</strong> Not <code>first + size</code>.</li>
+    </ol>
+  </div>
+
+  <h4>Worked · 192.168.1.0/25</h4>
+  <pre class="plate">32 − 25 = 7 free bits          <span class="c">-> 128 addresses</span>
+/25 falls in the 4th octet     <span class="c">-> the last octet moves</span>
+25 − 24 = 1 bit locked there   <span class="c">-> step = 2^7 = 128</span>
+
+192.168.1.0/25    =  192.168.1.0   ... 192.168.1.127
+192.168.1.128/25  =  192.168.1.128 ... 192.168.1.255</pre>
+
+  <div class="err">
+    <div class="err-row">
+      <div class="err-half"><span class="lbl no">Live error</span><p><code>10.0.5.64/26</code> runs <code>.65</code> to <code>.129</code></p></div>
+      <div class="err-half"><span class="lbl yes">Correct</span><p><code>10.0.5.64/26</code> runs <code>.64</code> to <code>.127</code></p></div>
+    </div>
+    <div class="err-why">Two slips at once. <b>The block starts at the number in the CIDR</b>, so the first address is <code>.64</code>, not <code>.65</code>. And <b>the first address counts</b>, so 64 addresses from 64 end at 127 — <code>.128</code> is where the next block begins.</div>
+  </div>
+
+  <h3>Splitting a range</h3>
+  <div class="col">
+    <div class="note">
+      <span class="tag">The rule</span>
+      <p>To split into 2<sup>n</sup> equal parts, <strong>add n to the prefix</strong>. Two parts &rarr; +1. Four parts &rarr; +2. Eight parts &rarr; +3.</p>
+    </div>
+  </div>
+
+  <div class="err">
+    <div class="err-row">
+      <div class="err-half"><span class="lbl no">Live error</span><p>Divide the <em>free bits</em>: 16 ÷ 4 = 4</p></div>
+      <div class="err-half"><span class="lbl yes">Correct</span><p>Add to the prefix: /16 + 2 = <code>/18</code>, four times</p></div>
+    </div>
+    <div class="err-why">Dividing the bits produced <code>/20 /24 /28 /32</code> — four different <b>sizes</b>, all starting at the same address, so they sat on top of one another. Four equal parts must be four blocks of the same prefix.</div>
+  </div>
+
+  <pre class="plate">10.0.0.0/16 split four ways
+<span class="c">32 − 18 = 14 free bits -> 16,384 addresses each
+/18 sits in the 3rd octet; 2 bits locked there -> step 64</span>
+
+10.0.0.0/18      10.0.0.0    ... 10.0.63.255
+10.0.64.0/18     10.0.64.0   ... 10.0.127.255
+10.0.128.0/18    10.0.128.0  ... 10.0.191.255
+10.0.192.0/18    10.0.192.0  ... 10.0.255.255</pre>
+
+  <div class="err">
+    <div class="err-row">
+      <div class="err-half"><span class="lbl no">Live error</span><p>&ldquo;16384 / 256 = 64 usable addresses&rdquo;</p></div>
+      <div class="err-half"><span class="lbl yes">Correct</span><p>16,384 addresses each. <b>64</b> is the step in the third octet.</p></div>
+    </div>
+    <div class="err-why">Both numbers come out of the same division, but one is a <b>count</b> and the other is a <b>stride</b> — how far apart the blocks start. Keep them apart.</div>
+  </div>
+
+  <h3>Which ranges are private</h3>
+  <div class="tw plate">
+    <table>
+      <thead><tr><th>Range</th><th>Covers</th><th>Size</th></tr></thead>
+      <tbody>
+        <tr><td class="num">10.0.0.0/8</td><td><code>10.</code> anything</td><td class="num">16.7M</td></tr>
+        <tr><td class="num">172.16.0.0/12</td><td><code>172.16.x</code> through <code>172.31.x</code> — <strong>only</strong> .16 to .31</td><td class="num">1M</td></tr>
+        <tr><td class="num">192.168.0.0/16</td><td><code>192.168.</code> anything</td><td class="num">65K</td></tr>
+        <tr><td colspan="3"><strong>Everything else is public.</strong> <code>34.120.55.10</code> is public. <code>8.8.8.8</code> is public.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col">
+    <p>The <code>172</code> range is the trap: <code>172.15.0.1</code> and <code>172.32.0.1</code> are both <strong>public</strong>. And &ldquo;starts with 192&rdquo; is not enough — <code>192.168.4.4</code> is private, <code>192.169.4.4</code> is public.</p>
+    <div class="note">
+      <span class="tag">AWS reserves 5 per subnet</span>
+      <p>A <code>/24</code> gives 256 addresses but only <strong>251 usable</strong>: the network address, the VPC router, DNS, one held for future use, and broadcast. So a <code>/26</code> holds 64 − 5 = <strong>59</strong> — which does not fit 60 servers. Always subtract the five, and always leave slack: <strong>a subnet CIDR cannot be changed later.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section id="boxes">
+  <div class="sec-head"><span class="sec-num">03</span><h2>The five boxes</h2></div>
+  <div class="tw plate">
+    <table>
+      <thead><tr><th>Box</th><th>Attached to</th><th>What it is</th></tr></thead>
+      <tbody>
+        <tr><td><strong>VPC</strong></td><td>a region</td><td>Your own private slice of the AWS network. It has a CIDR.</td></tr>
+        <tr><td><strong>Subnet</strong></td><td><strong>exactly 1 AZ</strong></td><td>A slice of the VPC range. Its CIDR and its AZ both matter.</td></tr>
+        <tr><td><strong>Route table</strong></td><td>a subnet</td><td>A list of rules. Answers &ldquo;which way out?&rdquo;</td></tr>
+        <tr><td><strong>Internet gateway</strong></td><td>the VPC</td><td>The door to the internet. One per VPC.</td></tr>
+        <tr><td><strong>NAT gateway</strong></td><td>a <strong>public</strong> subnet</td><td>Lets private subnets call out. Nothing may call in.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>What a route table actually does</h3>
+  <div class="col">
+    <p>It is not a directory. It never knows where any server lives. It answers <strong>one</strong> question: <em>I hold a packet, its destination is X, where do I send it?</em></p>
+  </div>
+  <pre class="plate">ROUTE TABLE rt-private
+  10.0.0.0/16   ->  local      <span class="c"># my own VPC</span>
+  0.0.0.0/0     ->  nat-abc    <span class="c"># the "else" branch</span>
+
+<span class="c">read as code:</span>
+  if dest in 10.0.0.0/16:  send local
+  else:                    send to the NAT</pre>
+
+  <div class="col">
+    <ul class="plain">
+      <li><strong>The most specific match wins.</strong> <code>/24</code> beats <code>/16</code> beats <code>/0</code>.</li>
+      <li><strong>Every subnet has exactly one route table.</strong> Attach none and it uses the VPC's main one.</li>
+      <li>AWS adds <code>10.0.0.0/16 -&gt; local</code> and <strong>you cannot remove it</strong>. So every subnet in a VPC can already reach every other.</li>
+      <li><code>local</code> does <strong>not</strong> mean "private subnet". It means "the destination is inside this VPC — deliver it directly, use no gateway". Public subnets carry the same line.</li>
+    </ul>
+    <div class="note">
+      <span class="tag">Why the local route covers the whole VPC</span>
+      <p>If <code>rt-private</code> said <code>10.0.128.0/18 -&gt; local</code>, then private-a could not reach private-b, and an app server could not reach a database in the other AZ. The local route must span the <strong>entire</strong> VPC for cross-AZ traffic to work at all.</p>
+    </div>
+  </div>
+
+  <h3>The definition of public</h3>
+  <div class="col">
+    <div class="note">
+      <span class="tag">No checkbox exists</span>
+      <p>A subnet is <strong>public</strong> if its route table contains <code>0.0.0.0/0 -&gt; igw-xxxx</code>. That is the entire definition.</p>
+    </div>
+    <p>Which is exactly why you cannot solve the outbound problem by adding an IGW route to a private subnet — that <em>makes it public</em>. You need the NAT gateway instead.</p>
+  </div>
+
+  <h3>What the NAT gateway does</h3>
+  <ol class="check">
+    <li>The private server sends its packet to the NAT gateway.</li>
+    <li>The NAT swaps the source address for its own public IP, and sends it out through the IGW.</li>
+    <li>The far end replies to the NAT gateway.</li>
+    <li>The NAT remembers who asked, and passes the reply back inside.</li>
+  </ol>
+
+  <div class="err">
+    <div class="err-row">
+      <div class="err-half"><span class="lbl no">Live error</span><p><code>0.0.0.0/0 -&gt; NAT</code> &nbsp;<em>(internet inbound)</em></p></div>
+      <div class="err-half"><span class="lbl yes">Correct</span><p><code>0.0.0.0/0 -&gt; NAT</code> &nbsp;<em>(outbound only)</em></p></div>
+    </div>
+    <div class="err-why">A NAT gateway is <b>outbound only</b>, and that asymmetry is the entire purpose of a private subnet. It returns replies to calls that started inside. Nothing on the internet can <b>start</b> a connection through it.</div>
+  </div>
+
+  <div class="tw plate">
+    <table>
+      <thead><tr><th>NAT placement</th><th>Cost</th><th>If that AZ fails</th></tr></thead>
+      <tbody>
+        <tr><td>One, shared</td><td class="num">~$32 / month</td><td>The other AZ loses all outbound traffic.</td></tr>
+        <tr><td>One per AZ</td><td class="num">~$64 / month</td><td>The other AZ is unaffected.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col">
+    <p>Plus roughly <strong>$0.045 per GB processed</strong>. Saying this tradeoff out loud is cost-versus-resilience reasoning, and it earns marks in the case study.</p>
+  </div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section id="packet">
+  <div class="sec-head"><span class="sec-num">04</span><h2>What a packet is, and who reads which layer</h2></div>
+  <div class="col">
+    <p class="lede">Bytes on a wire. Your JSON is only the innermost part. Each layer adds a header in front and hands the result down.</p>
+  </div>
+
+  <pre class="plate">┌─ Ethernet header ─────────────────────────────────┐
+│ ┌─ IP header ───────────────────────────────────┐ │
+│ │  src 10.0.11.20   dst 34.120.55.10            │ │   <span class="a">&lt;- route table reads here</span>
+│ │ ┌─ TCP header ──────────────────────────────┐ │ │
+│ │ │  src port 51234   dst port 443            │ │ │   <span class="a">&lt;- security group reads here</span>
+│ │ │ ┌─ HTTP ────────────────────────────────┐ │ │ │
+│ │ │ │  POST /v1/charges                     │ │ │ │   <span class="a">&lt;- load balancer reads here</span>
+│ │ │ │  {"amount": 500}   <span class="c">&lt;- your JSON</span>        │ │ │ │
+│ │ │ └───────────────────────────────────────┘ │ │ │
+│ │ └───────────────────────────────────────────┘ │ │
+│ └───────────────────────────────────────────────┘ │
+└───────────────────────────────────────────────────┘</pre>
+
+  <div class="col">
+    <p>A route table <strong>cannot see the port</strong>, let alone the JSON. It reads one field. That is why a route table is never the thing blocking port 443.</p>
+    <p>A packet carries about <strong>1500 bytes</strong>. A 50&nbsp;KB response is roughly 35 packets, which TCP puts back in order at the far end.</p>
+  </div>
+
+  <div class="tw plate">
+    <table>
+      <thead><tr><th>Protocol</th><th>Layer</th><th>Port</th><th>What it gives you</th></tr></thead>
+      <tbody>
+        <tr><td><strong>IP</strong></td><td class="num">3</td><td class="num">&mdash;</td><td>Addresses. No guarantee of delivery.</td></tr>
+        <tr><td><strong>TCP</strong></td><td class="num">4</td><td class="num">&mdash;</td><td>A connection. Ordered, retried, guaranteed. Slow to start.</td></tr>
+        <tr><td><strong>UDP</strong></td><td class="num">4</td><td class="num">&mdash;</td><td>Fire and forget. No order, no retry. Fast.</td></tr>
+        <tr><td><strong>HTTP</strong></td><td class="num">7</td><td class="num">80</td><td>Requests over TCP. HyperText <strong>Transfer</strong> Protocol.</td></tr>
+        <tr><td><strong>HTTPS</strong></td><td class="num">7</td><td class="num">443</td><td>HTTP inside TLS encryption.</td></tr>
+        <tr><td><strong>SSH</strong></td><td class="num">7</td><td class="num">22</td><td>An encrypted shell, over TCP.</td></tr>
+        <tr><td><strong>DNS</strong></td><td class="num">7</td><td class="num">53</td><td>Name to IP. Normally over <strong>UDP</strong>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col">
+    <p><strong>Why DNS picks UDP:</strong> one small question, one small answer. A TCP connection spends three packets on a handshake before any data moves — more than a retry would cost. Video calls choose UDP for the same reason: a late frame is worthless, so do not retry it.</p>
+  </div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section id="sg">
+  <div class="sec-head"><span class="sec-num">05</span><h2>Security groups</h2></div>
+  <div class="col">
+    <p class="lede">A firewall attached to a <strong>resource</strong> — an instance, a load balancer, a database — never to a subnet.</p>
+    <ol class="check">
+      <li><strong>The default denies all inbound and allows all outbound.</strong> A new instance can call out; nothing reaches in.</li>
+      <li><strong>Allow rules only.</strong> There is no deny rule. To block one specific IP you need a network ACL — stateless, attached to the subnet, and it does have deny rules.</li>
+      <li><strong>A source can be another security group.</strong> <code>from sg-alb</code> beats a hardcoded IP, because instances come and go.</li>
+      <li><strong>It is stateful.</strong> A reply to an allowed request needs no outbound rule — the group remembers the connection. So you write rules only for <em>who starts the conversation</em>.</li>
+    </ol>
+  </div>
+
+  <div class="tw plate">
+    <table>
+      <thead><tr><th></th><th>Route table</th><th>Security group</th></tr></thead>
+      <tbody>
+        <tr><td>Attached to</td><td>a <strong>subnet</strong></td><td>a <strong>resource</strong></td></tr>
+        <tr><td>Reads</td><td>destination IP</td><td>IP + port + protocol</td></tr>
+        <tr><td>Answers</td><td>&ldquo;which way out?&rdquo;</td><td>&ldquo;may these two talk at all?&rdquo;</td></tr>
+        <tr><td>Rule types</td><td>routes only</td><td><strong>allow</strong> only</td></tr>
+        <tr><td>Remembers connections</td><td>n/a</td><td><strong>yes — stateful</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col">
+    <div class="note">
+      <span class="tag">Both must pass</span>
+      <p>A correct route with a closed security group is dropped. An open security group with no route never leaves. <strong>When something cannot connect in AWS, check this pair first.</strong></p>
+    </div>
+  </div>
+
+  <h3>The chain to memorise</h3>
+  <pre class="plate">sg-alb        IN:  TCP 443   from 0.0.0.0/0
+              OUT: TCP 8080  to sg-app
+
+sg-app        IN:  TCP 8080  from sg-alb
+              OUT: <span class="c">(default allow all)</span>
+
+sg-database   IN:  TCP 5432  from sg-app
+              OUT: <span class="c">(nothing needed)</span></pre>
+  <div class="col">
+    <p>The internet reaches only the load balancer. The load balancer reaches only the app. The app reaches only the database. <strong>Nothing on the internet can reach the database even by mistake, because no rule names it.</strong></p>
+  </div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section id="reach">
+  <div class="sec-head"><span class="sec-num">06</span><h2>How the internet reaches a server</h2></div>
+  <div class="col">
+    <p class="lede">Your instance holds <code>10.0.1.20</code> — an address the internet refuses to route. So AWS gives it a <strong>second</strong> address, held by the gateway rather than by the machine.</p>
+  </div>
+
+  <pre class="plate">instance   private IP  10.0.1.20     <span class="c">&lt;- the OS only ever sees this one</span>
+           public  IP  54.12.33.9    <span class="a">&lt;- held by the IGW, not by the OS</span></pre>
+
+  <ol class="check">
+    <li>DNS resolves <code>myapp.com</code> to <code>54.12.33.9</code>.</li>
+    <li>The browser sends the packet there. The internet routes it to the IGW.</li>
+    <li>The IGW rewrites the destination to <code>10.0.1.20</code> and passes it in.</li>
+    <li>On the way back, the IGW rewrites the source to <code>54.12.33.9</code>.</li>
+  </ol>
+
+  <div class="col">
+    <p>Run <code>ifconfig</code> on that server and you see only <code>10.0.1.20</code>. <strong>The machine never knows it has a public address.</strong> An <strong>Elastic IP</strong> is the same mechanism, except you own the number and it survives a stop/start; a plain public IP does not.</p>
+  </div>
+
+  <h3>The four conditions — a troubleshooting order</h3>
+  <div class="col">
+    <ol class="check">
+      <li>The subnet's route table has <code>0.0.0.0/0 -&gt; igw</code>.</li>
+      <li>The instance has a public IP or an Elastic IP.</li>
+      <li>Its security group allows inbound on that port.</li>
+      <li>The network ACL allows it (the default allows everything).</li>
+    </ol>
+    <div class="note">
+      <span class="tag">Why the order matters</span>
+      <p>Miss any one and it fails <strong>silently</strong> — no error, just a timeout. Walk the list in this order out loud and you have shown a method rather than a guess.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7 ============ -->
+<section id="vpc">
+  <div class="sec-head"><span class="sec-num">07</span><h2>The reference design</h2></div>
+  <div class="col">
+    <p class="lede">Two availability zones, four subnets, one public tier and one private tier per zone. This is the shape to start every design from.</p>
+  </div>
+
+  <div class="diagram plate">
+    <div class="dg-inner">
+      <div class="dg-title"><span><b>VPC</b> 10.0.0.0/16 &middot; us-east-1 &middot; 65,536 addresses</span><span>4 subnets &middot; /18 each &middot; 16,384 addresses</span></div>
+
+      <div class="igw">IGW &nbsp;·&nbsp; the only door to the internet</div>
+      <div class="stem"></div>
+
+      <div class="vpc">
+        <span class="vpc-tag">VPC 10.0.0.0/16</span>
+        <div class="azs">
+
+          <div class="az">
+            <span class="az-tag">us-east-1a</span>
+            <div class="sn pub">
+              <span class="sn-tag">public-a</span>
+              <span class="sn-cidr">10.0.0.0/18 &nbsp; 10.0.0.0 – 10.0.63.255</span>
+              <div class="nodes">
+                <span class="node hl">ALB node</span>
+                <span class="node hl">NAT gateway</span>
+              </div>
+            </div>
+            <div class="sn priv">
+              <span class="sn-tag">private-a</span>
+              <span class="sn-cidr">10.0.128.0/18 &nbsp; 10.0.128.0 – 10.0.191.255</span>
+              <div class="nodes">
+                <span class="node">app server</span>
+                <span class="node new">RDS primary</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="az">
+            <span class="az-tag">us-east-1b</span>
+            <div class="sn pub">
+              <span class="sn-tag">public-b</span>
+              <span class="sn-cidr">10.0.64.0/18 &nbsp; 10.0.64.0 – 10.0.127.255</span>
+              <div class="nodes">
+                <span class="node hl">ALB node</span>
+              </div>
+            </div>
+            <div class="sn priv">
+              <span class="sn-tag">private-b</span>
+              <span class="sn-cidr">10.0.192.0/18 &nbsp; 10.0.192.0 – 10.0.255.255</span>
+              <div class="nodes">
+                <span class="node">app server</span>
+                <span class="node new">RDS standby</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="rt-strip">
+          <strong>rt-public</strong> &rarr; public-a, public-b &nbsp;&nbsp; <code>10.0.0.0/16 → local</code> &nbsp; <code>0.0.0.0/0 → igw</code><br>
+          <strong>rt-private</strong> &rarr; private-a, private-b &nbsp;&nbsp; <code>10.0.0.0/16 → local</code> &nbsp; <code>0.0.0.0/0 → nat</code> &nbsp;<em>(outbound only)</em>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dg-key">
+    <span><i>■</i> green = added in the correction pass</span>
+    <span>ALB = one logical load balancer with a node in every AZ</span>
+  </div>
+
+  <h3>The request path</h3>
+
+  <div class="path">
+    <span class="path-label">Inbound</span>
+    <span class="h">browser</span><span class="arrow">→</span>
+    <span class="h">DNS → 54.12.33.9</span><span class="arrow">→</span>
+    <span class="h">IGW</span><span class="arrow">→</span>
+    <span class="h">ALB :443</span><span class="arrow">→</span>
+    <span class="h">app :8080</span><span class="arrow">→</span>
+    <span class="h">RDS primary :5432</span>
+  </div>
+  <div class="path">
+    <span class="path-label">Return — every hop is stateful, so no extra rule is needed</span>
+    <span class="h">RDS</span><span class="arrow">→</span>
+    <span class="h">app</span><span class="arrow">→</span>
+    <span class="h">ALB</span><span class="arrow">→</span>
+    <span class="h">IGW rewrites source</span><span class="arrow">→</span>
+    <span class="h">browser</span>
+  </div>
+  <div class="col">
+    <p>Note what is <em>not</em> in that path: the NAT gateway. It carries no inbound traffic at all. It appears only when the app server calls <em>out</em> — to a payment API, or to fetch a package.</p>
+  </div>
+
+  <h3>Corrections to the first draft</h3>
+  <div class="tw plate">
+    <table>
+      <thead><tr><th>Drawn as</th><th>Should be</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>NAT labelled <em>internet inbound</em></td><td><em>Outbound only</em></td><td>The asymmetry is the whole purpose of a private subnet.</td></tr>
+        <tr><td>One ALB, in public-b only</td><td>One ALB, a node in <strong>each</strong> AZ</td><td>As drawn, losing AZ 1b takes the whole site down — which defeats the two-AZ design.</td></tr>
+        <tr><td>One database, in private-b</td><td>RDS <strong>Multi-AZ</strong>: primary in private-a, synchronous standby in private-b</td><td>Automatic failover. A single database is the last single point of failure left.</td></tr>
+        <tr><td>One NAT, in public-a</td><td>A legitimate choice — <strong>name the tradeoff</strong></td><td>$32/month and AZ 1a takes down private-b's outbound, versus $64/month and it does not.</td></tr>
+        <tr><td>16,384 ÷ 256 = 64 usable</td><td>16,384 addresses; 64 is the octet <strong>stride</strong></td><td>A count and a stride are different numbers.</td></tr>
+        <tr><td><code>REQUEST PATH</code> left blank</td><td>Written above</td><td>It was the deliverable — the path is what you narrate out loud.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 8 ============ -->
+<section id="recall">
+  <div class="sec-head"><span class="sec-num">08</span><h2>Wednesday recall check</h2></div>
+  <div class="col">
+    <p class="lede">Answer these from memory with the page closed. Anything you miss is what the taper reviews.</p>
+    <ol class="check">
+      <li>What single line in a route table makes a subnet public?</li>
+      <li>Split <code>10.0.0.0/24</code> into eight equal subnets. Give all eight CIDRs.</li>
+      <li>Why can a NAT gateway not live in a private subnet?</li>
+      <li>An instance cannot be reached from the internet. Name the four things you check, in order.</li>
+      <li>Why does the <code>local</code> route cover the whole VPC rather than one subnet?</li>
+      <li>A server sits in a private subnet and has a public IP attached. Can the internet reach it? Why?</li>
+      <li>Write the three security groups for load balancer, app, and database, from memory.</li>
+      <li>What does a route table read, and what can it not see?</li>
+    </ol>
+  </div>
+</section>
+
+<footer class="foot">
+  Cloud &amp; DevOps intensive &middot; Day 1 of 7 &middot; sources in <code>notes/</code> and <code>designs/</code> &middot; this page grows a section each evening
+</footer>
+
+</div>
+</body>
+</html>

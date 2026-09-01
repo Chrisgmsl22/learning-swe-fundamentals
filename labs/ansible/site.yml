@@ -1,0 +1,55 @@
+# =============================================================================
+# PLAYBOOK — a list of tasks, run TOP TO BOTTOM, on a set of hosts.
+#
+# This is the key difference from Terraform. Terraform reads your references
+# and decides the order itself. Ansible runs your tasks in the order you wrote
+# them. You are responsible for the sequence.
+# =============================================================================
+
+- name: Configure the web tier
+  hosts: web                  # matches the [web] group in inventory.ini
+  become: true                # run as root, via sudo
+
+  vars:
+    app_port: 8080
+    worker_count: 4
+
+  tasks:
+    # A TASK uses a MODULE. The module is the part that is idempotent:
+    # it checks the current condition first, and acts only if needed.
+    - name: Install nginx
+      ansible.builtin.package:
+        name: nginx
+        state: present        # "present", not "install" — describe the end state
+
+    - name: Write the nginx config from a template
+      ansible.builtin.template:
+        src: nginx.conf.j2    # a Jinja2 template, filled with the vars above
+        dest: /etc/nginx/nginx.conf
+        owner: root
+        group: root
+        mode: "0644"          # rw-r--r--  (see notes/03-linux.md)
+      notify: Reload nginx    # fires the handler below — but ONLY if this
+                              # task actually changed something
+
+    - name: Make sure nginx is running and starts on boot
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: true
+
+    - name: Create the application directory
+      ansible.builtin.file:
+        path: /opt/app
+        state: directory
+        owner: ec2-user
+        group: ec2-user
+        mode: "0750"          # rwxr-x---  owner all, group read+enter, others nothing
+
+  # HANDLERS run at the END of the play, and only once, and only if notified.
+  # This is how you avoid restarting a service on every single run.
+  handlers:
+    - name: Reload nginx
+      ansible.builtin.service:
+        name: nginx
+        state: reloaded

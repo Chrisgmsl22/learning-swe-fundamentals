@@ -1,0 +1,246 @@
+# =============================================================================
+# The SAME VPC as labs/terraform/01-reference — written in CloudFormation.
+#
+# Read this beside the Terraform version. The infrastructure is identical.
+# Only the language changed. That comparison is the whole point of this file.
+# =============================================================================
+
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Two-AZ VPC with public and private subnets, one NAT, three security groups.
+
+# PARAMETERS == Terraform "variable"
+Parameters:
+  Project:
+    Type: String
+    Default: cloudprep
+    Description: Name prefix for every resource.
+
+  VpcCidr:
+    Type: String
+    Default: 10.0.0.0/16
+
+# RESOURCES == Terraform "resource"
+# Note there is no provider block. CloudFormation is AWS only, so it is implied.
+Resources:
+
+  # --- The VPC and its door ---
+
+  Vpc:
+    Type: AWS::EC2::VPC          # <- "aws_vpc" in Terraform
+    Properties:
+      CidrBlock: !Ref VpcCidr    # !Ref <param> == var.vpc_cidr
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      Tags:
+        - Key: Name
+          Value: !Sub "${Project}-vpc"   # !Sub == "${var.project}-vpc"
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: !Sub "${Project}-igw"
+
+  # In Terraform the IGW carries a vpc_id. In CloudFormation the attachment is
+  # its own resource. Same result, different shape.
+  IgwAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref Vpc
+      InternetGatewayId: !Ref InternetGateway
+
+  # --- Subnets ---
+  # CloudFormation has no `count`. Four subnets means four blocks, written out.
+  # This is the single biggest practical difference from Terraform.
+
+  PublicSubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: 10.0.0.0/18
+      AvailabilityZone: !Select [0, !GetAZs ""]   # first AZ in this region
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub "${Project}-public-a"
+
+  PublicSubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: 10.0.64.0/18
+      AvailabilityZone: !Select [1, !GetAZs ""]
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub "${Project}-public-b"
+
+  PrivateSubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: 10.0.128.0/18
+      AvailabilityZone: !Select [0, !GetAZs ""]
+      Tags:
+        - Key: Name
+          Value: !Sub "${Project}-private-a"
+
+  PrivateSubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: 10.0.192.0/18
+      AvailabilityZone: !Select [1, !GetAZs ""]
+      Tags:
+        - Key: Name
+          Value: !Sub "${Project}-private-b"
+
+  # --- NAT gateway: outbound only, and it lives in a PUBLIC subnet ---
+
+  NatEip:
+    Type: AWS::EC2::EIP
+    DependsOn: IgwAttachment      # == Terraform "depends_on"
+    Properties:
+      Domain: vpc
+
+  NatGateway:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt NatEip.AllocationId   # !GetAtt == aws_eip.nat.id
+      SubnetId: !Ref PublicSubnetA
+      Tags:
+        - Key: Name
+          Value: !Sub "${Project}-nat"
+
+  # --- Route tables ---
+  # The 10.0.0.0/16 -> local route is not written here either. AWS adds it.
+
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc
+      Tags:
+        - Key: Name
+          Value: !Sub "${Project}-rt-public"
+
+  # In Terraform a route is a nested block. Here it is a separate resource.
+  PublicDefaultRoute:
+    Type: AWS::EC2::Route
+    DependsOn: IgwAttachment
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway     # THIS is what makes a subnet public
+
+  PrivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc
+      Tags:
+        - Key: Name
+          Value: !Sub "${Project}-rt-private"
+
+  PrivateDefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref NatGateway       # outbound only
+
+  PublicSubnetARouteAssoc:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnetA
+      RouteTableId: !Ref PublicRouteTable
+
+  PublicSubnetBRouteAssoc:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnetB
+      RouteTableId: !Ref PublicRouteTable
+
+  PrivateSubnetARouteAssoc:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PrivateSubnetA
+      RouteTableId: !Ref PrivateRouteTable
+
+  PrivateSubnetBRouteAssoc:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PrivateSubnetB
+      RouteTableId: !Ref PrivateRouteTable
+
+  # --- Security groups: internet -> alb -> app -> db ---
+
+  AlbSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Public entry point. HTTPS from anywhere.
+      VpcId: !Ref Vpc
+      SecurityGroupIngress:
+        - Description: HTTPS from the internet
+          IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0        # singular CidrIp here, not CidrBlocks
+      Tags:
+        - Key: Name
+          Value: !Sub "${Project}-sg-alb"
+
+  AppSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: App tier. Reachable only from the load balancer.
+      VpcId: !Ref Vpc
+      SecurityGroupIngress:
+        - Description: From the ALB only
+          IpProtocol: tcp
+          FromPort: 8080
+          ToPort: 8080
+          SourceSecurityGroupId: !Ref AlbSecurityGroup
+      Tags:
+        - Key: Name
+          Value: !Sub "${Project}-sg-app"
+
+  # Same cycle problem as Terraform, same solution: break one side out.
+  AlbToAppEgress:
+    Type: AWS::EC2::SecurityGroupEgress
+    Properties:
+      GroupId: !Ref AlbSecurityGroup
+      IpProtocol: tcp
+      FromPort: 8080
+      ToPort: 8080
+      DestinationSecurityGroupId: !Ref AppSecurityGroup
+
+  DbSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Database. Reachable only from the app tier.
+      VpcId: !Ref Vpc
+      SecurityGroupIngress:
+        - Description: Postgres from the app tier only
+          IpProtocol: tcp
+          FromPort: 5432
+          ToPort: 5432
+          SourceSecurityGroupId: !Ref AppSecurityGroup
+      Tags:
+        - Key: Name
+          Value: !Sub "${Project}-sg-db"
+
+# OUTPUTS == Terraform "output"
+Outputs:
+  VpcId:
+    Description: The VPC id.
+    Value: !Ref Vpc
+    Export:
+      Name: !Sub "${Project}-vpc-id"      # Export lets ANOTHER stack import it
+
+  PublicSubnetIds:
+    Description: Both public subnet ids.
+    Value: !Join [",", [!Ref PublicSubnetA, !Ref PublicSubnetB]]
+
+  PrivateSubnetIds:
+    Description: Both private subnet ids.
+    Value: !Join [",", [!Ref PrivateSubnetA, !Ref PrivateSubnetB]]

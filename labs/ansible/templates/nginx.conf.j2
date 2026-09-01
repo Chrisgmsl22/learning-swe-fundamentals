@@ -1,0 +1,24 @@
+# A Jinja2 template. {{ }} is substituted from the playbook vars at run time.
+# This is why Ansible can write one config that differs per machine.
+
+worker_processes {{ worker_count }};
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    upstream app {
+        server 127.0.0.1:{{ app_port }};
+    }
+
+    server {
+        listen 80;
+        server_name {{ inventory_hostname }};   # a built-in fact: this host's name
+
+        location / {
+            proxy_pass http://app;
+            proxy_set_header Host $host;
+        }
+    }
+}

@@ -7,6 +7,7 @@ notes/        how things work, in my own words, with a diagram or worked example
 labs/         actual code — terraform, cloudformation, docker, scripts
 designs/      system design write-ups, one folder per problem
 behavioral/   experience stories, structured
+site/         standalone HTML reference pages — open them in a browser
 ```
 
 ## The plan
@@ -26,6 +27,21 @@ are only a list of terms do not count.
 
 **The test for any note:** could I redraw or rewrite this from memory tomorrow? If not, it is
 notes *about* the thing rather than understanding *of* it.
+
+## Visual reference — `site/`
+
+One standalone HTML page per day. No build step, no server, no account:
+
+```bash
+open site/day-01-network-spine.html
+```
+
+Each page holds the diagrams, the corrected reference designs, and a recall check for
+Wednesday's taper. **The repo is the only home for this.** Everything is committed here.
+
+| Page | Covers |
+| --- | --- |
+| `day-01-network-spine.html` | CIDR, subnets, route tables, NAT, security groups, the 2-AZ VPC |
 
 ## Setup
 
