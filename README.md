@@ -41,11 +41,12 @@ A bad one-page design beats a well-understood article.
 Standalone HTML. No build step, no server, no account.
 
 ```bash
-open site/day-01-network-spine.html
+open site/schedule.html
 ```
 
 | Page | Covers |
 | --- | --- |
+| **`schedule.html`** | **The week, colour-coded by track, with today highlighted** |
 | `day-01-network-spine.html` | CIDR, subnets, route tables, NAT, security groups, the 2-AZ VPC |
 | `day-02-iac-and-containers.html` | Terraform vs CloudFormation vs Ansible, file permissions, Docker layers and PID 1 |
 | `case-round-cheatsheet.html` | The case arc, anchors, the spike arc, slow-API ladder, cost, migration |

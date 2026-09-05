@@ -5,6 +5,8 @@ rather than keeping its own copy, so the two repos cannot drift.
 
 Set 2026-09-04. Replaces the 2026-08-24 draft, which was paused for the SRE interview.
 
+**Visual version:** `open site/schedule.html` — colour-coded by track, with today highlighted.
+
 ---
 
 ## The week

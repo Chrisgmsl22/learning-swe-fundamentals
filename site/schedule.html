@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Study Week</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+
+:root{
+  --ground:#FBFBFC;
+  --surface:#F1F4F8;
+  --surface-2:#E7ECF3;
+  --ink:#141922;
+  --muted:#596475;
+  --faint:#8A94A3;
+  --rule:#DCE2EA;
+  --accent:#0E7C86;
+  --accent-soft:#DCF0F1;
+  --good:#2C6E49;
+  --good-soft:#DFF0E6;
+  --bad:#A82820;
+  --bad-soft:#FBE6E4;
+  --shadow:0 1px 2px rgba(20,25,34,.05), 0 8px 24px -16px rgba(20,25,34,.28);
+
+  color-scheme:light;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+/* Light theme only — locked by preference. Do not add dark overrides. */
+
+
+  --lld:#7A4FA3; --lld-soft:#F0E9F7;
+  --sd:#0E7C86;  --sd-soft:#DCF0F1;
+  --dsa:#4A5568; --dsa-soft:#EDF0F4;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1280px;margin:0 auto;padding:26px 24px 70px}
+
+.top{display:flex;flex-wrap:wrap;gap:18px 40px;align-items:flex-end;justify-content:space-between;border-bottom:2px solid var(--ink);padding-bottom:18px;margin-bottom:18px}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin:0 0 7px}
+h1{font-family:var(--sans);font-weight:700;font-size:clamp(2rem,4.4vw,3rem);line-height:1;letter-spacing:-.028em;margin:0}
+.today{border-left:3px solid var(--accent);padding:2px 0 2px 14px;max-width:44ch}
+.today-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);font-weight:700}
+.today p{margin:3px 0 0;font-size:14.5px}
+.intro{color:var(--muted);margin:0 0 20px;max-width:70ch}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;box-shadow:var(--shadow)}
+table.week{width:100%;min-width:820px;border-collapse:collapse;font-family:var(--sans)}
+table.week th{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:700;padding:11px 14px;text-align:left;background:var(--surface);border-bottom:1px solid var(--rule)}
+table.week th.day{width:74px;font-size:13px;letter-spacing:.04em;color:var(--ink);text-transform:none;font-family:var(--sans);font-weight:700;background:var(--surface);border-right:1px solid var(--rule)}
+table.week td{padding:13px 14px;border-bottom:1px solid var(--rule);border-right:1px solid var(--rule);vertical-align:top;font-size:14px;font-weight:500}
+table.week td:last-child{border-right:none}
+table.week tbody tr:last-child td{border-bottom:none}
+table.week td span{display:block;font-family:var(--mono);font-size:11px;font-weight:400;color:var(--muted);margin-top:3px;line-height:1.35}
+td.t-dsa{background:var(--dsa-soft);color:var(--dsa)}
+td.t-sd{background:var(--sd-soft);color:var(--sd)}
+td.t-lld{background:var(--lld-soft);color:var(--lld)}
+td.t-off,td.t-free{background:var(--good-soft);color:var(--good)}
+td.t-none{color:var(--faint)}
+td.din{background:var(--ground);color:var(--faint);font-weight:400;font-style:italic}
+th.din{color:var(--faint)}
+td.opt{opacity:.82}
+tr.is-today th.day{background:var(--ink);color:var(--ground)}
+tr.is-today td{box-shadow:inset 0 2px 0 var(--accent),inset 0 -2px 0 var(--accent)}
+
+.key{display:flex;flex-wrap:wrap;gap:8px 22px;margin:12px 2px 22px;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.key span{display:flex;align-items:center;gap:7px}
+.key i{width:11px;height:11px;border-radius:3px;display:block}
+.k-dsa{background:var(--dsa-soft);border:1px solid var(--dsa)}
+.k-sd{background:var(--sd-soft);border:1px solid var(--sd)}
+.k-lld{background:var(--lld-soft);border:1px solid var(--lld)}
+.k-off{background:var(--good-soft);border:1px solid var(--good)}
+
+.warn{border:1px solid var(--accent);background:var(--accent-soft);border-radius:9px;padding:15px 18px;margin:0 0 24px;font-size:14.5px;max-width:88ch}
+.warn b{color:var(--accent)}
+
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:15px;align-items:start}
+.card{border:1px solid var(--rule);border-radius:9px;background:var(--surface);padding:17px 19px}
+.card h2{font-family:var(--sans);font-weight:600;font-size:1.02rem;margin:0 0 4px;letter-spacing:-.008em;text-wrap:balance}
+.sub{color:var(--muted);font-size:13px;margin:0 0 13px}
+.note{font-size:13px;color:var(--muted);border-top:1px dotted var(--rule);padding-top:10px;margin:12px 0 0}
+.note b{color:var(--ink)}
+
+.lvl{display:flex;flex-direction:column;gap:9px}
+.lvl>div{border-left:3px solid var(--accent);padding:2px 0 2px 12px}
+.lvl b{font-family:var(--sans);font-size:14px}
+.lvl .m{font-family:var(--mono);font-size:11px;color:var(--faint);margin-left:8px}
+.lvl p{margin:2px 0 0;font-size:13.5px}
+
+ol.cyc{counter-reset:c;list-style:none;padding:0;margin:0}
+ol.cyc li{counter-increment:c;position:relative;padding:8px 0 8px 28px;border-bottom:1px solid var(--rule);font-size:13.5px}
+ol.cyc li:last-child{border-bottom:none}
+ol.cyc li::before{content:counter(c);position:absolute;left:0;top:9px;width:19px;height:19px;border-radius:50%;display:grid;place-items:center;font-family:var(--mono);font-size:10px;font-weight:700;background:var(--ground);border:1px solid var(--accent);color:var(--accent)}
+ol.cyc li span{display:block;font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:3px}
+
+ol.num{padding-left:19px;margin:0;font-size:13.5px}
+ol.num li{margin-bottom:9px}
+ol.num li:last-child{margin-bottom:0}
+.rules{grid-column:span 2}
+@media (max-width:760px){.rules{grid-column:span 1}}
+
+.repos{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:13px;margin-top:22px}
+.repos div{border:1px solid var(--rule);border-radius:8px;padding:13px 16px;background:var(--surface)}
+.repos b{font-family:var(--mono);font-size:13px;color:var(--accent);display:block;margin-bottom:3px}
+.repos span{font-size:13px;color:var(--muted)}
+
+code{font-family:var(--mono);font-size:.86em;background:var(--ground);border:1px solid var(--rule);border-radius:3px;padding:.06em .3em}
+.foot{margin-top:26px;border-top:1px solid var(--rule);padding-top:13px;font-family:var(--mono);font-size:11px;color:var(--faint)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div>
+    <p class="kicker">learning-swe-fundamentals</p>
+    <h1>The Study Week</h1>
+  </div>
+  <div class="today">
+    <span class="today-lbl">Today</span>
+    <p id="today-txt">&mdash;</p>
+  </div>
+</header>
+
+<p class="intro">Three tracks. Roughly 9&ndash;10 hours a week, <strong>deliberately under capacity</strong> &mdash; that margin is what keeps this alive past six weeks.</p>
+
+<div class="tablewrap">
+<table class="week">
+  <thead>
+    <tr>
+      <th class="day"></th>
+      <th>17:00 &ndash; 18:00</th>
+      <th>18:00 &ndash; 19:00</th>
+      <th class="din">19:00 &ndash; 20:00</th>
+      <th>20:00 &ndash; 20:40</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-day="1">
+      <th class="day">Mon</th>
+      <td class="t-dsa">3 DSA reps</td>
+      <td class="t-dsa opt">1 new DSA problem<span>optional</span></td>
+      <td class="din">dinner</td>
+      <td class="t-sd">System design<span>attempt &mdash; timed, blind</span></td>
+    </tr>
+    <tr data-day="2">
+      <th class="day">Tue</th>
+      <td class="t-dsa">3 DSA reps</td>
+      <td class="t-dsa opt">1 new DSA problem<span>optional</span></td>
+      <td class="din">dinner</td>
+      <td class="t-lld">LLD<span>study one pattern</span></td>
+    </tr>
+    <tr data-day="3">
+      <th class="day">Wed</th>
+      <td class="t-dsa">3 DSA reps</td>
+      <td class="t-dsa opt">1 new DSA problem<span>optional</span></td>
+      <td class="din">dinner</td>
+      <td class="t-sd">System design<span>check &mdash; reference + 3&times;3 sweep</span></td>
+    </tr>
+    <tr data-day="4">
+      <th class="day">Thu</th>
+      <td class="t-dsa">3 DSA reps</td>
+      <td class="t-none">&mdash;</td>
+      <td class="din">dinner</td>
+      <td class="t-lld">LLD<span>sketch Sunday's build</span></td>
+    </tr>
+    <tr data-day="5">
+      <th class="day">Fri</th>
+      <td class="t-dsa">3 DSA reps</td>
+      <td class="t-sd">System design<span>close one gap</span></td>
+      <td class="din">dinner</td>
+      <td class="t-free">free</td>
+    </tr>
+    <tr data-day="6">
+      <th class="day">Sat</th>
+      <td class="t-off" colspan="4"><b>OFF</b> &mdash; family and friends. Not "off unless something comes up". Off.</td>
+    </tr>
+    <tr data-day="0">
+      <th class="day">Sun</th>
+      <td class="t-lld" colspan="4"><b>LLD build</b>, 1.5&ndash;2 hours<span>write it by hand, in Python</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="key">
+  <span><i class="k-dsa"></i>DSA</span>
+  <span><i class="k-sd"></i>System design</span>
+  <span><i class="k-lld"></i>LLD / organic projects</span>
+  <span><i class="k-off"></i>Rest</span>
+</div>
+
+<div class="warn">
+  <b>17:00&ndash;18:00 is a window, not a quota.</b>
+  The work is <b>3 reps</b>, which takes 35&ndash;45 minutes. If you finish at 17:40, you stop.
+  Do not fill the hour &mdash; filling it is how 9 hours becomes 12 and the plan dies.
+</div>
+
+<div class="cols">
+
+  <section class="card">
+    <h2>The three levels of a day</h2>
+    <p class="sub">Say this to yourself when you feel behind.</p>
+    <div class="lvl">
+      <div><b>Floor</b><span class="m">35 min</span><p>3 reps, nothing else. On a rough night this is a <b>win</b>. The streak survives.</p></div>
+      <div><b>Standard</b><span class="m">~75 min</span><p>3 reps plus the evening block.</p></div>
+      <div><b>Full</b><span class="m">~2 h</span><p>Adds the new DSA problem. <b>3 times a week, Mon&ndash;Wed</b> &mdash; energy falls across the week.</p></div>
+    </div>
+    <p class="note"><b>The new DSA problem is optional by design.</b> A night at Floor is not a miss.</p>
+  </section>
+
+  <section class="card">
+    <h2>System design &mdash; the weekly cycle</h2>
+    <p class="sub">One design a week. A 40-minute slot cannot hold an attempt <em>and</em> a review, so it is split.</p>
+    <ol class="cyc">
+      <li><b>Mon &mdash; Attempt.</b> Timed, blind, no reading. Boxes and arrows. Numbers out loud.<span>&rarr; attempt.md + sketch</span></li>
+      <li><b>Wed &mdash; Check.</b> Compare against the reference. Run the 3&times;3 sweep. Write every question you could not answer.<span>&rarr; gaps.md</span></li>
+      <li><b>Fri &mdash; Close one gap.</b> Take a single item from gaps.md and learn it properly, with a diagram.<span>&rarr; a note in concepts/</span></li>
+    </ol>
+    <p class="note"><b>Every third Friday</b>, re-draw an old design blind instead. See <code>REVIEW-QUEUE.md</code>.</p>
+  </section>
+
+  <section class="card">
+    <h2>LLD &mdash; the weekly cycle</h2>
+    <p class="sub">One pattern a week. Every ~4 weeks, one full problem combining several.</p>
+    <ol class="cyc">
+      <li><b>Tue</b> &mdash; Study one pattern. What problem it solves, and <b>what it costs</b>.</li>
+      <li><b>Thu</b> &mdash; Sketch Sunday's build: the class list and the interfaces, on paper.</li>
+      <li><b>Sun</b> &mdash; Build it in Python, by hand, 1.5&ndash;2 hours.</li>
+    </ol>
+    <p class="note"><b>Build the wrong version too</b>, so you can feel why the pattern exists. The goal is taste, not a finished app.</p>
+  </section>
+
+  <section class="card rules">
+    <h2>The rules</h2>
+    <ol class="num">
+      <li><b>Practice means producing an artifact.</b> Reading an article or watching a video is not practice. <b>A bad one-page design beats a well-understood article.</b></li>
+      <li><b>Saturday is off, and Friday ends early.</b> Rest pays for the other six days. It is not what is left over.</li>
+      <li><b>Do not add more.</b> Hitting Full five nights a week is overdrawing, not dedication.</li>
+      <li><b>Concepts are pulled, not pushed.</b> Never study a topic you have not already needed. <b>The gap list is the curriculum.</b></li>
+      <li><b>Never open a reference design before your attempt exists.</b> The gap between the two is the entire lesson.</li>
+    </ol>
+  </section>
+
+</div>
+
+<div class="repos">
+  <div><b>learning-swe-fundamentals</b><span>System design &middot; cloud and DevOps fundamentals &middot; the schedule</span></div>
+  <div><b>dsa-tech-prep</b><span>LeetCode &middot; LLD &middot; organic projects &middot; the spaced-repetition tracker</span></div>
+</div>
+
+<footer class="foot">Set 2026-09-04 &middot; source of truth: <code>SCHEDULE.md</code> &middot; framework: <code>system-design/FRAMEWORK.md</code></footer>
+</div>
+
+<script>
+(function () {
+  var COPY = {
+    1: "Monday &mdash; 3 reps, a new problem if you have it, then <b>attempt this week's design</b> at 20:00.",
+    2: "Tuesday &mdash; 3 reps, a new problem if you have it, then <b>study one LLD pattern</b> at 20:00.",
+    3: "Wednesday &mdash; 3 reps, a new problem if you have it, then <b>check your design</b> and write gaps.md at 20:00.",
+    4: "Thursday &mdash; 3 reps, no new problem, then <b>sketch Sunday's build</b> at 20:00.",
+    5: "Friday &mdash; 3 reps, then <b>close one gap</b> at 18:00. Evening free.",
+    6: "Saturday &mdash; <b>off.</b> Family and friends.",
+    0: "Sunday &mdash; <b>LLD build</b>, 1.5&ndash;2 hours. Write it by hand."
+  };
+  try {
+    var d = new Date().getDay();
+    var row = document.querySelector('tr[data-day="' + d + '"]');
+    if (row) { row.classList.add('is-today'); }
+    var t = document.getElementById('today-txt');
+    if (t) { t.innerHTML = COPY[d]; }
+  } catch (e) {}
+})();
+</script>
+
+</body>
+</html>
