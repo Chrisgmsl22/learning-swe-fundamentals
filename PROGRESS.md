@@ -79,17 +79,52 @@ Behavioral rehearsal and concept flashcards. No screen needed for either.
 
 _(the honest list — this is what Wednesday's taper reviews)_
 
-- **CIDR arithmetic** — the recipe is known, the speed is not. Fix by use, not by study.
-  Live errors: "octet" said for "bit"; `last = first + size` instead of `− 1`;
-  splitting a range by dividing the bits instead of adding to the prefix.
-- Linux commands, file/group permissions, `chmod 600 key.pem`. Not started.
-- Terraform and CloudFormation. Not started.
-- Behavioral stories. Not started. **Now a full 60-minute round — needs STAR structure.**
-- **Ansible** — never seen. New requirement from the official guide.
-- **Jenkins** specifics, and **Python / boto3**. New requirements.
-- CloudFormation. Not started.
+- **BEHAVIORAL — nothing done. A full 60-minute round. This is now the biggest gap by far.**
+- **CIDR arithmetic** — the recipe is known, the speed is not. Live errors: "octet" said for
+  "bit"; `last = first + size` instead of `− 1`; splitting by dividing the bits.
+- **Terraform: 4 of 9 lab bugs still unfixed** — the ORed `cidr_blocks` on sg-db, `gateway_id`
+  for a NAT, SSH 22 open, and the CIDR overlap fixed on the wrong side.
+- Kubernetes vocabulary. Not started.
+- CI/CD + Jenkins. Not started.
+- Observability, capacity, cost, multi-region. Not started.
+- Python / boto3. Not started — but this is his strongest area.
+- No mock case done yet.
+
+**Done and solid:** networking spine · CIDR mechanics · Terraform reading · CloudFormation ·
+Ansible · file permissions · Docker.
 
 ## Session log
+
+**Thu 3 – Fri 4.** Three rounds done. Reported questions across them: monitoring, scaling, AZ and
+cross-region replication, cost, slow APIs, alerts, metrics. **Case round is the last one.**
+Built `site/case-round-cheatsheet.html` — a one-screen glance sheet, adding the four things the
+playbook lacked: the slow-API diagnostic ladder, multi-AZ vs multi-region with RPO/RTO, the
+migration options (lift-and-shift / replatform / refactor), and cost levers in order.
+
+
+**Wed 2 — taper.** No new labs. Wrote the 8 STAR stories (`behavioral/stories.md`) from his own
+material, plus a question bank for the interviewers (`behavioral/questions-to-ask.md`). Closed with
+a deliberately light skim of Kubernetes, CI/CD and observability
+(`notes/04-k8s-cicd-observability.md`) — vocabulary level only, by design.
+
+Strongest stories: the tool that was not ready (influencing), optimising for quality when the team
+needed speed (self-awareness), the AI harness (initiative), the one-client feature (judgment).
+Delivery notes: he says "we" instead of "I", his situations run long, and 2 stories still lack a
+result.
+
+
+**Mon 31 – Tue 1, evening.** Covered CloudFormation (`labs/cloudformation/vpc.yaml`, the same VPC
+in YAML), the `DependsOn` rule, route table vs route vs association, Ansible (`labs/ansible/`,
+agentless over SSH, idempotent modules, handlers), file permissions including the special bits,
+and Docker end to end — layer cache order, multi-stage, `.dockerignore`, non-root, PID 1 and
+`SIGTERM`. **Bad image 1.74 GB -> fixed image 242 MB, running as `appuser`.**
+
+Artifact: **`site/day-02-iac-and-containers.html`**.
+
+**Decision — Docker stopped early, deliberately.** The hands-on round is Terraform/CloudFormation;
+Docker appears only in the concept round, where he already has a strong answer. Remaining time
+goes to behavioral, which is a full 60-minute round with zero preparation.
+
 
 **Mon 31.** Official interview guide arrived. Plan restructured: behavioral promoted from
 micro-slots to a real 45-minute block (it is a full 60-minute round), and **Ansible**, **Jenkins**

@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case Round Cheat Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+
+:root{
+  --ground:#FBFBFC;
+  --surface:#F1F4F8;
+  --surface-2:#E7ECF3;
+  --ink:#141922;
+  --muted:#596475;
+  --faint:#8A94A3;
+  --rule:#DCE2EA;
+  --accent:#0E7C86;
+  --accent-soft:#DCF0F1;
+  --good:#2C6E49;
+  --good-soft:#DFF0E6;
+  --bad:#A82820;
+  --bad-soft:#FBE6E4;
+  --shadow:0 1px 2px rgba(20,25,34,.05), 0 8px 24px -16px rgba(20,25,34,.28);
+
+  color-scheme:light;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+/* Light theme only — locked by preference. Do not add dark overrides. */
+
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--serif);font-size:14.5px;line-height:1.45;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1500px;margin:0 auto;padding:22px 22px 60px}
+.top{display:flex;flex-wrap:wrap;gap:14px 40px;align-items:flex-end;justify-content:space-between;border-bottom:2px solid var(--ink);padding-bottom:16px;margin-bottom:20px}
+.kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+h1{font-family:var(--sans);font-weight:700;font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1;letter-spacing:-.025em;margin:0}
+.lede{margin:0;max-width:58ch;color:var(--muted);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;align-items:start}
+.card{border:1px solid var(--rule);border-radius:9px;background:var(--surface);padding:15px 17px}
+.card.accent{border-color:var(--accent);background:var(--accent-soft)}
+.card.span2{grid-column:span 2}
+@media (max-width:760px){.card.span2{grid-column:span 1}}
+h2{font-family:var(--sans);font-weight:600;font-size:.98rem;letter-spacing:-.005em;margin:0 0 10px;padding-bottom:7px;border-bottom:1px solid var(--rule);text-wrap:balance}
+.card p{margin:0 0 8px;font-size:13.5px}
+.card p:last-child{margin-bottom:0}
+.pre{color:var(--muted);font-size:12.5px!important;margin-bottom:8px!important}
+b,strong{font-weight:600}
+code{font-family:var(--mono);font-size:.85em;background:var(--ground);border:1px solid var(--rule);border-radius:3px;padding:.06em .3em}
+ol.arc{counter-reset:c;list-style:none;padding:0;margin:0;font-size:13.5px}
+ol.arc li{counter-increment:c;position:relative;padding:5px 0 5px 27px;border-bottom:1px solid var(--rule)}
+ol.arc li:last-child{border-bottom:none}
+ol.arc li::before{content:counter(c);position:absolute;left:0;top:6px;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-family:var(--mono);font-size:10px;font-weight:700;background:var(--ground);border:1px solid var(--accent);color:var(--accent)}
+ol.arc.tight li{padding-top:4px;padding-bottom:4px}
+ol.arc li.key{background:var(--good-soft);margin:0 -17px;padding-left:44px;padding-right:17px;border-radius:3px}
+ol.arc li.key::before{left:17px}
+table.mini{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:12.8px;margin:0 0 9px}
+table.mini th{text-align:left;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);padding:4px 8px 4px 0;border-bottom:1px solid var(--rule)}
+table.mini td{padding:5px 8px 5px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+table.mini tr:last-child td{border-bottom:none}
+table.mini td.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap;padding-right:0}
+table.mini tr.hl td{background:var(--good-soft)}
+.say{font-family:var(--sans);font-size:12.8px;color:var(--ink);border-left:2px solid var(--accent);padding:6px 0 6px 10px;margin:9px 0 8px!important;background:var(--ground)}
+.pairs{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.pairs div{font-size:12.8px}
+.pairs b{display:block;font-family:var(--sans);color:var(--accent);margin-bottom:2px}
+.pairs span{color:var(--muted)}
+ul.phr{list-style:none;padding:0;margin:0;columns:2;column-gap:26px;font-size:13.5px}
+@media (max-width:700px){ul.phr{columns:1}}
+ul.phr li{padding:4px 0;break-inside:avoid;border-bottom:1px solid var(--rule)}
+.foot{margin-top:22px;border-top:1px solid var(--rule);padding-top:12px;font-family:var(--mono);font-size:11px;color:var(--faint)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div>
+    <p class="kicker">Case round · today</p>
+    <h1>Case Round Cheat Sheet</h1>
+  </div>
+  <p class="lede">Consulting <em>format</em>, engineering <em>content</em>. Framing &rarr; drivers &rarr; recommendation. <strong>Draw while you talk. Numbers out loud. Recommendations may change.</strong></p>
+</header>
+
+<div class="grid">
+
+  <!-- ARC -->
+  <div class="card span2 accent">
+    <h2>The arc</h2>
+    <ol class="arc">
+      <li><b>Clarify.</b> 3&ndash;4 questions before you draw. Who uses it? Read or write heavy? What must never break? Is the spike predictable?</li>
+      <li><b>Numbers.</b> Out loud. <em>"Let me put rough numbers on this first."</em> Rough is fine; silent is not.</li>
+      <li><b>Boxes and arrows.</b> Simplest thing that works. No product names yet.</li>
+      <li><b>Name the bottleneck.</b> <em>"The constraint here is the database, so that is where I would spend the design."</em></li>
+      <li><b>Tradeoffs</b> as you go. Gain and lose, every time.</li>
+      <li><b>Recommend</b> &mdash; and say what would change your mind.</li>
+    </ol>
+  </div>
+
+  <!-- NUMBERS -->
+  <div class="card">
+    <h2>Anchors</h2>
+    <table class="mini">
+      <tr><td>1M req/day</td><td class="n"><b>12/s</b></td></tr>
+      <tr><td>100M req/day</td><td class="n">1,200/s</td></tr>
+      <tr><td>Peak vs avg</td><td class="n">2&ndash;5&times;</td></tr>
+      <tr><td>Memory read</td><td class="n">100 ns</td></tr>
+      <tr><td>SSD read</td><td class="n">100 µs</td></tr>
+      <tr><td>Net, same region</td><td class="n">0.5 ms</td></tr>
+      <tr class="hl"><td>Net, cross-region</td><td class="n">50&ndash;150 ms</td></tr>
+      <tr><td>1 SQL DB, reads</td><td class="n">5&ndash;10k/s</td></tr>
+      <tr><td>Cache hit rate</td><td class="n">80&ndash;95%</td></tr>
+      <tr><td>NAT gateway</td><td class="n">$32/mo</td></tr>
+      <tr class="hl"><td>Data out of AWS</td><td class="n">$0.09/GB</td></tr>
+    </table>
+  </div>
+
+  <!-- SPIKE -->
+  <div class="card span2 accent">
+    <h2>The payment spike &mdash; their example</h2>
+    <ol class="arc tight">
+      <li><b>Predictable or not?</b> Payday and Black Friday are schedulable. Viral is not. <b>Different answers.</b></li>
+      <li><b>Numbers.</b> Baseline vs peak, and <em>how long</em> the peak lasts. 10&times; for 5 min &ne; 2&times; for 6 h.</li>
+      <li class="key"><b>Decouple accepting from processing.</b> Accept, write to a <b>queue</b>, return "accepted". Workers drain it at their own rate. <b>The spike hits the queue, not the database.</b> A queue is a shock absorber &mdash; strongest single thing to say.</li>
+      <li><b>Idempotency keys</b>, so a retry never double-charges. Say this unprompted.</li>
+      <li><b>Autoscaling warms up in minutes, not seconds.</b> Predictable &rarr; scale on a <b>schedule</b>, ahead of it. Unpredictable &rarr; keep headroom, scale on <b>queue depth</b>, not CPU.</li>
+      <li><b>Protect the database.</b> It cannot scale in seconds. Connection pooling, read replicas, queue absorbing writes.</li>
+      <li><b>Shed load deliberately.</b> Rate limit, return a clear "try again". <b>A degraded service beats a dead one.</b></li>
+      <li><b>Cost:</b> reserved for the baseline, on-demand for the spike. Do not pay peak prices all month.</li>
+    </ol>
+  </div>
+
+  <!-- SLOW API -->
+  <div class="card">
+    <h2>"The API is slow" &mdash; the ladder</h2>
+    <p class="pre">Ask in this order. Never guess first.</p>
+    <ol class="arc tight">
+      <li><b>Slow for whom?</b> All users, one region, one endpoint?</li>
+      <li><b>p50 or p99?</b> p50 slow = everything. <b>p99 slow = contention, GC, or a cold cache.</b></li>
+      <li><b>When did it start?</b> A deploy, a traffic change, or gradual?</li>
+      <li><b>Where is the time?</b> <b>A trace answers this</b> &mdash; app, database, or a downstream call.</li>
+      <li>Then the usual suspects: <b>a missing index</b>, N+1 queries, no connection pool, no cache, a chatty dependency with no timeout.</li>
+    </ol>
+    <p class="say">"I would look at a trace before changing anything &mdash; I want to know which hop owns the latency."</p>
+  </div>
+
+  <!-- OBSERVABILITY -->
+  <div class="card">
+    <h2>Monitoring &amp; alerts</h2>
+    <table class="mini">
+      <tr><td><b>Metrics</b></td><td>numbers over time. cheap, aggregate</td></tr>
+      <tr><td><b>Logs</b></td><td>events with detail. expensive</td></tr>
+      <tr><td><b>Traces</b></td><td>one request across services</td></tr>
+    </table>
+    <p><b>SLI</b> the measurement &middot; <b>SLO</b> your target &middot; <b>SLA</b> the contract, money attached.</p>
+    <p><b>Error budget = 100% &minus; SLO.</b> 99.9% = <b>43 min/month</b>. Spend it on releases. Budget gone &rarr; stop shipping features.</p>
+    <p class="say">"Alert on symptoms, not causes. Checkout error rate above 2% &mdash; not CPU at 90%."</p>
+    <p><b>Incident:</b> detect &rarr; mitigate &rarr; fix &rarr; learn. <b>Mitigate before you fix</b> &mdash; roll back first, understand afterwards.</p>
+  </div>
+
+  <!-- AZ vs REGION -->
+  <div class="card">
+    <h2>Multi-AZ vs multi-region</h2>
+    <table class="mini">
+      <tr><th></th><th>Multi-AZ</th><th>Multi-region</th></tr>
+      <tr><td>Protects</td><td>one datacenter</td><td>a whole region</td></tr>
+      <tr><td>Latency</td><td>&lt;1 ms &mdash; <b>sync works</b></td><td>50&ndash;150 ms &mdash; <b>async only</b></td></tr>
+      <tr><td>Replication</td><td>synchronous standby</td><td>asynchronous, lag</td></tr>
+      <tr><td>Failover</td><td>automatic</td><td>manual or DNS, minutes</td></tr>
+      <tr><td>Cost</td><td>~2&times;</td><td>&gt;2&times;, plus egress</td></tr>
+    </table>
+    <p class="say">"Multi-AZ is the default and it is cheap insurance. Multi-region I would justify by a real requirement &mdash; a compliance rule, a latency target, or a stated RTO &mdash; not by instinct."</p>
+    <p><b>RPO</b> = data you can lose. <b>RTO</b> = time you can be down. <b>Ask for both numbers.</b></p>
+  </div>
+
+  <!-- SCALING -->
+  <div class="card">
+    <h2>Scaling &mdash; in order</h2>
+    <ol class="arc tight">
+      <li class="key"><b>Stateless app tier. Always first.</b> Nothing else works until session state is out of the app.</li>
+      <li><b>Load balancer</b> + horizontal scaling</li>
+      <li><b>Cache</b> &mdash; reads repeat. Costs you staleness.</li>
+      <li><b>Read replicas</b> &mdash; costs you replication lag, so reads can be stale</li>
+      <li><b>Queue</b> &mdash; absorbs write spikes, costs eventual consistency</li>
+      <li><b>CDN</b> for static and global</li>
+      <li><b>Shard</b> only when one database is genuinely full</li>
+    </ol>
+  </div>
+
+  <!-- RESILIENCE -->
+  <div class="card">
+    <h2>Resilience</h2>
+    <table class="mini">
+      <tr class="hl"><td><b>Timeouts</b></td><td>most forgotten. none = one slow dependency hangs everything</td></tr>
+      <tr><td><b>Retry + jitter</b></td><td>without jitter, every client retries at once</td></tr>
+      <tr><td><b>Circuit breaker</b></td><td>stop calling what is already failing</td></tr>
+      <tr class="hl"><td><b>Idempotency</b></td><td>no double charges</td></tr>
+      <tr><td><b>Degrade</b></td><td>recommendations off, checkout works</td></tr>
+      <tr><td><b>Multi-AZ</b></td><td>one datacenter dies</td></tr>
+      <tr><td><b>Canary</b></td><td>a bad deploy reaching everyone</td></tr>
+    </table>
+  </div>
+
+  <!-- COST -->
+  <div class="card">
+    <h2>Cost levers</h2>
+    <ol class="arc tight">
+      <li><b>Right-size first.</b> Most bills are oversized instances, not too many.</li>
+      <li><b>Reserved / savings plan</b> for the steady baseline &mdash; up to ~40% off.</li>
+      <li><b>Spot</b> for anything interruptible &mdash; batch, CI, workers.</li>
+      <li><b>Autoscale down</b>, not just up. <b>That is elasticity.</b></li>
+      <li><b>Storage tiers</b> &mdash; move cold objects off standard.</li>
+      <li class="key"><b>Egress.</b> $0.09/GB. Cross-AZ and cross-region traffic is the line nobody predicts.</li>
+      <li><b>Managed vs self-hosted</b> &mdash; more per hour, less per engineer.</li>
+    </ol>
+  </div>
+
+  <!-- MIGRATION -->
+  <div class="card">
+    <h2>Migration to the cloud</h2>
+    <p><b>The three options, in cost order:</b></p>
+    <table class="mini">
+      <tr><td><b>Lift and shift</b></td><td>fast, low risk, <b>no cloud benefit</b> &mdash; and often more expensive than the datacenter</td></tr>
+      <tr><td><b>Replatform</b></td><td>managed database, containers. the usual right answer.</td></tr>
+      <tr><td><b>Refactor</b></td><td>serverless, microservices. biggest gain, biggest cost and risk.</td></tr>
+    </table>
+    <p class="say">"I would lift and shift what is stable, replatform what is painful, and refactor only where the numbers justify it. And I would move something low-risk first, to learn."</p>
+    <p><b>Gain:</b> elasticity, speed, no capacity planning, managed services.<br>
+    <b>Lose:</b> per-hour cost can exceed owned hardware at steady load, egress fees, lock-in, and a new skill requirement.</p>
+  </div>
+
+  <!-- WORDS -->
+  <div class="card span2">
+    <h2>The distinctions they listed</h2>
+    <div class="pairs">
+      <div><b>Scalability vs elasticity</b><span>Scalability = <em>can</em> it grow. <b>Elasticity = grows AND shrinks, automatically, fast.</b> They asked for both words.</span></div>
+      <div><b>Performance vs efficiency</b><span>Performance = how fast. Efficiency = how much you spent to get it.</span></div>
+      <div><b>Resilience vs availability</b><span>Availability = up now. Resilience = recovers from failure.</span></div>
+      <div><b>Consistency vs availability</b><span>In a partition you pick one. <b>Payments pick consistency.</b></span></div>
+      <div><b>Latency vs throughput</b><span>Batching raises both.</span></div>
+      <div><b>Agility</b><span>How fast you can change your mind. Managed services and IaC buy it.</span></div>
+    </div>
+  </div>
+
+  <!-- PHRASES -->
+  <div class="card span2 accent">
+    <h2>Say these</h2>
+    <ul class="phr">
+      <li>"Let me put rough numbers on this first."</li>
+      <li>"Before I design &mdash; is the spike predictable, or genuinely unexpected?"</li>
+      <li>"The bottleneck here is X, so that is where I would spend the design."</li>
+      <li>"I would accept and queue, so the spike hits the queue rather than the database."</li>
+      <li>"Idempotency keys, so a retry during a spike never double-charges."</li>
+      <li>"That is the simplest thing that works &mdash; I would add more only when the numbers justify it."</li>
+      <li>"What are your RPO and RTO? That decides multi-AZ versus multi-region."</li>
+      <li>"I would look at a trace before changing anything."</li>
+      <li><b>"I would change this recommendation if X turned out to be true."</b></li>
+      <li>"Can I take a moment to think about that?"</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer class="foot">Cloud &amp; DevOps intensive &middot; case round &middot; longer version in <code>designs/00-case-playbook.md</code></footer>
+</div>
+
+</body>
+</html>

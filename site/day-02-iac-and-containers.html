@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Config, Machines, Containers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+<style>
+:root{
+  --ground:#FBFBFC;
+  --surface:#F1F4F8;
+  --surface-2:#E7ECF3;
+  --ink:#141922;
+  --muted:#596475;
+  --faint:#8A94A3;
+  --rule:#DCE2EA;
+  --accent:#0E7C86;
+  --accent-soft:#DCF0F1;
+  --good:#2C6E49;
+  --good-soft:#DFF0E6;
+  --bad:#A82820;
+  --bad-soft:#FBE6E4;
+  --shadow:0 1px 2px rgba(20,25,34,.05), 0 8px 24px -16px rgba(20,25,34,.28);
+
+  color-scheme:light;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+/* Light theme only — locked by preference. Do not add dark overrides. */
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:17px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+
+.page{max-width:1140px;margin:0 auto;padding:0 28px 120px}
+.col{max-width:65ch}
+.plate{max-width:100%}
+
+/* ---------- masthead ---------- */
+.mast{
+  padding:72px 0 40px;
+  border-bottom:1px solid var(--rule);
+  margin-bottom:56px;
+}
+.kicker{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin:0 0 18px;
+}
+h1{
+  font-family:var(--sans);
+  font-weight:700;
+  font-size:clamp(2.4rem,6vw,3.9rem);
+  line-height:1.02;
+  letter-spacing:-.025em;
+  margin:0 0 20px;
+  text-wrap:balance;
+}
+.standfirst{
+  font-size:1.16rem;
+  color:var(--muted);
+  margin:0;
+  max-width:56ch;
+}
+.mast-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 28px;
+  margin-top:30px;
+  font-family:var(--mono);
+  font-size:12.5px;
+  color:var(--faint);
+}
+.mast-meta b{color:var(--ink);font-weight:500}
+
+/* ---------- sections ---------- */
+section{margin:0 0 76px;scroll-margin-top:24px}
+.sec-head{
+  display:flex;
+  align-items:baseline;
+  gap:16px;
+  margin:0 0 8px;
+  padding-bottom:12px;
+  border-bottom:2px solid var(--ink);
+}
+.sec-num{
+  font-family:var(--mono);
+  font-size:13px;
+  font-weight:700;
+  color:var(--accent);
+  letter-spacing:.06em;
+}
+h2{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:1.62rem;
+  letter-spacing:-.018em;
+  margin:0;
+  text-wrap:balance;
+}
+h3{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:1.12rem;
+  letter-spacing:-.008em;
+  margin:38px 0 12px;
+  text-wrap:balance;
+}
+h4{
+  font-family:var(--mono);
+  font-weight:700;
+  font-size:11.5px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--faint);
+  margin:28px 0 10px;
+}
+p{margin:0 0 16px}
+.lede{color:var(--muted);margin-bottom:26px}
+strong{font-weight:600}
+code{
+  font-family:var(--mono);
+  font-size:.87em;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:.1em .36em;
+  white-space:nowrap;
+}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:0 0 26px;border:1px solid var(--rule);border-radius:8px;background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:14.5px}
+th{
+  text-align:left;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  color:var(--faint);
+  font-weight:700;
+  padding:12px 16px;
+  border-bottom:1px solid var(--rule);
+  white-space:nowrap;
+}
+td{padding:11px 16px;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--ink)}
+tr:last-child td{border-bottom:none}
+td code{background:var(--ground)}
+.num{font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:13.5px;white-space:nowrap}
+
+/* ---------- code blocks ---------- */
+pre{
+  font-family:var(--mono);
+  font-size:13px;
+  line-height:1.66;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:8px;
+  padding:18px 20px;
+  overflow-x:auto;
+  margin:0 0 26px;
+  color:var(--ink);
+}
+pre .c{color:var(--faint)}
+pre .a{color:var(--accent)}
+
+/* ---------- callouts ---------- */
+.note{
+  border-left:3px solid var(--accent);
+  background:var(--accent-soft);
+  padding:16px 20px;
+  border-radius:0 8px 8px 0;
+  margin:0 0 26px;
+}
+.note p:last-child{margin-bottom:0}
+.note .tag{
+  display:block;
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--accent);
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.err{
+  border:1px solid var(--rule);
+  border-radius:8px;
+  overflow:hidden;
+  margin:0 0 18px;
+  background:var(--surface);
+}
+.err-row{display:flex;gap:0;flex-wrap:wrap}
+.err-half{flex:1 1 260px;padding:14px 18px}
+.err-half+.err-half{border-left:1px solid var(--rule)}
+.err .lbl{
+  display:inline-block;
+  font-family:var(--mono);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  padding:2px 7px;
+  border-radius:3px;
+  margin-bottom:8px;
+}
+.err .lbl.no{background:var(--bad-soft);color:var(--bad)}
+.err .lbl.yes{background:var(--good-soft);color:var(--good)}
+.err code{font-size:12.5px;background:var(--ground)}
+.err p{margin:0;font-size:15px;line-height:1.5}
+.err-why{
+  padding:12px 18px;
+  border-top:1px solid var(--rule);
+  background:var(--surface-2);
+  font-size:14.5px;
+  color:var(--muted);
+}
+.err-why b{color:var(--ink)}
+
+/* ---------- VPC diagram ---------- */
+.diagram{
+  border:1px solid var(--rule);
+  border-radius:10px;
+  background:var(--surface);
+  padding:24px;
+  margin:0 0 12px;
+  overflow-x:auto;
+  box-shadow:var(--shadow);
+}
+.dg-inner{min-width:600px}
+.dg-title{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:16px;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.dg-title b{color:var(--ink);font-weight:500}
+
+.igw{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  border:2px solid var(--accent);
+  background:var(--accent-soft);
+  color:var(--accent);
+  border-radius:6px;
+  padding:9px;
+  font-family:var(--mono);
+  font-size:12.5px;
+  font-weight:700;
+  letter-spacing:.06em;
+  margin-bottom:0;
+}
+.stem{
+  width:2px;height:20px;background:var(--accent);
+  margin:0 auto;
+}
+.vpc{
+  border:2px solid var(--ink);
+  border-radius:10px;
+  padding:18px;
+  position:relative;
+}
+.vpc-tag,.az-tag,.sn-tag{
+  font-family:var(--mono);
+  font-size:10.5px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.vpc-tag{color:var(--ink);margin-bottom:14px;display:block}
+.azs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.az{
+  border:1px dashed var(--faint);
+  border-radius:8px;
+  padding:14px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.az-tag{color:var(--faint);display:block}
+.sn{border:1px solid var(--rule);border-radius:7px;padding:12px;background:var(--ground)}
+.sn.pub{border-color:var(--accent)}
+.sn-tag{display:block;margin-bottom:2px}
+.sn.pub .sn-tag{color:var(--accent)}
+.sn.priv .sn-tag{color:var(--muted)}
+.sn-cidr{
+  font-family:var(--mono);
+  font-size:11.5px;
+  color:var(--faint);
+  display:block;
+  margin-bottom:10px;
+  font-variant-numeric:tabular-nums;
+}
+.nodes{display:flex;flex-wrap:wrap;gap:7px}
+.node{
+  font-family:var(--mono);
+  font-size:11.5px;
+  padding:5px 9px;
+  border-radius:5px;
+  background:var(--surface-2);
+  border:1px solid var(--rule);
+  color:var(--ink);
+  white-space:nowrap;
+}
+.node.hl{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:500}
+.node.new{background:var(--good-soft);border-color:var(--good);color:var(--good);font-weight:500}
+.rt-strip{
+  margin-top:12px;
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--muted);
+  border-top:1px dotted var(--rule);
+  padding-top:9px;
+}
+.dg-key{
+  display:flex;flex-wrap:wrap;gap:8px 20px;
+  font-family:var(--mono);font-size:11px;color:var(--faint);
+  margin-bottom:34px;
+}
+.dg-key i{font-style:normal;color:var(--good);font-weight:700}
+
+/* ---------- path strip ---------- */
+.path{
+  display:flex;flex-wrap:wrap;align-items:center;gap:7px;
+  font-family:var(--mono);font-size:12px;
+  padding:16px 18px;border:1px solid var(--rule);border-radius:8px;
+  background:var(--surface);margin:0 0 14px;
+}
+.path .h{padding:4px 9px;border-radius:5px;background:var(--surface-2);border:1px solid var(--rule);white-space:nowrap}
+.path .arrow{color:var(--accent);font-weight:700}
+.path-label{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--faint);font-weight:700;
+  width:100%;margin-bottom:2px;
+}
+
+/* ---------- checklist ---------- */
+ol.check{counter-reset:c;list-style:none;padding:0;margin:0 0 26px}
+ol.check li{
+  counter-increment:c;
+  position:relative;
+  padding:12px 0 12px 46px;
+  border-bottom:1px solid var(--rule);
+}
+ol.check li:last-child{border-bottom:none}
+ol.check li::before{
+  content:counter(c);
+  position:absolute;left:0;top:12px;
+  width:26px;height:26px;border-radius:50%;
+  display:grid;place-items:center;
+  font-family:var(--mono);font-size:12px;font-weight:700;
+  background:var(--accent-soft);color:var(--accent);
+}
+
+ul.plain{padding-left:20px;margin:0 0 22px}
+ul.plain li{margin-bottom:8px}
+
+.foot{
+  border-top:1px solid var(--rule);
+  padding-top:22px;
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--faint);
+}
+@media (max-width:700px){
+  body{font-size:16px}
+  .azs{grid-template-columns:1fr}
+  .page{padding:0 18px 80px}
+  .mast{padding-top:48px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="mast">
+  <p class="kicker">Cloud &amp; DevOps intensive · Day 2</p>
+  <h1>Config, Machines, Containers</h1>
+  <p class="standfirst">The three infrastructure-as-code tools, what Linux permissions actually say, and why a Docker image was 1.74&nbsp;GB.</p>
+  <div class="mast-meta">
+    <span>Covered <b>Mon 31 Aug – Tue 1 Sep</b></span>
+    <span>Assessment <b>Thu 3 Sep</b></span>
+    <span>Labs <b>labs/terraform · labs/cloudformation · labs/ansible · labs/docker</b></span>
+  </div>
+</header>
+
+<!-- ============ 1 ============ -->
+<section id="trio">
+  <div class="sec-head"><span class="sec-num">01</span><h2>The three IaC tools</h2></div>
+  <div class="col">
+    <p class="lede">The official guide names all three. They are not competitors — two of them do one job and the third does a different one.</p>
+    <div class="note">
+      <span class="tag">The sentence to say</span>
+      <p><strong>Terraform and CloudFormation build the house. Ansible furnishes it.</strong> The first two <em>provision infrastructure</em>. Ansible does <em>configuration management</em> — it sets up what runs inside a machine that already exists.</p>
+    </div>
+  </div>
+
+  <div class="tw plate">
+    <table>
+      <thead><tr><th></th><th>Terraform</th><th>CloudFormation</th><th>Ansible</th></tr></thead>
+      <tbody>
+        <tr><td>Job</td><td>Provision infrastructure</td><td>Provision infrastructure</td><td><strong>Configure machines</strong></td></tr>
+        <tr><td>Clouds</td><td>Any, and many at once</td><td><strong>AWS only</strong></td><td>Any machine with SSH</td></tr>
+        <tr><td>Order of work</td><td>A dependency graph. You do not choose it.</td><td>A dependency graph.</td><td><strong>Top to bottom</strong>, as written.</td></tr>
+        <tr><td>State</td><td>A state file <strong>you</strong> own</td><td>A stack, <strong>AWS</strong> owns it</td><td><strong>None</strong> — inspects the live machine</td></tr>
+        <tr><td>Talks to</td><td>Cloud APIs</td><td>Cloud APIs</td><td><strong>SSH, port 22</strong></td></tr>
+        <tr><td>Dry run</td><td><code>terraform plan</code></td><td>a change set</td><td><code>--check</code></td></tr>
+        <tr><td>Language</td><td>HCL</td><td>YAML / JSON</td><td>YAML + Jinja2</td></tr>
+        <tr><td>Loops</td><td><code>count</code>, <code>for_each</code></td><td><strong>none</strong> — write it out</td><td><code>loop</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col">
+    <div class="note">
+      <span class="tag">Terraform or Ansible?</span>
+      <p>Not a choice — different jobs. Terraform builds the VPC, the subnets and the instances. Ansible then installs nginx on those instances and writes their config. Ansible <em>can</em> create cloud resources, but it has no state file, no <code>plan</code> and no <code>destroy</code>, so Terraform is the better provisioner.</p>
+    </div>
+    <div class="note">
+      <span class="tag">Terraform or CloudFormation?</span>
+      <p>Terraform when you have more than one provider, or want modules and loops — it is the industry default and HCL reads more easily. CloudFormation when it is AWS-only and you want AWS to own the state and the rollback. <strong>Both are declarative:</strong> you describe the end state, not the steps.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section id="cfn">
+  <div class="sec-head"><span class="sec-num">02</span><h2>CloudFormation, translated</h2></div>
+  <div class="col"><p class="lede">Same VPC, same 21 resources, different language. Only the differences are worth memory.</p></div>
+
+  <div class="tw plate">
+    <table>
+      <thead><tr><th>Terraform</th><th>CloudFormation</th></tr></thead>
+      <tbody>
+        <tr><td><code>variable</code></td><td><code>Parameters</code></td></tr>
+        <tr><td><code>resource</code></td><td><code>Resources</code></td></tr>
+        <tr><td><code>output</code></td><td><code>Outputs</code></td></tr>
+        <tr><td><code>provider "aws"</code></td><td><strong>nothing</strong> — AWS-only, so it is implied</td></tr>
+        <tr><td><code>var.project</code></td><td><code>!Ref Project</code></td></tr>
+        <tr><td><code>"${var.project}-vpc"</code></td><td><code>!Sub "${Project}-vpc"</code></td></tr>
+        <tr><td><code>aws_vpc.main.id</code></td><td><code>!Ref Vpc</code></td></tr>
+        <tr><td><code>aws_eip.nat.id</code></td><td><code>!GetAtt NatEip.AllocationId</code></td></tr>
+        <tr><td><code>depends_on</code></td><td><code>DependsOn</code></td></tr>
+        <tr><td><code>count = 2</code></td><td><strong>nothing — write the resource twice</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>The four real differences</h3>
+  <div class="col">
+    <ol class="check">
+      <li><strong>No loops.</strong> Four subnets means four blocks. This is why CloudFormation templates get long.</li>
+      <li><strong>Nested things become separate resources.</strong> A route is a block inside <code>aws_route_table</code> in Terraform; <code>AWS::EC2::Route</code> is its own resource here. Same for the IGW attachment.</li>
+      <li><strong>Different property names for the same idea.</strong> A security group takes <code>cidr_blocks</code> (a list) in Terraform and <code>CidrIp</code> (one value) in CloudFormation. Expect this trap live.</li>
+      <li><strong>State.</strong> Terraform keeps a file you must store and protect. CloudFormation keeps the stack inside AWS. That is its single best argument.</li>
+    </ol>
+  </div>
+
+  <h3>When to write <code>DependsOn</code></h3>
+  <div class="col">
+    <p>Both tools build the order <strong>from the references you write</strong>. You need <code>DependsOn</code> only when a dependency is real but <strong>invisible</strong>.</p>
+  </div>
+  <pre class="plate">PublicDefaultRoute  --&gt; !Ref InternetGateway
+<span class="c">   the reference says "the IGW must exist".
+   It does NOT say "the IGW must be ATTACHED to the VPC".
+   That resource is never named here -&gt; invisible -&gt; state it.</span>
+
+PrivateDefaultRoute --&gt; !Ref NatGateway --&gt; !GetAtt NatEip --&gt; DependsOn: IgwAttachment
+<span class="c">   every link is written down -&gt; visible -&gt; say nothing.</span></pre>
+  <div class="col">
+    <div class="note">
+      <span class="tag">The rule</span>
+      <p>Add <code>DependsOn</code> only when the ordering cannot be seen in a reference. Adding it everywhere is a smell — it means you did not trust the graph, and it serialises a build that could have run in parallel.</p>
+    </div>
+    <div class="err">
+      <div class="err-row">
+        <div class="err-half"><span class="lbl no">Live error</span><p>"The private route table does not rely on the outside world, it is simply internal."</p></div>
+        <div class="err-half"><span class="lbl yes">Correct</span><p>It depends on the outside world completely — it points at the NAT, and a NAT is useless without the IGW.</p></div>
+      </div>
+      <div class="err-why"><b>Private does not mean disconnected. It means outbound only.</b> The reason no <code>DependsOn</code> is needed there is that the chain is already written down, not that the dependency is absent.</div>
+    </div>
+  </div>
+
+  <h3>Route table &middot; route &middot; association</h3>
+  <div class="col"><p>Three separate objects, and the split trips people constantly.</p></div>
+  <div class="tw plate">
+    <table>
+      <thead><tr><th>Object</th><th>What it is</th><th>Analogy</th></tr></thead>
+      <tbody>
+        <tr><td><code>RouteTable</code></td><td>An <strong>empty container</strong> of rules. Belongs to the VPC.</td><td>A blank signpost</td></tr>
+        <tr><td><code>Route</code></td><td><strong>One rule</strong>: <code>0.0.0.0/0 → somewhere</code></td><td>The directions painted on it</td></tr>
+        <tr><td><code>SubnetRouteTableAssociation</code></td><td><strong>Attaches the table to a subnet</strong></td><td>Planting it at a junction</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col">
+    <div class="note">
+      <span class="tag">Why this is a nasty bug</span>
+      <p>Without the association nothing happens. The table exists, the rules are perfect, and no packet ever consults it — the subnet quietly falls back to the VPC's <strong>main</strong> route table instead. Everything <em>looks</em> right.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section id="ansible">
+  <div class="sec-head"><span class="sec-num">03</span><h2>Ansible</h2></div>
+  <div class="col">
+    <p class="lede">Agentless. It installs nothing on the target — it connects over <strong>SSH port 22</strong>, runs Python there, and disconnects. Close port 22 and Ansible can do nothing.</p>
+  </div>
+
+  <div class="tw plate">
+    <table>
+      <thead><tr><th>Word</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Inventory</strong></td><td>The list of target machines, in groups.</td></tr>
+        <tr><td><strong>Playbook</strong></td><td>A YAML file of plays. Each maps a host group to a list of tasks.</td></tr>
+        <tr><td><strong>Task</strong></td><td>One step. It calls a module.</td></tr>
+        <tr><td><strong>Module</strong></td><td>The unit that does the work — <code>package</code>, <code>service</code>, <code>file</code>, <code>template</code>. <strong>Modules are what make Ansible idempotent.</strong></td></tr>
+        <tr><td><strong>Handler</strong></td><td>Runs at the end, once, and only if a task notified it.</td></tr>
+        <tr><td><strong>Role</strong></td><td>A reusable folder of tasks and templates. Ansible's answer to a Terraform module.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <pre class="plate">- name: Install nginx
+  ansible.builtin.package:
+    name: nginx
+    state: present          <span class="c"># the END STATE, not "install"</span>
+
+- name: Write the config from a template
+  ansible.builtin.template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    mode: "0644"
+  notify: Reload nginx      <span class="a"># fires ONLY if the file actually changed</span></pre>
+
+  <div class="col">
+    <p><strong>Idempotent</strong> is the word to know. Every module checks the machine before it acts. Run the playbook 10 times and it ends in the same condition — runs 2 to 10 report <code>ok</code> rather than <code>changed</code>.</p>
+    <div class="note">
+      <span class="tag">Terraform describes a destination. Ansible describes a journey.</span>
+      <p><strong>Easier:</strong> you can express steps with no data dependency that still must run in order — <em>stop the service, swap the binary, start the service</em>. Terraform sees no references between those, so it would run them at once. A procedure cannot be expressed as a graph.</p>
+      <p><strong>Harder:</strong> you own the correctness. Swap two tasks and it breaks silently, with no graph to catch it. You also lose automatic parallelism, a real preview of the end state, and <code>destroy</code>.</p>
+    </div>
+  </div>
+
+  <h3>Reaching a private server</h3>
+  <div class="col">
+    <p>Ansible needs SSH. Your app servers sit in private subnets, so <strong>three of the four reachability conditions fail</strong> — no IGW route, no public IP, and port 22 closed. Opening port 22 alone changes nothing, because a NAT carries no inbound traffic.</p>
+  </div>
+  <div class="tw plate">
+    <table>
+      <thead><tr><th>Option</th><th>How</th><th>Cost</th></tr></thead>
+      <tbody>
+        <tr><td><strong>SSM Session Manager</strong></td><td>The agent calls <strong>out</strong> through the NAT. <strong>No inbound port at all.</strong></td><td>Free. Lead with this.</td></tr>
+        <tr><td>Bastion host</td><td>A small instance in a public subnet. SSH 22 from your IP only; the app SG allows 22 from the bastion's SG.</td><td>One instance to patch.</td></tr>
+        <tr><td>Control node inside the VPC</td><td>Run Ansible from a machine already in a private subnet.</td><td>Nothing exposed.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section id="perms">
+  <div class="sec-head"><span class="sec-num">04</span><h2>File permissions</h2></div>
+  <div class="col"><p class="lede">Four octal digits. Most people only ever read the last three.</p></div>
+
+  <pre class="plate">0 7 5 0
+│ │ │ └── others   0 = ---
+│ │ └──── group    5 = r-x
+│ └────── owner    7 = rwx
+└──────── <span class="a">SPECIAL BITS</span>
+
+<span class="c">read = 4    write = 2    execute = 1        7 = 4+2+1</span></pre>
+
+  <div class="tw plate">
+    <table>
+      <thead><tr><th>Special bit</th><th>Value</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td>setuid</td><td class="num">4</td><td>The file runs as its <strong>owner</strong>, not as you.</td></tr>
+        <tr><td>setgid</td><td class="num">2</td><td>On a directory: new files inherit the <strong>group</strong>.</td></tr>
+        <tr><td>sticky</td><td class="num">1</td><td>In a shared directory, only the owner may delete their own file. <code>/tmp</code> is <code>1777</code>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="err">
+    <div class="err-row">
+      <div class="err-half"><span class="lbl no">Live error</span><p>The leading <code>0</code> is the file type — <code>-</code> for a file.</p></div>
+      <div class="err-half"><span class="lbl yes">Correct</span><p>The leading digit is the <strong>special bits</strong>. <code>0</code> means none are set.</p></div>
+    </div>
+    <div class="err-why">The file type is a separate thing, shown by <code>ls -l</code> as the first of ten characters — <code>-rwxr-x---</code> a file, <code>drwxr-xr-x</code> a directory, <code>lrwxrwxrwx</code> a symlink. <b>It is never part of the number, and <code>chmod</code> cannot change it.</b></div>
+  </div>
+
+  <div class="col">
+    <div class="note">
+      <span class="tag">The ones worth knowing on sight</span>
+      <p><code>600</code> a private key — owner read/write, nobody else. SSH <strong>refuses</strong> a key that is more open than this.<br>
+      <code>644</code> a normal config file — everyone reads, owner writes.<br>
+      <code>755</code> a script or a directory — everyone runs or enters, owner writes.<br>
+      <code>777</code> <strong>never</strong>. It is the answer to "I do not know which permission it needs".</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section id="docker">
+  <div class="sec-head"><span class="sec-num">05</span><h2>Docker</h2></div>
+  <div class="col">
+    <p class="lede">An image is a stack of read-only layers. A container is that stack plus one writable layer on top. Every instruction that changes the filesystem makes one layer.</p>
+    <div class="note">
+      <span class="tag">The cache rule — the whole optimisation game</span>
+      <p>Docker walks the file top to bottom and reuses a cached layer when its inputs are unchanged. <strong>The first instruction that changes invalidates that layer and every layer below it.</strong> So order instructions from <strong>least likely to change</strong> to <strong>most likely</strong>.</p>
+    </div>
+  </div>
+
+  <h4>Measured on this machine</h4>
+  <div class="tw plate">
+    <table>
+      <thead><tr><th>Measure</th><th>Bad</th><th>Fixed</th></tr></thead>
+      <tbody>
+        <tr><td>Image size</td><td class="num">1.74 GB</td><td class="num">242 MB</td></tr>
+        <tr><td>Runs as</td><td><code>root</code></td><td><code>appuser</code></td></tr>
+        <tr><td>Packages beyond the app</td><td>curl, vim, build-essential</td><td>none</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>The eight fixes</h3>
+  <div class="tw plate">
+    <table>
+      <thead><tr><th>Problem</th><th>Fix</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td><code>FROM python:3.12</code></td><td><code>python:3.12-slim</code></td><td>~1 GB of the size, in one line. Never <code>latest</code>.</td></tr>
+        <tr><td><code>COPY . .</code> before <code>pip install</code></td><td>Copy <strong>requirements.txt only</strong>, install, then copy the source</td><td>One character of Python otherwise reinstalls every dependency. This is the CI complaint.</td></tr>
+        <tr><td>Four <code>RUN apt-get</code> lines</td><td>One <code>RUN</code>, with <code>rm -rf /var/lib/apt/lists/*</code> <strong>in the same layer</strong></td><td>A layer is a snapshot. Deleting later only hides the bytes; the image still carries them.</td></tr>
+        <tr><td>curl, vim, build-essential</td><td>Delete them</td><td>Attack surface and CVE noise. <strong>Containers are immutable — you never edit one, you replace it.</strong></td></tr>
+        <tr><td>No <code>USER</code></td><td><code>useradd</code>, then <code>USER appuser</code> before <code>CMD</code></td><td>A container escape as root is far worse than as <code>appuser</code>.</td></tr>
+        <tr><td>No <code>.dockerignore</code></td><td>Exclude <code>.git</code>, <code>.env</code>, <code>venv</code>, caches</td><td>The whole context is uploaded before the build. And <code>COPY . .</code> otherwise ships <code>.env</code> and full git history into the image.</td></tr>
+        <tr><td><code>pip install</code></td><td>add <code>--no-cache-dir</code></td><td>pip's download cache is baked into the layer and never used again.</td></tr>
+        <tr><td><code>CMD python app/main.py</code></td><td><code>CMD ["gunicorn", ...]</code></td><td>See below. This one is worth real marks.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>PID 1 and why exec form matters</h3>
+  <div class="col">
+    <p><strong>PID 1</strong> is the first process, the root of the process tree. Inside a container that is <em>your application</em>. Two things make it special: when PID 1 exits the container is finished, and <strong>the kernel does not apply default signal handling to PID 1</strong> — a signal is dropped unless the program handles it.</p>
+  </div>
+
+  <pre class="plate"><span class="c">SHELL FORM   CMD python app/main.py</span>        <span class="c">EXEC FORM   CMD ["python","app/main.py"]</span>
+  PID  PPID COMMAND                          PID  PPID COMMAND
+    1     0 sh        <span class="a">&lt;- PID 1</span>                 1     0 python    <span class="a">&lt;- your app</span>
+    7     1 sh
+    9     7 python    <span class="c">&lt;- your app</span></pre>
+
+  <div class="col">
+    <p>Docker and Kubernetes stop a container the same way: send <strong><code>SIGTERM</code> to PID 1</strong>, wait (10 s for Docker, 30 s for Kubernetes), then send <strong><code>SIGKILL</code></strong>, which cannot be caught.</p>
+    <p><strong>In shell form the signal goes to <code>sh</code>, and <code>sh -c</code> does not forward it.</strong> Your app never hears anything and gets killed mid-request. Every rolling deploy drops in-flight connections, and the app logs nothing, because it was never told.</p>
+    <div class="note">
+      <span class="tag">Say this on Thursday</span>
+      <p>"Exec form, so the app is PID 1 and receives SIGTERM — otherwise every rolling deploy drops in-flight requests." That is a Docker answer, a Kubernetes answer and a failure-modes answer at once.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section id="recall">
+  <div class="sec-head"><span class="sec-num">06</span><h2>Wednesday recall check</h2></div>
+  <div class="col">
+    <p class="lede">Page closed. Anything you miss is what the taper reviews.</p>
+    <ol class="check">
+      <li>Terraform, CloudFormation, Ansible — one sentence each on what job it does.</li>
+      <li>When do you need <code>DependsOn</code>, and when is it a smell?</li>
+      <li>A route table has perfect rules and no traffic uses it. What is missing?</li>
+      <li>What makes an Ansible module idempotent, and why does it matter?</li>
+      <li>Ansible cannot reach a server in a private subnet. Name three ways to fix it, best first.</li>
+      <li><code>chmod 640 secrets.env</code> — who can do what? And what does the leading digit hold?</li>
+      <li>A one-line code change rebuilds every dependency. Which instruction is in the wrong place?</li>
+      <li>Why must <code>rm -rf /var/lib/apt/lists/*</code> be in the same <code>RUN</code> as the install?</li>
+      <li>Why does <code>CMD python app.py</code> break a rolling deploy?</li>
+    </ol>
+  </div>
+</section>
+
+<footer class="foot">
+  Cloud &amp; DevOps intensive &middot; Day 2 &middot; labs in <code>labs/</code> &middot; see also <code>site/day-01-network-spine.html</code>
+</footer>
+
+</div>
+
+</body>
+</html>

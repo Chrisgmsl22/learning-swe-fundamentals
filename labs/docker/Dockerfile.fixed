@@ -1,0 +1,40 @@
+# =============================================================================
+# The fixed version. Compare it against Dockerfile line by line.
+# Ordering rule: least likely to change at the top, most likely at the bottom.
+# =============================================================================
+
+# 1. SLIM base. ~150 MB instead of ~1 GB. Pin the tag, never use `latest`.
+FROM python:3.12-slim
+
+# 2. One RUN, --no-install-recommends, and the cleanup IN THE SAME LAYER.
+#    A later `rm` only hides the files; the bytes stay in the layer above.
+#    curl, vim and build-essential are all deleted — a production image ships
+#    the application and nothing else.
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
+# 3. A non-root user, created early and switched to late.
+RUN useradd --create-home --uid 10001 appuser
+
+WORKDIR /app
+
+# 4. THE CACHE BOUNDARY. Only the manifest, so this layer survives every
+#    code change. --no-cache-dir drops pip's download cache from the layer.
+COPY app/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 5. Source code last — it changes on every commit, and everything below a
+#    changed layer is rebuilt.
+COPY app/ ./app/
+
+# 6. Metadata. No filesystem change, so effectively free.
+ENV APP_VERSION=1.0.0 \
+    PYTHONUNBUFFERED=1
+EXPOSE 8080
+
+# 7. Drop privileges only now — the steps above needed root.
+USER appuser
+
+# 8. Exec form, so gunicorn is PID 1 and actually receives SIGTERM.
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "2", "app.main:app"]
