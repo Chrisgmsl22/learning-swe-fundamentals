@@ -11,7 +11,7 @@ The week is in `SCHEDULE.md`. The system design loop is in `system-design/FRAMEW
 
 | # | Design | Attempted | Checked | Gaps closed | Next re-draw |
 | --- | --- | --- | --- | --- | --- |
-| 01 | URL shortener | — | — | — | — |
+| 01 | URL shortener | **2026-09-07** (37 min) | — | — | — |
 | 02 | Rate limiter | — | — | — | — |
 | 03 | Async job service | — | — | — | — |
 
@@ -31,6 +31,18 @@ _(one line per note in `system-design/concepts/`. This list is the honest covera
 ## Session log
 
 _(newest first)_
+
+### 2026-09-07 · design 01 — attempt
+
+URL shortener, 37 of 40 minutes, first design of the new loop. Artifacts:
+`system-design/problems/01-url-shortener/attempt.md` + `attempt.png`.
+
+He worked the whole slot and produced a real design, not a term list. The reasoning lives mostly
+in annotations on the drawing rather than in `attempt.md` sections 3-7, which stayed as template.
+**Not marked — Wednesday is the check.**
+
+Self-identified gap, written during the attempt: *"Need to learn back of the envelope
+estimations."*
 
 ### 2026-09-07 · phase change
 
