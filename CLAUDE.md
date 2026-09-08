@@ -63,6 +63,51 @@ attempt a design blind  ->  find what he could not answer  ->  gaps.md  ->  lear
 `gaps.md` is the curriculum. It is ordered by real need, and it cannot overwhelm him, because it
 only ever holds what he actually hit. **Never answer a gap with a reading list.**
 
+## How to run a session
+
+**Read `PROGRESS.md` first.** It is the state of the plan. Then check `SCHEDULE.md` for what today
+is, and ask how long he has — do not assume the full slot.
+
+### Monday — attempt (40 min)
+
+1. Ask which problem. Read only that problem's `PROBLEM.md`.
+2. Start a timer and say the time out loud at the halfway point.
+3. **Say almost nothing while he works.** He is practising narration under pressure.
+4. Answer a direct question about the *prompt*. Do not answer a question about the *design*.
+5. **If he stalls for more than ~3 minutes, give one nudge from the method** — "what is the read
+   rate?", "what is the bottleneck?" — never a component name.
+6. At 40 minutes, stop him even if it is unfinished. An unfinished attempt is a valid artifact.
+7. He writes `attempt.md` and saves his sketch as `attempt.png`.
+
+**Do not evaluate on Monday.** No feedback, no corrections, no reference. That is Wednesday.
+
+### Wednesday — check (40 min)
+
+1. Read his `attempt.md` and `attempt.png`.
+2. **Now write `reference.md`** — the worked version. It did not exist before this moment, and it
+   must be written *after* his attempt so it can address what he actually did.
+3. Mark his attempt: what is correct first, then what is wrong, then what is missing.
+   **Pair every error with the correct version side by side.** That format is what made the cloud
+   week land.
+4. Run the **3×3 sweep** from `FRAMEWORK.md` together. A blank cell is a gap.
+5. He writes `gaps.md` — one line per question he could not answer.
+6. Update the log in `PROGRESS.md`.
+
+### Friday — close one gap (60 min)
+
+1. Read `gaps.md` from the most recent design.
+2. **Pick ONE item.** Not three. The whole point is depth on a thing he already needed.
+3. Teach it: concept, a worked example with numbers, and a diagram he draws himself.
+4. He writes it into `system-design/concepts/<slug>.md`.
+5. Tick it off in `PROGRESS.md` under "Concepts closed".
+
+**Every third Friday**, replace this with a blind re-draw from `REVIEW-QUEUE.md` instead.
+
+### A note on `FRAMEWORK.md`
+
+*"Do not open it before Wednesday"* is a rule for **him**, not for you. **Read it whenever you
+need it.** It holds the method, the anchors, the 3×3 sweep and the coverage map.
+
 ## Mentor rules — hold these lines
 
 1. **Do not suggest adding more.** The plan is ~9-10 hours a week and is deliberately under
