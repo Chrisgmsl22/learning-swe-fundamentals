@@ -11,7 +11,7 @@ The week is in `SCHEDULE.md`. The system design loop is in `system-design/FRAMEW
 
 | # | Design | Attempted | Checked | Gaps closed | Next re-draw |
 | --- | --- | --- | --- | --- | --- |
-| 01 | URL shortener | **2026-09-07** (37 min) | — | — | — |
+| 01 | URL shortener | **2026-09-07** (37 min) | **2026-09-10** | — | ~2026-10-01 |
 | 02 | Rate limiter | — | — | — | — |
 | 03 | Async job service | — | — | — | — |
 
@@ -21,6 +21,9 @@ _(one line per note in `system-design/concepts/`. This list is the honest covera
 
 ## Still shaky
 
+- **Back-of-envelope estimation.** 100x slip on design 01. The single largest gap — it is what
+  lets him reject complexity with evidence instead of reaching for it.
+- **Metrics vs states.** Names booleans ("DB is up") when asked for metrics.
 - **Layer 3 — data.** SQL vs NoSQL, indexing, denormalisation, blob storage. Nothing covered.
 - **CIDR arithmetic** — the recipe is known, the speed is not. Live errors seen: "octet" said for
   "bit"; `last = first + size` instead of `− 1`; splitting a range by dividing the bits.
@@ -31,6 +34,25 @@ _(one line per note in `system-design/concepts/`. This list is the honest covera
 ## Session log
 
 _(newest first)_
+
+### 2026-09-10 · design 01 — check (ran Thursday; Wednesday was lost)
+
+`reference.md` written after the attempt. Marked side by side.
+
+**Right:** split the write and read paths; cache-aside described correctly and only on the read
+path; expiry via DB field + daily cron; API gateway justified; relational DB with a reason.
+
+**The big error: a 100x arithmetic slip at the first step** (100M/12 written as 83k, is 8.33M),
+so writes/sec, reads/sec and storage were never derived. The real numbers — **3.2 writes/s,
+~320 reads/s, ~250 GB in 5 years** — reject sharding, queues and multi-region on evidence. He
+reached for replication anyway in the failure question, which is the same gap from the other side.
+
+**Missing:** what the short code is and how it is generated (the prompt asked); 301 vs 302; the
+bottleneck section blank. Sweep: no security, cost or observability on the page — normal for a
+first attempt. He had the phishing insight and framed it as a feature. Named states ("DB is up")
+where metrics were asked; cache hit rate was the one real metric he gave.
+
+**Friday's concept: back-of-envelope estimation.** Seven gaps total in `gaps.md` (his to write).
 
 ### 2026-09-07 · design 01 — attempt
 

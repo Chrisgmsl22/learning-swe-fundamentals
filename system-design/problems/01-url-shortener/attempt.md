@@ -28,7 +28,7 @@ _112 per hour_
 
 _2 a minute_
 
-_100 _ 10^6\*
+_100 _ 10^6
 
 _how much does a link weight?, given its simply strings, lets assume 1kb?_
 
@@ -75,4 +75,7 @@ _Every choice: what you gain, what you lose._
 
 _Write this honestly. It becomes_ `gaps.md` _on Wednesday, and_ `gaps.md` _is the curriculum._
 
--
+- I dont know how to represent the FE
+- When adding servers, are those referencing to backend servers?
+- All arrows are bidirectional, right?, information flows
+- Need to learn back of the envelope estimations, just some rough math
