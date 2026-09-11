@@ -2,7 +2,11 @@
 
 System design and cloud/DevOps fundamentals. One of two repos in a three-track study plan.
 
-**Start here: [`SCHEDULE.md`](SCHEDULE.md).**
+**Resume here: [PROGRESS.md](PROGRESS.md).** Use [SCHEDULE.md](SCHEDULE.md) for the weekly slots.
+
+The broader goal is SWE skill across application design, code, infrastructure, and operation.
+This repo supplies guided system design practice and cloud/operations at fundamentals depth.
+Codex and Claude use one [mentor brief](CLAUDE.md); `AGENTS.md` links to `CLAUDE.md`.
 
 ```
 SCHEDULE.md      the week — the single source of truth
@@ -25,16 +29,19 @@ PROGRESS.md      session log
 
 ## The system design loop
 
-| Day | Session | Artifact |
+| Usual slot | Stage | Artifact |
 | --- | --- | --- |
-| **Mon** | Attempt a design, timed and blind | `attempt.md` + sketch |
-| **Wed** | Check against the reference, run the 3×3 sweep | `gaps.md` |
-| **Fri** | Close one gap properly, with a diagram | a note in `concepts/` |
+| Mon | Guided attempt | `attempt.md` and a sketch |
+| Wed | Guided evaluation and the 3×3 sweep | Questions in `gaps.md` |
+| Fri | Close one gap | A concept note and a diagram |
 
-Every third Friday, re-draw an old design blind instead. See `system-design/REVIEW-QUEUE.md`.
+Stages can continue across slots. Resume unfinished work instead of a forced restart.
+Every third Friday replaces gap closure with a revisit from [REVIEW-QUEUE.md](system-design/REVIEW-QUEUE.md).
 
-**One rule above all: practice means producing an artifact.** Reading an article is not practice.
-A bad one-page design beats a well-understood article.
+Use the [start guide](system-design/README.md), [method](system-design/FRAMEWORK.md), and [topic map](system-design/TOPICS.md).
+Short explanations, videos, and small examples can precede application.
+Keep your own attempt before the full reference solution. End each session with an artifact or an update.
+Strict silent or timed simulation requires an explicit request.
 
 ## Visual reference — `site/`
 

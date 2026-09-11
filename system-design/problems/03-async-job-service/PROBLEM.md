@@ -1,6 +1,6 @@
 # 03 · Async job service
 
-**Attempt this blind.**
+**Use guided practice.** Follow the [framework](../../FRAMEWORK.md), with one question at a time.
 
 ## The prompt
 
@@ -17,8 +17,12 @@ the outcome. Example jobs: generate a PDF, send an email, call a slow third-part
 
 ## What to produce
 
-1. `attempt.md` — your reasoning, written **before** you look at anything.
+1. `attempt.md` — your decisions, assumptions, and open questions.
 2. `attempt.png` — your sketch.
+
+Short explanations, videos, and small examples can help before application.
+Keep your own attempt before the full reference solution for this exercise.
+Use the [attempt template](../../ATTEMPT-TEMPLATE.md) as a guide. Resume existing artifacts instead of a forced restart.
 
 ## Do not skip
 

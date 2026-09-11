@@ -1,61 +1,81 @@
 # Attempt — <problem name>
 
-Copy this to `attempt.md` in the problem folder. **Fill it in as you go, not afterwards.**
-An unfinished one is still a valid artifact.
+Copy this file to `attempt.md` for a new exercise. Keep an existing attempt when you resume.
+Use the guided method in `system-design/FRAMEWORK.md` from the repo root. Leave unknown parts open for discussion.
+Short explanations and small examples can help. Save your own attempt before the full reference solution.
+An incomplete artifact is valid. Do not let the template force the order of the conversation.
 
----
+## 1 · Requirements and assumptions
 
-## 1 · Clarifying questions
+- Users and required behavior: …
+- Exclusions: …
+- Quality targets, such as latency or availability: …
+- Questions and assumed answers: …
 
-_3-4 questions, and the answer you assumed if nobody was there to ask._
+## 2 · Estimates
 
-- Q: … → assumed: …
+State units and assumptions. Connect each estimate to a design choice.
 
-## 2 · Numbers
+| Quantity | Inputs and assumptions | Calculation | Result and design consequence |
+| --- | --- | --- | --- |
+| Writes per second | | | |
+| Reads per second | | | |
+| Peak rate | State the multiplier or traffic evidence | | |
+| Storage | State bytes per record, retention, and overhead | | |
 
-_Rough is fine. Silent is not. Show the arithmetic._
+## 3 · API and data
 
-| Quantity | Working | Result |
-| --- | --- | --- |
-| Writes / second | | |
-| Reads / second | | |
-| Peak (2-5×) | | |
-| Storage after 5 years | | |
+| Operation | Request | Response or error | Data access |
+| --- | --- | --- | --- |
 
-**The derived number that matters here:** …
+- Stored fields and keys: …
+- Lookup pattern and index: …
+- Consistency or transaction needs: …
+- Retention or expiry behavior: …
 
-## 3 · The design
+## 4 · Diagram and request trace
 
-_Boxes and arrows. Sketch it in Excalidraw, save as `attempt.png`, and describe it here._
+Draw the design in Excalidraw. Save the sketch as `attempt.png`.
+Explain whether each box means a responsibility or a separate deployment.
+Label what each arrow carries.
 
-## 4 · The bottleneck
+1. The caller sends …
+2. The service does …
+3. The data operation …
+4. The caller receives …
+
+## 5 · Constraints and bottleneck
 
 **The constraint is …, because …**
 
-_Then: what you did about it._
+**The evidence is …**
 
-## 5 · Technology choices
+**My response to this constraint is …**
 
-| Choice | Why | What I rejected, and why |
-| --- | --- | --- |
+## 6 · Choices and tradeoffs
 
-## 6 · Tradeoffs
+| Decision | Gain | Lose | Alternative and why I rejected it |
+| --- | --- | --- | --- |
 
-_Every choice: what you gain, what you lose._
+## 7 · Failures and operations
 
-| Decision | Gain | Lose |
-| --- | --- | --- |
+| Failure | What the caller sees | Recovery | Data guarantee or limit |
+| --- | --- | --- | --- |
 
-## 7 · Recommendation
+- Relevant security controls: …
+- Main cost and its assumption: …
+- Metrics that show user impact or resource pressure: …
+
+Use the framework's 3×3 sweep to find omissions.
+
+## 8 · Recommendation
 
 **I would build …**
 
-**I would change this if … turned out to be true.**
+**I would change this choice if …**
 
----
+## Open questions
 
-## Where I got stuck
+Record questions as they arise. Use them to form `gaps.md` during evaluation.
 
-_Write this honestly. It becomes `gaps.md` on Wednesday, and `gaps.md` is the curriculum._
-
--
+- …

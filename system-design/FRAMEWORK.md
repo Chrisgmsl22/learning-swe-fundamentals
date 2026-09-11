@@ -1,114 +1,119 @@
-# The framework
+# The system design framework
 
-Two different tools. Keep them apart.
+Use guided practice by default. The goal is a design the learner can explain and defend.
+This method supports broad SWE skill, with cloud and operations at fundamentals depth.
 
-| | Tells you | Use it |
+## Start or resume
+
+1. Read [PROGRESS.md](../PROGRESS.md) for the current stage and next action.
+2. Check [SCHEDULE.md](../SCHEDULE.md) for the time slots.
+3. Read the exercise prompt and existing learner artifacts.
+4. Resume the existing exercise with one question about the learner's intent.
+
+Do not restart a design because its weekly slot passed.
+Ask about time only for an explicit timed session.
+Use the framework at any stage. It is a guide, not a test the learner must pass first.
+
+## The three stages
+
+| Stage | Mentor action | Learner artifact |
 | --- | --- | --- |
-| **A method** | what order to think in | to move forward |
-| **A checklist** | what you have not covered | to catch what you forgot |
+| Attempt | Clarify the prompt. Explain unknown concepts. Ask one question at a time. | `attempt.md` and an Excalidraw sketch, saved as `attempt.png` |
+| Evaluation | Understand the attempt, then compare choices and run the checklist. | Updates to the attempt and questions in `gaps.md` |
+| Gap closure | Select one gap. Explain it with numbers, then ask for an application. | A concept note and a diagram the learner draws |
 
----
+These are stages, not weekday gates. Monday, Wednesday, and Friday supply the usual slots.
+Continue an unfinished stage within the next available slot. Do not add hours or require a new exercise.
+Every third Friday replaces gap closure with a revisit from [REVIEW-QUEUE.md](REVIEW-QUEUE.md).
 
-## The method — Monday
+Short videos, explanations, and small worked examples can precede application.
+The learner must produce an attempt before the full reference solution for that exercise.
+The mentor can then write or use `reference.md` to address the actual attempt.
+A reference presents one justified solution under stated assumptions.
 
-Follow this order out loud. **Draw while you talk.** A silent screen is the failure mode.
+During evaluation, identify correct decisions first. Pair each error with a corrected version and its consequence.
+Ask what each ambiguous box or arrow means before you judge it.
+A box can represent a responsibility without a separate deployment.
+Explain unknown concepts directly. Do not turn every gap into a quiz or a resource list.
+Use the learner's stated assumptions unless a constraint contradicts them.
 
-| Step | Do | Time |
-| --- | --- | --- |
-| 1 · **Clarify** | 3-4 questions before drawing. Who uses it? Read or write heavy? What must never break? | 5 min |
-| 2 · **Numbers** | Estimate out loud. *"Let me put rough numbers on this first."* **Rough is fine; silent is not.** | 5 min |
-| 3 · **Boxes and arrows** | The simplest thing that works. **No product names yet.** | 10 min |
-| 4 · **Name the bottleneck** | *"The constraint here is X, so that is where I spend the design."* | 15 min |
-| 5 · **Tradeoffs** | Every choice: what you gain, what you lose | throughout |
-| 6 · **Recommend** | State it, and say **what would change your mind** | 5 min |
+## A typical design artifact
 
-**The most common failure is designing for scale you never estimated.** Do step 2.
+Use [ATTEMPT-TEMPLATE.md](ATTEMPT-TEMPLATE.md) as a guide. An incomplete artifact is valid.
 
-### Anchors
-
-| Anchor | Value |
+| Part | What the learner records |
 | --- | --- |
-| 1M requests/day | **≈ 12/s** |
-| 100M requests/day | ≈ 1,200/s |
-| Peak vs average | 2-5x |
-| Memory read | ~100 ns |
-| SSD read | ~100 µs |
-| Network, same region | ~0.5 ms |
-| **Network, cross-region** | **~50-150 ms** — kills synchronous multi-region |
-| One SQL database | ~5-10k simple reads/s, far fewer writes |
-| Cache hit rate | 80-95% |
-| **Data out of AWS** | **~$0.09/GB** — the line nobody predicts |
+| Requirements | Users, required behavior, exclusions, and quality targets |
+| Estimates | Inputs, units, assumptions, arithmetic, and consequences for the design |
+| API and data | Example requests, responses, errors, stored fields, keys, and access patterns |
+| Diagram and request trace | Responsibilities, deployment boundaries, arrow meanings, and one request from start to response |
+| Constraints | The likely bottleneck and the evidence for it |
+| Tradeoffs | What each choice gains and loses; alternatives and their costs |
+| Failure behavior | What the caller sees when a dependency fails; recovery and data guarantees |
+| Recommendation | The simplest justified design and the evidence that would change it |
+| Open questions | What needs explanation, a check, or another attempt |
 
-**The number that matters is usually derived** — the fan-out, the write rate, the yearly growth,
-not the number you were handed.
+The mentor can guide these parts in the order that helps the current question.
+Do not force another arithmetic exercise before a useful walkthrough of an existing sketch.
+Connect a number to a choice when that choice needs evidence.
 
----
+### Estimates and assumptions
 
-## The checklist — Wednesday
+| Check | Method |
+| --- | --- |
+| Average request rate | Divide requests per day by 86,400 seconds |
+| Arithmetic anchor | 1 million requests/day is about 12 requests/second |
+| Peak rate | State an assumed peak multiplier or use measured traffic |
+| Storage | Multiply records by bytes per record and retention duration |
+| Extra storage | Account separately for indexes, replicas, and other overhead |
+| Capacity | Check the workload, query shape, hardware, and latency target |
 
-The 6 pillars are the **AWS Well-Architected Framework** in plainer words. But a list of 6 hides
-its own shape: **traffic, compute and data are layers. Security, cost and observability are
-lenses over all three.**
+A peak multiplier, cache hit rate, database capacity, network latency, or cloud price is an assumption to check.
+Do not treat a generic anchor as guaranteed capacity or cost.
+For the current URL shortener, retain the learner's 1 kB assumption when relevant.
+The historical reference used 500 bytes. State the difference before a comparison.
 
-|  | **Security** | **Cost** | **Observability** |
+## The design checklist
+
+This repo uses a 3×3 grid for traffic, compute, and data through security, cost, and observability.
+It is not an exact representation of the six AWS Well-Architected pillars.
+
+| | Security | Cost | Observability |
 | --- | --- | --- | --- |
-| **Traffic** | TLS · WAF · DDoS | egress fees · CDN offload | request rate · latency · error rate |
-| **Compute** | IAM · least privilege | right-sizing · spot vs reserved | CPU · saturation · traces |
-| **Data** | encryption at rest · access control | storage tiers · retention | queue depth · replication lag · slow queries |
+| Traffic | TLS, abuse controls, access rules | Egress and request volume | Request rate, latency, error rate |
+| Compute | Least privilege and service access | Capacity and utilization | CPU, saturation, request traces |
+| Data | Access control and encryption | Storage, indexes, retention | Slow queries, queue depth, replication lag |
 
-**9 cells, and each cell is a question.** A blank cell is visible: *"I have said nothing about
-cost at the data layer"* is a thought you can actually have.
+Use each cell as a question about this design. A blank cell can expose a gap.
+Mark a cell as irrelevant only with a reason. Do not add components merely to fill the grid.
 
-### What the 6 pillars miss
+The grid does not replace these checks:
 
-They start at traffic, which assumes you already know what you are building.
+1. Confirm the requirements and estimates.
+2. Trace an actual API request through the data operations.
+3. Identify transaction boundaries and duplicate-request behavior where relevant.
+4. Explain timeouts, retries, partial failures, and recovery where relevant.
+5. State a recommendation with gain-versus-lose tradeoffs.
 
-1. **Requirements** — functional and non-functional. Comes first. **Interviewers grade the
-   clarifying questions.**
-2. **Numbers** — not a pillar at all, but the thing that *chooses* between options inside every
-   pillar.
-3. **The interface** — what are the actual endpoints and contracts?
-4. **Failure modes** — observability tells you something broke. It does not cover timeouts,
-   retries, circuit breakers, or graceful degradation.
+## Progress and later review
 
-So the real sequence is:
+[TOPICS.md](TOPICS.md) is the only topic map. It records Introduced, Applied, and Revisited with evidence.
+It is not a prerequisite checklist or a mastery score.
+Select concepts from real questions and design needs. A brief explanation can help the learner identify the next question.
 
-```
-requirements -> numbers -> design -> sweep the 3x3 -> failure modes -> recommend
-                                     ^ the pillars live here
-```
+At the end of a session:
 
-### When the sweep earns its keep
+1. Save the learner's artifact or its update.
+2. Record the current stage, open questions, and next action in [PROGRESS.md](../PROGRESS.md).
+3. Update topic evidence only when the session supports it.
+4. Record concept closure only after the learner produces the application and note.
 
-- **When you go blank.** The grid always gives you a legitimate next question.
-- **When you think you are finished.** The real one. Almost everyone stops at "it works and it
-  scales" and never mentions cost or security. **Running the sweep out loud is a senior signal.**
+An existing reference or old log entry does not prove that the learner completed evaluation.
+Resolve contradictions with the actual artifacts and the learner's latest statement.
 
----
+## Optional interview simulation
 
-## Coverage map — the 30 concepts in 5 layers
-
-Not a reading order. **A map to mark up as problems teach you things.**
-
-| Layer | Concepts | State |
-| --- | --- | --- |
-| **1 · How a request travels** | client-server · IP · DNS · proxy / reverse proxy · latency · HTTP/HTTPS | **mostly covered** (Aug 2026) |
-| **2 · APIs** | APIs · REST · GraphQL · WebSockets · webhooks · API gateway · rate limiting · idempotency | idempotency, rate limiting covered |
-| **3 · Data** | databases · SQL vs NoSQL · indexing · denormalisation · blob storage | **the real gap — nothing covered** |
-| **4 · Scale** | vertical · horizontal · load balancers · caching · CDN · message queues | **mostly covered** |
-| **5 · Distribution** | replication · sharding · vertical partitioning · CAP · microservices | replication, CAP touched |
-
-Roughly 13 of 30 are already covered. **Layer 3 is where the next designs should bite.**
-
----
-
-## The loop
-
-| Session | Produces | Which is checked by | Which comes back as |
-| --- | --- | --- | --- |
-| **Mon — attempt** | `attempt.md` + sketch | Wednesday's reference + sweep | a blind re-draw, 3+ weeks later |
-| **Wed — check** | `gaps.md` | — | Friday's concept |
-| **Fri — close a gap** | a note in `concepts/` | the next design that needs it | — |
-
-**You never study a concept you have not already needed.** The gap list is the curriculum, it is
-ordered by real need, and it cannot overwhelm you, because it only holds what you actually hit.
+Strict silent or timed simulation requires an explicit user request.
+Agree on the duration and feedback rules for that session.
+Use the requested timer and checkpoints. Save an unfinished attempt when the time ends.
+Do not silently carry simulation rules into the next guided session.

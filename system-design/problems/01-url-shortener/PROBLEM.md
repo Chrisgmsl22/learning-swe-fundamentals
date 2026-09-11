@@ -1,6 +1,6 @@
 # 01 · URL shortener
 
-**Attempt this blind. Do not read anything first — that is the whole point.**
+**Use guided practice.** Follow the [framework](../../FRAMEWORK.md), with one question at a time.
 
 ## The prompt
 
@@ -17,12 +17,16 @@ short link back to the original.
 
 ## What to produce
 
-1. `attempt.md` — your reasoning, written **before** you look at anything.
+1. `attempt.md` — your decisions, assumptions, and open questions.
 2. `attempt.png` — your sketch.
+
+Short explanations, videos, and small examples can help before application.
+Keep your own attempt before the full reference solution for this exercise.
+Use the [attempt template](../../ATTEMPT-TEMPLATE.md) as a guide. Resume existing artifacts instead of a forced restart.
 
 ## Do not skip
 
-- **Numbers first.** What is the write rate? The read rate? How much storage after 5 years?
+- **Connect numbers to choices.** What are the write rate, read rate, and storage after five years?
 - Say what the short code actually is, and how you generate it.
 - Name the bottleneck before you optimise anything.
 

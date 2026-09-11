@@ -5,12 +5,17 @@ queue of 8 items does not need a web app. Revisit the format at ~30 designs.
 
 ## How a re-draw works
 
-**Every third Friday**, instead of closing a gap:
+**Every third Friday**, replace gap closure with a revisit in the same slot:
 
-1. Open a design that is due. **Read only its `PROBLEM.md`.**
-2. Re-draw it blind, 20 minutes, on a clean page.
-3. Compare against your own `attempt.md` and `reference.md`.
-4. Grade yourself and set the next date.
+1. Open the prompt for a design that is due.
+2. Draw what you recall on a clean page.
+3. Ask for guidance when a concept blocks progress.
+4. Compare your sketch with the old attempt and reference.
+5. Record the result and the next date.
+
+A memory attempt can expose gaps without strict silence or a timer.
+Strict silent or timed simulation requires an explicit request. Ask about time only for an explicit timed session.
+Record any help beside the grade. Do not treat a guided revisit as proof of independent recall.
 
 | Grade | Meaning | Next interval |
 | --- | --- | --- |

@@ -5,13 +5,40 @@
 Current phase: the **long-term three-track plan**, started 2026-09-07.
 The week is in `SCHEDULE.md`. The system design loop is in `system-design/FRAMEWORK.md`.
 
+## Current state — guided mentor agreement, 2026-09-10
+
+- **Exercise:** URL shortener. Reuse the existing `attempt.md` and `attempt.png`.
+- **Stage:** Evaluation in progress. The learner has not completed the guided walkthrough.
+- **Next action:** Ask the learner to trace one request through the existing sketch, with one question at a time.
+- Ask what each box represents before you judge separate services or deployments.
+- Continue through request flow, estimates, lookup, code generation, redirects, and expiry as questions arise.
+- Do not require another arithmetic quiz before the walkthrough.
+- Use the learner's **1 kB per link** assumption when relevant. The historical reference used **500 bytes**.
+- `gaps.md` does not exist yet. The earlier log proposed seven gaps; it did not record seven completed learner entries.
+- `reference.md` exists, but its existence does not prove a completed evaluation.
+- The attempt contains later notes about abuse and metrics. These notes do not establish concept closure.
+- No new concepts are closed by this mentor update.
+
+### Agreements for later sessions
+
+- Guided practice is the default. Explain unknown concepts directly, then ask for application.
+- Permit short videos, explanations, and small examples before application.
+- Preserve the learner's own attempt before the full reference solution for that exercise.
+- Understand intent before judgment. Connect each correction to a concrete consequence.
+- Treat attempt, evaluation, and gap closure as stages, independent of the weekday.
+- Use strict silent or timed simulation only on explicit request.
+- Ask about time only for an explicit timed session.
+- Keep the three tracks, weekly slots, Saturday rest, early Friday finish, and total workload.
+- Use the [shared brief](CLAUDE.md), [framework](system-design/FRAMEWORK.md), and [topic map](system-design/TOPICS.md) across agents.
+- Resolve conflicts in old records with current artifacts and the learner's latest statement.
+
 ---
 
 ## System design — the log
 
 | # | Design | Attempted | Checked | Gaps closed | Next re-draw |
 | --- | --- | --- | --- | --- | --- |
-| 01 | URL shortener | **2026-09-07** (37 min) | **2026-09-10** | — | ~2026-10-01 |
+| 01 | URL shortener | **2026-09-07** (37 min) | Started 2026-09-10; incomplete | — | ~2026-10-01, provisional |
 | 02 | Rate limiter | — | — | — | — |
 | 03 | Async job service | — | — | — | — |
 
@@ -19,7 +46,7 @@ The week is in `SCHEDULE.md`. The system design loop is in `system-design/FRAMEW
 
 _(one line per note in `system-design/concepts/`. This list is the honest coverage record.)_
 
-## Still shaky
+## Still shaky — historical observations
 
 - **Back-of-envelope estimation.** 100x slip on design 01. The single largest gap — it is what
   lets him reject complexity with evidence instead of reaching for it.
@@ -32,6 +59,8 @@ _(one line per note in `system-design/concepts/`. This list is the honest covera
 - Kubernetes, CI/CD, observability — vocabulary only.
 
 ## Session log
+
+Historical entries remain below. The current state above supersedes any conflicting completion or next-step claim.
 
 _(newest first)_
 

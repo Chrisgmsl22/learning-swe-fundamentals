@@ -43,7 +43,7 @@ _how much does a link weight?, given its simply strings, lets assume 1kb?_
 
 ## 3 · The design
 
-_Boxes and arrows. Sketch it in Excalidraw, save as_ `attempt.png`_, and describe it here._
+_Still need to account for security. A URL with a short link could be used for phising purposes, we need to make sure the links we have do not point to important sites, like banking or governent sites. Could we maybe blacklist a group of addresses? We can also rate limit our app to prevent DDoS attacks._
 
 ## 4 · The bottleneck
 
@@ -79,3 +79,14 @@ _Write this honestly. It becomes_ `gaps.md` _on Wednesday, and_ `gaps.md` _is th
 - When adding servers, are those referencing to backend servers?
 - All arrows are bidirectional, right?, information flows
 - Need to learn back of the envelope estimations, just some rough math
+
+### LESSONS:
+
+Every feature is also an attach surface. Asks "who benefits fro this if they are malicious", once per design
+
+OBSERVABILITY:
+
+A metric is a number over time. It moves before things break.
+
+- Symptom: Is it healthy now?: Redirect p99 latency, error rate
+- Leading: Is it about to be unhealthy?, Cache hit rate failing, DB connections in use

@@ -55,17 +55,23 @@ thing that forces one pattern, by hand, in Python.
 
 ### System design — the weekly cycle
 
-**One design a week.** A 40-minute slot cannot hold an attempt *and* a proper review, so it is
-split. Details and the framework: `system-design/FRAMEWORK.md`.
+**One design a week is the usual pace.** Keep the three slots below.
+Attempt, evaluation, and gap closure are stages, independent of the weekday.
+Continue an unfinished stage in the next slot. Do not add hours or restart the current exercise.
+Use [PROGRESS.md](PROGRESS.md) for the next action and [FRAMEWORK.md](system-design/FRAMEWORK.md) for the method.
 
-| Session | What you do | Artifact |
+| Usual slot | What you do | Artifact |
 | --- | --- | --- |
-| **Mon 20:00** | **Attempt.** Timed, blind, no reading. Boxes and arrows. Numbers out loud. | `attempt.md` + sketch |
-| **Wed 20:00** | **Check.** Compare against the reference. Run the 3×3 sweep. Write down every question you could not answer. | `gaps.md` |
-| **Fri 18:00** | **Close one gap.** Take a single item from `gaps.md` and learn it properly, with a diagram. | a concept note |
+| **Mon 20:00–20:40** | **Guided attempt.** Ask questions, state assumptions, and draw your own design. | `attempt.md` and sketch |
+| **Wed 20:00–20:40** | **Guided evaluation.** Explain your intent, compare choices, and run the 3×3 sweep. | Questions in `gaps.md` |
+| **Fri 18:00–19:00** | **Close one gap.** Apply one concept with numbers and your own diagram. | A concept note |
 
-**Every third Friday**, replace the concept with a **blind re-draw** of a design 3+ weeks old.
-See `system-design/REVIEW-QUEUE.md`.
+Short videos, explanations, and small examples can precede application.
+Preserve your own attempt before the full reference solution.
+Strict silent or timed simulation requires an explicit request. Ask about time only for an explicit timed session.
+
+**Every third Friday**, replace gap closure with a revisit of a design at least three weeks old.
+See [REVIEW-QUEUE.md](system-design/REVIEW-QUEUE.md). Keep the same slot and early finish.
 
 ### LLD — the weekly cycle
 
@@ -81,15 +87,10 @@ Every ~4 weeks, one full LLD problem that combines several patterns.
 
 ## The rules
 
-1. **Practice means producing an artifact.** Reading an article or watching a video is not
-   practice. It is the same trap as re-reading a stuck solution instead of re-solving it blind.
-   **A bad one-page design beats a well-understood article.**
-2. **Saturday is off, and Friday ends early.** Rest pays for the other six days. It is not what is
-   left over.
-3. **Do not add more.** If you are hitting Full five nights a week, that is overdrawing, not
-   dedication.
-4. **Concepts are pulled, not pushed.** You never study a topic you have not already needed. The
-   gap list is the curriculum.
+1. **End each session with an artifact or an update.** Apply what an explanation or video taught you.
+2. **Saturday is off, and Friday ends early.** Keep the existing rest periods.
+3. **Do not add more.** Five Full nights exceed the plan.
+4. **Use real questions to select concepts.** The gap list guides depth; the topic map records evidence.
 
 ## Repo split
 

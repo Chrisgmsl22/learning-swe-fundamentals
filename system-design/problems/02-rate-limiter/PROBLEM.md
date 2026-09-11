@@ -1,6 +1,6 @@
 # 02 · Rate limiter
 
-**Attempt this blind.**
+**Use guided practice.** Follow the [framework](../../FRAMEWORK.md), with one question at a time.
 
 ## The prompt
 
@@ -17,8 +17,12 @@ allowance.
 
 ## What to produce
 
-1. `attempt.md` — your reasoning, written **before** you look at anything.
+1. `attempt.md` — your decisions, assumptions, and open questions.
 2. `attempt.png` — your sketch.
+
+Short explanations, videos, and small examples can help before application.
+Keep your own attempt before the full reference solution for this exercise.
+Use the [attempt template](../../ATTEMPT-TEMPLATE.md) as a guide. Resume existing artifacts instead of a forced restart.
 
 ## Do not skip
 
@@ -26,5 +30,4 @@ allowance.
 - Name at least 2 algorithms and say which you pick, and why.
 - **What happens when the counter store is down?** Fail open or fail closed? Defend it.
 
-*Why this one: bounded and small, so it can be designed fully in 40 minutes. It also overlaps LLD
-and LeetCode, so the work pays three times.*
+*This exercise connects system design, LLD, and algorithm choices. Continue across slots if you need more time.*
