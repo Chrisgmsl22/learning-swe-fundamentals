@@ -1,0 +1,7 @@
+flowchart TB
+ accTitle: Webhooks example
+ accDescr: The endpoint verifies the sender and saves the event before acknowledgment. A worker updates the order later. Duplicate event IDs need a check.
+ P["Payment<br/>provider"] -->|"1. POST<br/>payment event"| W["Webhook<br/>endpoint"]
+ W -->|"2. Verify and<br/>record event<br/>ID"| D[("Event inbox")]
+ W -->|"3. After<br/>durable save:<br/>2xx"| P
+ D -->|"4. Read saved<br/>event"| H["Order worker"]

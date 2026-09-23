@@ -1,0 +1,6 @@
+flowchart TB
+  accTitle: Sharding divides URL records by short code
+  accDescr: A URL retriever asks a shard router to find a code. The router sends codes that start with A through M to shard one and N through Z to shard two.
+  R["URL retriever"] -->|"Find short<br/>code"| P["Shard router"]
+  P -->|"Code starts<br/>A-M"| A[("Shard 1: A-M<br/>records")]
+  P -->|"Code starts<br/>N-Z"| B[("Shard 2: N-Z<br/>records")]

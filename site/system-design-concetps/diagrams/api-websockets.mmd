@@ -1,0 +1,7 @@
+flowchart TB
+ accTitle: WebSockets example
+ accDescr: Each chat client has its own open connection to the server. The server relays messages. The diagram omits connection setup and message history.
+ A["Chat client A"] -->|"Message on<br/>open<br/>connection"| S["Chat server"]
+ S -->|"Reply on same<br/>connection"| A
+ S -->|"New message on<br/>open<br/>connection"| B["Chat client B"]
+ B -->|"Reply on same<br/>connection"| S

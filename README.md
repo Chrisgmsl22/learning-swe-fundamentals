@@ -53,6 +53,7 @@ open site/schedule.html
 
 | Page | Covers |
 | --- | --- |
+| [System design concepts](site/system-design-concetps/index.html) | Planned concept articles; shared format in [ARTICLE-GUIDE.md](system-design/ARTICLE-GUIDE.md) |
 | **`schedule.html`** | **The week, colour-coded by track, with today highlighted** |
 | `day-01-network-spine.html` | CIDR, subnets, route tables, NAT, security groups, the 2-AZ VPC |
 | `day-02-iac-and-containers.html` | Terraform vs CloudFormation vs Ansible, file permissions, Docker layers and PID 1 |

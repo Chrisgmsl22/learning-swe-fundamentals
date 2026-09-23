@@ -1,0 +1,11 @@
+flowchart TD
+    accTitle: A short URL lookup through a database index
+    accDescr: The browser requests a short URL from the URL retriever. The retriever queries PostgreSQL by short code. Inside the database, the index locates the table row. The response follows the reverse path.
+    browser[Browser] -->|Request /a7Kp| retriever[URL retriever]
+    retriever -->|Query by short code| database
+    subgraph database[PostgreSQL database]
+    direction TB
+        index[Index on short_code] -->|Locate row| row[links table row]
+    end
+    classDef focus fill:#E7F1EE,stroke:#2E786B,color:#184D44;
+    class index focus;

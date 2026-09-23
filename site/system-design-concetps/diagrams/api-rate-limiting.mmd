@@ -1,0 +1,6 @@
+flowchart TB
+ accTitle: Rate limiting example
+ accDescr: The check permits or rejects each request before the API handles it. The example omits the counter store and response from the API.
+ C["Client"] -->|"Create-link<br/>request"| R["Rate limit<br/>check"]
+ R -->|"Within limit"| A["Link API"]
+ R -->|"Over limit:<br/>HTTP 429"| C

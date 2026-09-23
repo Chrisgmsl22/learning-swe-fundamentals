@@ -1,0 +1,7 @@
+flowchart TB
+ accTitle: Blob storage example
+ accDescr: The object store holds the photo bytes. The database holds its owner and object key. The API confirms each write before the next step.
+ C["Browser"] -->|"1. Upload<br/>photo"| A["Photo API"]
+ A -->|"2. Save bytes"| O[("Object store")]
+ A -->|"3. Save owner<br/>and object key"| D[("Photo metadata<br/>database")]
+ A -->|"4. Return<br/>photo ID"| C

@@ -17,7 +17,7 @@ A term in a document does not prove application. A reference solution is mentor 
 The old framework used broad coverage labels. Those labels support prior exposure only, where noted below.
 Keep prior exposure and assisted attempts in the evidence notes; they do not grant a stronger state.
 Not assessed does not mean the learner lacks the skill. It means the record lacks the required demonstration.
-The current evidence does not confirm these thresholds for any assigned topic state yet.
+The rows below record the thresholds that current evidence supports.
 Preserve all previous work. Do not restart exercises or require a separate assessment for every topic.
 Record demonstrations as they arise in normal guided practice.
 
@@ -47,7 +47,7 @@ Record demonstrations as they arise in normal guided practice.
 | Scale | Vertical scaling | Not assessed | Legacy scale coverage claim; independent application needs assessment. |
 | Scale | Horizontal scaling | Not assessed | Legacy scale coverage claim; current [attempt](problems/01-url-shortener/attempt.md) asks what extra servers represent. |
 | Scale | Load balancers | Not assessed | Legacy scale coverage claim; [network notes](../notes/01-networking-spine.md) include the prior reference. |
-| Scale | Caching | Not assessed | [Historical evaluation log](../PROGRESS.md) describes cache-aside; confirm the learner's request trace. |
+| Scale | Caching | Introduced | [2026-09-21 session](problems/01-url-shortener/session-2026-09-21.md): the learner explained fast lookups for a read-heavy service, cache-aside, and outage fallback. Timeout and load tradeoffs still need learner application. |
 | Scale | CDN | Not assessed | Legacy scale coverage claim; independent application needs assessment. |
 | Scale | Message queues | Not assessed | Legacy scale coverage claim; no assessed learner application yet. |
 | Distribution | Replication | Not assessed | Legacy coverage claim and [historical evaluation log](../PROGRESS.md); the reason for use remains open. |

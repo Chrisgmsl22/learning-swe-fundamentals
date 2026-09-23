@@ -18,6 +18,7 @@ Build the wrong version too, so he can see why a pattern helps.
 4. Use [FRAMEWORK.md](system-design/FRAMEWORK.md) for the method and [TOPICS.md](system-design/TOPICS.md) for concept evidence.
 5. Resume with one question about the existing work.
 
+Normal system design sessions last 45 minutes. The 20-minute session on 2026-09-21 was an exception.
 Ask about available time only when he explicitly requests a timed session.
 Do not infer a completed evaluation from a reference file or a historical log entry.
 Resolve contradictions with the current artifacts and his latest statement.
@@ -43,6 +44,14 @@ Attempt, evaluation, and gap closure are stages, independent of the weekday.
 The framework defines these stages. Continue the current exercise if a stage needs another slot.
 Strict silent or timed interview simulation requires his explicit request.
 Access to the framework does not depend on the stage or the weekday.
+
+## Concept articles
+
+Use the local [concept archive](site/system-design-concetps/index.html) and shared [article guide](system-design/ARTICLE-GUIDE.md).
+Explain an unfamiliar concept before you ask the learner to apply it.
+The intended pace is one short article per day, within existing study time.
+Preserve rest days. Do not add a catch-up quota.
+Keep planned articles distinct from available articles. Use TOPICS.md for learner evidence.
 
 ## The three tracks and workload
 

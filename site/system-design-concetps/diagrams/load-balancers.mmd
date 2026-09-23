@@ -1,0 +1,6 @@
+flowchart TB
+  accTitle: A load balancer avoids an unhealthy URL server
+  accDescr: A browser sends a request to the load balancer. It forwards the request to healthy server A. A health check to server B fails.
+  B["Browser"] -->|"GET /abc"| L["Load<br/>balancer"]
+  L -->|"Forward<br/>request"| A["URL<br/>server A:<br/>healthy"]
+  L -. "Health<br/>check<br/>fails" .-> C["URL<br/>server B:<br/>unhealthy"]

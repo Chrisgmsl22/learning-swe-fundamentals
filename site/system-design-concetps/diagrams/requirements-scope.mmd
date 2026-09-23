@@ -1,0 +1,7 @@
+flowchart TB
+  accTitle: The first URL service supports two user actions
+  accDescr: A creator submits a destination URL. A reader requests a short code. One URL service stores or reads the corresponding record. Reports remain outside this example.
+  C["Creator"] -->|"Create<br/>short URL"| S["URL<br/>service"]
+  R["Reader"] -->|"Open<br/>short URL"| S
+  S -->|"Create or<br/>read<br/>record"| D[("URL<br/>database")]
+ C ~~~ R

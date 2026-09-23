@@ -1,0 +1,7 @@
+flowchart TB
+ accTitle: Latency example
+ accDescr: The browser waits for every required step. The application also takes time to process the request. Connection setup and queues are omitted.
+ C["Browser"] -->|"1. Request:<br/>network time"| A["Shortener<br/>application"]
+ A -->|"2. Query:<br/>network time"| D[("Database:<br/>query time")]
+ D -->|"3. Result:<br/>network time"| A
+ A -->|"4. Response:<br/>network time"| C

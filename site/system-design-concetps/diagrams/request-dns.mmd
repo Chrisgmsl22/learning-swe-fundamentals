@@ -1,0 +1,6 @@
+flowchart TB
+ accTitle: DNS example
+ accDescr: The client gets an address before it connects to the server. The resolver may use a cached answer. Further DNS servers are omitted.
+ C["Browser<br/>and OS"] <-->|"1.<br/>Resolve<br/>short.example;<br/>2.<br/>Address:<br/>203.0.113.20"| D["DNS<br/>resolver"]
+ C -->|"3.<br/>Connect<br/>to<br/>address"| S["Shortener<br/>server"]
+ D ~~~ S

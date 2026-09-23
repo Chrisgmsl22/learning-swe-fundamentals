@@ -1,0 +1,6 @@
+flowchart TB
+ accTitle: API gateway example
+ accDescr: The gateway chooses a service from the request path. Shared authentication can occur here. Responses and internal service checks are omitted.
+ C["Client"] -->|"API<br/>request"| G["API<br/>gateway"]
+ G -->|"/links<br/>request"| L["Link<br/>service"]
+ G -->|"/users<br/>request"| U["User<br/>service"]

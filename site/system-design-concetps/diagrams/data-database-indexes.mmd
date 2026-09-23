@@ -1,0 +1,10 @@
+flowchart TB
+ accTitle: Database indexes (indexing) example
+ accDescr: The index locates a row inside the database. It is not a separate service or a replica. This selective lookup omits cache and expiry rules.
+ A["Shortener<br/>application"] -->|"Find short<br/>code abc"| D
+ subgraph D["One<br/>database"]
+    direction TB
+ I["Index on<br/>short_code"] -->|"Locate<br/>matching<br/>row"| T[("Links<br/>table")]
+ end
+ classDef focus fill:#E7F1EE,stroke:#2E786B,color:#184D44;
+ class I focus;

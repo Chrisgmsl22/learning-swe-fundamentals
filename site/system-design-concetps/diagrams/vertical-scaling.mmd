@@ -1,0 +1,6 @@
+flowchart TB
+  accTitle: Vertical scaling for a URL service
+  accDescr: A browser reaches one URL server. The operator upgrades that server from two CPU cores to four. The server reads the URL database.
+  B["Browser"] -->|"GET /abc"| S["One URL server"]
+  U["Upgrade: 2 to<br/>4 cores"] -. "Illustrative<br/>resource<br/>change" .-> S
+  S -->|"Read URL"| D[("URL database")]

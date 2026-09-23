@@ -1,0 +1,7 @@
+flowchart TB
+  accTitle: The URL retriever owns cache failure fallback
+  accDescr: A browser requests a URL. The retriever tries the cache and reaches its timeout. The retriever then reads the database and returns a redirect to the browser.
+  B["Browser"] -->|"GET /abc"| R["URL<br/>retriever"]
+  R -->|"Try cache;<br/>bounded<br/>wait"| C[("Unavailable<br/>cache")]
+  R -->|"After<br/>timeout:<br/>read URL"| D[("URL<br/>database")]
+  C ~~~ D

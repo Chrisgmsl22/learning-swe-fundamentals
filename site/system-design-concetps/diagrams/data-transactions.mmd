@@ -1,0 +1,5 @@
+flowchart TB
+ accTitle: Transactions example
+ accDescr: The service transfers money between two accounts in one database transaction. Both balances change together. The example omits concurrent transfer controls.
+ A["Transfer<br/>service"] -->|"BEGIN; debit;<br/>credit; COMMIT"| D[("Accounts<br/>database")]
+ D -->|"Both changes<br/>commit, or<br/>neither does"| A

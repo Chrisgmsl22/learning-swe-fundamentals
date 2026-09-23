@@ -1,0 +1,6 @@
+flowchart TB
+ accTitle: APIs example
+ accDescr: The client sends a long URL through the API. The server validates the input and saves the link before success. The database reply is omitted.
+ C["Web or mobile<br/>client"] -->|"POST /links:<br/>long URL"| A["Link API"]
+ A -->|"Save link"| D[("Link database")]
+ A -->|"Short URL or<br/>error"| C

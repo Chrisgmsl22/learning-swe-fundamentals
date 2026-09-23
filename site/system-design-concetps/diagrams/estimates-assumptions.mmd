@@ -1,0 +1,6 @@
+flowchart TB
+  accTitle: An illustrative URL service traffic estimate
+  accDescr: An assumed one hundred requests per second enter the URL service. Ninety requests read records and ten requests create records each second. All requests reach the database in this example.
+  C["Assumed<br/>demand: 100<br/>requests/s"] -->|"All requests"| S["URL service"]
+  S -->|"90 reads/s"| D[("URL database")]
+  S -->|"10 creates/s"| D

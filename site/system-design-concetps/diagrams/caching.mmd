@@ -1,0 +1,7 @@
+flowchart TB
+  accTitle: Cache-aside URL lookup
+  accDescr: The browser asks the URL retriever for a redirect. The retriever checks the cache, reads the database on a miss, and stores the result in the cache.
+  B["Browser"] -->|"GET /abc"| R["URL<br/>retriever"]
+  R -->|"1. Read<br/>3. Write"| C[("Cache")]
+  R -->|"2. Read on<br/>miss"| D[("URL<br/>database")]
+  C ~~~ D

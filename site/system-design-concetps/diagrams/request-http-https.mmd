@@ -1,0 +1,5 @@
+flowchart TB
+ accTitle: HTTP/HTTPS example
+ accDescr: TLS protects this connection between the browser and the server. A redirect can cause a separate request, which the diagram omits.
+ C["Browser"] -->|"HTTPS: GET<br/>/abc"| S["Shortener<br/>server: TLS<br/>endpoint"]
+ S -->|"HTTPS:<br/>redirect<br/>response"| C

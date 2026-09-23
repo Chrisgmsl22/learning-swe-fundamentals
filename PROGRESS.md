@@ -5,11 +5,14 @@
 Current phase: the **long-term three-track plan**, started 2026-09-07.
 The week is in `SCHEDULE.md`. The system design loop is in `system-design/FRAMEWORK.md`.
 
-## Current state — guided mentor agreement, 2026-09-10
+## Current state — guided evaluation, 2026-09-21
 
 - **Exercise:** URL shortener. Reuse the existing `attempt.md` and `attempt.png`.
 - **Stage:** Evaluation in progress. The learner has not completed the guided walkthrough.
-- **Next action:** Ask the learner to trace one request through the existing sketch, with one question at a time.
+- **Next action:** Resume cache timeout budgets. Use a concrete redirect target and ask about the gain and loss of a shorter timeout.
+- **Latest session:** [2026-09-21 mentor notes](system-design/problems/01-url-shortener/session-2026-09-21.md). The learner explained cache-aside and distinguished a cache failure from a miss.
+- The session addressed redirect responses, destination ownership, and database fallback. Timeout tradeoffs still need learner application.
+- The learner shared an updated sketch in chat. The repository's `attempt.png` remains the original image.
 - Ask what each box represents before you judge separate services or deployments.
 - Continue through request flow, estimates, lookup, code generation, redirects, and expiry as questions arise.
 - Do not require another arithmetic quiz before the walkthrough.
@@ -17,9 +20,15 @@ The week is in `SCHEDULE.md`. The system design loop is in `system-design/FRAMEW
 - `gaps.md` does not exist yet. The earlier log proposed seven gaps; it did not record seven completed learner entries.
 - `reference.md` exists, but its existence does not prove a completed evaluation.
 - The attempt contains later notes about abuse and metrics. These notes do not establish concept closure.
-- No new concepts are closed by this mentor update.
+- No new concepts are closed. The current cache evidence supports Introduced, not Applied or Revisited.
 
 ### Agreements for later sessions
+
+- Normal system design sessions last **45 minutes**. The 2026-09-21 session was a 20-minute exception.
+- Article preference: one short article per day, with explanation before application, within existing study time and rest rules. No catch-up quota.
+- Use the local [concept archive](site/system-design-concetps/index.html) and shared [article guide](system-design/ARTICLE-GUIDE.md).
+- Archive format: six category pages, with one simple Mermaid design per subtopic. Use vertical space and no horizontal scroll.
+- Diagram style: compact boxes, monospace labels, thin borders, clear groups, and a light theme. The archive has 37 examples, not new mastery evidence.
 
 - Guided practice is the default. Explain unknown concepts directly, then ask for application.
 - Permit short videos, explanations, and small examples before application.
@@ -63,6 +72,18 @@ _(one line per note in `system-design/concepts/`. This list is the honest covera
 Historical entries remain below. The current state above supersedes any conflicting completion or next-step claim.
 
 _(newest first)_
+
+### 2026-09-21 · design 01 — guided evaluation, 20 minutes
+
+- The learner explained cache lookup, database fallback after a miss, and 404 for an unknown code.
+- He added a status-code and Location-header response to his sketch in chat.
+- We discussed the browser's separate destination request and the destination's ownership of its errors.
+- He distinguished cache failure from a miss and proposed temporary database fallback plus multiple cache nodes.
+- The mentor corrected fallback ownership: the URL retriever handles it, not the API gateway.
+- His proposed timeout was a couple of seconds. Latency budgets and timeout tradeoffs are the next application.
+- Capacity, regional outages, and the limits of advance alerts received brief explanations.
+- [Session notes](system-design/problems/01-url-shortener/session-2026-09-21.md) separate learner evidence from mentor explanations.
+- Evaluation remains incomplete. No concept closure or new independent recall is recorded.
 
 ### 2026-09-10 · design 01 — check (ran Thursday; Wednesday was lost)
 

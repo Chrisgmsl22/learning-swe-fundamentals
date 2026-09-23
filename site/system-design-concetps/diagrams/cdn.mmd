@@ -1,0 +1,7 @@
+flowchart TB
+  accTitle: A CDN serves a website logo
+  accDescr: A browser requests logo.svg from a nearby CDN location. The CDN serves a cached copy or fetches the file from the origin on a miss.
+  B["Browser"] -->|"GET /logo.svg"| C["Nearby CDN<br/>location"]
+  C -->|"Miss: fetch<br/>file"| O[("Origin file<br/>store")]
+  O -->|"Original file"| C
+  C -->|"Logo response"| B

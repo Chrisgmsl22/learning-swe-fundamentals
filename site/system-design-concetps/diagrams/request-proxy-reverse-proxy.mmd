@@ -1,0 +1,6 @@
+flowchart TB
+ accTitle: Proxy / reverse proxy example
+ accDescr: The forward proxy serves the client side. The reverse proxy serves the application side. Either proxy is optional; response arrows are omitted.
+ C["Browser"] -->|"Request"| F["Forward proxy"]
+ F -->|"Request to<br/>service"| R["Reverse proxy"]
+ R -->|"Request to<br/>application"| S["Shortener<br/>server"]

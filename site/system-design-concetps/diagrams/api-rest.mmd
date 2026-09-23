@@ -1,0 +1,6 @@
+flowchart TB
+ accTitle: REST example
+ accDescr: This HTTP example reads the resource at /links/abc. A representation is the data that describes a resource. The database reply is omitted.
+ C["Client"] -->|"GET /links/abc"| A["Link resource<br/>API"]
+ A -->|"Read abc"| D[("Links")]
+ A -->|"200: link<br/>representation"| C

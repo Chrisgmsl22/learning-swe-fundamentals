@@ -1,0 +1,7 @@
+flowchart TB
+  accTitle: Access and abuse checks protect URL creation
+  accDescr: A client sends an HTTPS create request to access and abuse checks. Allowed requests reach the URL service and database. Rejected requests return an error to the client.
+  C["Client"] -->|"HTTPS create<br/>request"| G["Identity,<br/>quota, URL<br/>checks"]
+  G -->|"Allowed<br/>request"| S["URL service"]
+  G -->|"Reject request"| C
+  S -->|"Store allowed<br/>URL"| D[("URL database")]

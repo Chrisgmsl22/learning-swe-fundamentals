@@ -3,7 +3,7 @@
 **This file is the single source of truth for the study week.** `dsa-tech-prep` points here
 rather than keeping its own copy, so the two repos cannot drift.
 
-Set 2026-09-04. Replaces the 2026-08-24 draft, which was paused for the SRE interview.
+Set 2026-09-04. System design durations updated 2026-09-21. Replaces the 2026-08-24 draft, which was paused for the SRE interview.
 
 **Visual version:** `open site/schedule.html` — colour-coded by track, with today highlighted.
 
@@ -11,13 +11,13 @@ Set 2026-09-04. Replaces the 2026-08-24 draft, which was paused for the SRE inte
 
 ## The week
 
-| Day | 17:00–18:00 | 18:00–19:00 | 19:00–20:00 | 20:00–20:40 |
+| Day | 17:00–18:00 | 18:00–19:00 | 19:00–20:00 | 20:00 evening block |
 | --- | --- | --- | --- | --- |
-| **Mon** | 3 DSA reps | 1 new DSA problem | dinner | **System design — attempt** |
-| **Tue** | 3 DSA reps | 1 new DSA problem | dinner | **LLD — study one pattern** |
-| **Wed** | 3 DSA reps | 1 new DSA problem | dinner | **System design — check** |
-| **Thu** | 3 DSA reps | — | dinner | **LLD — sketch Sunday's build** |
-| **Fri** | 3 DSA reps | **System design — close one gap** | dinner | **free** |
+| **Mon** | 3 DSA reps | 1 new DSA problem | dinner | **System design — attempt · 45 min** |
+| **Tue** | 3 DSA reps | 1 new DSA problem | dinner | **LLD — study one pattern · 40 min** |
+| **Wed** | 3 DSA reps | 1 new DSA problem | dinner | **System design — check · 45 min** |
+| **Thu** | 3 DSA reps | — | dinner | **LLD — sketch Sunday's build · 40 min** |
+| **Fri** | 3 DSA reps | **System design — close one gap · 18:00–18:45** | dinner | **free** |
 | **Sat** | **OFF.** Family and friends. Not "off unless something comes up". Off. | | | |
 | **Sun** | **LLD build, 1.5–2 hours** | | | |
 
@@ -56,15 +56,16 @@ thing that forces one pattern, by hand, in Python.
 ### System design — the weekly cycle
 
 **One design a week is the usual pace.** Keep the three slots below.
+Normal system design sessions last **45 minutes**. Tuesday and Thursday LLD slots remain **40 minutes**.
 Attempt, evaluation, and gap closure are stages, independent of the weekday.
 Continue an unfinished stage in the next slot. Do not add hours or restart the current exercise.
 Use [PROGRESS.md](PROGRESS.md) for the next action and [FRAMEWORK.md](system-design/FRAMEWORK.md) for the method.
 
 | Usual slot | What you do | Artifact |
 | --- | --- | --- |
-| **Mon 20:00–20:40** | **Guided attempt.** Ask questions, state assumptions, and draw your own design. | `attempt.md` and sketch |
-| **Wed 20:00–20:40** | **Guided evaluation.** Explain your intent, compare choices, and run the 3×3 sweep. | Questions in `gaps.md` |
-| **Fri 18:00–19:00** | **Close one gap.** Apply one concept with numbers and your own diagram. | A concept note |
+| **Mon 20:00–20:45** | **Guided attempt.** Ask questions, state assumptions, and draw your own design. | `attempt.md` and sketch |
+| **Wed 20:00–20:45** | **Guided evaluation.** Explain your intent, compare choices, and run the 3×3 sweep. | Questions in `gaps.md` |
+| **Fri 18:00–18:45** | **Close one gap.** Apply one concept with numbers and your own diagram. | A concept note |
 
 Short videos, explanations, and small examples can precede application.
 Preserve your own attempt before the full reference solution.

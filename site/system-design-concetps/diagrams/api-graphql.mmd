@@ -1,0 +1,7 @@
+flowchart TB
+ accTitle: GraphQL example
+ accDescr: The API combines user and link data for the page. Database reply arrows are omitted. Both data sets can share one database.
+ C["Profile page"] -->|"Query: user<br/>name and links"| G["GraphQL API"]
+ G -->|"Read user"| U[("Users")]
+ G -->|"Read links"| L[("Links")]
+ G -->|"Requested<br/>fields"| C

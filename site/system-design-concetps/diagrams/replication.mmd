@@ -1,0 +1,6 @@
+flowchart TB
+  accTitle: Replication copies URL records
+  accDescr: The URL creator writes to the primary database. The primary sends the same records to a read replica. The URL retriever reads that replica, which can lag.
+  C["URL<br/>creator"] -->|"Write URL"| P[("Primary:<br/>URL<br/>records")]
+  P -->|"Copy<br/>updates"| R[("Replica:<br/>same<br/>records")]
+  U["URL<br/>retriever"] -->|"Read URL;<br/>may be<br/>stale"| R

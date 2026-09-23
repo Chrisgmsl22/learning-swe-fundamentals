@@ -1,0 +1,30 @@
+{
+  "startOnLoad": false,
+  "securityLevel": "strict",
+  "htmlLabels": false,
+  "fontFamily": "monospace",
+  "theme": "base",
+  "themeVariables": {
+    "fontFamily": "monospace",
+    "fontSize": "15px",
+    "primaryColor": "#F4F5F3",
+    "primaryTextColor": "#252A31",
+    "primaryBorderColor": "#7D838B",
+    "lineColor": "#737B85",
+    "clusterBkg": "#FCFCFA",
+    "clusterBorder": "#C9CDD0",
+    "edgeLabelBackground": "#FCFCFA"
+  },
+  "flowchart": {
+    "htmlLabels": false,
+    "curve": "basis",
+    "padding": 12,
+    "nodeSpacing": 22,
+    "rankSpacing": 48,
+    "subGraphTitleMargin": {
+      "top": 10,
+      "bottom": 14
+    }
+  },
+  "themeCSS": ".node rect { rx: 2px; ry: 2px; } .node rect, .node polygon, .node path { stroke-width: 1px; } .cluster rect { rx: 3px; ry: 3px; stroke-width: 1px; } .edge-pattern-dashed, .edge-pattern-dotted { stroke: #B4531F; } .edgeLabel text { fill: #56606C; }"
+}

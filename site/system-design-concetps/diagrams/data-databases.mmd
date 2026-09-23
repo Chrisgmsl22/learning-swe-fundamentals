@@ -1,0 +1,6 @@
+flowchart TB
+ accTitle: Databases example
+ accDescr: The application stores links outside its own memory. It can retrieve them after a restart. The diagram omits the browser response and backups.
+ C["Browser"] -->|"Create or<br/>retrieve link"| A["Shortener<br/>application"]
+ A -->|"Write or query<br/>link"| D[("Durable link<br/>database")]
+ D -->|"Result"| A

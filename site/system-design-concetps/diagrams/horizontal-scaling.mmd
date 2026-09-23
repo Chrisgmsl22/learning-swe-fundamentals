@@ -1,0 +1,8 @@
+flowchart TB
+  accTitle: Horizontal scaling for a URL service
+  accDescr: A load balancer shares browser requests between two URL servers. Both servers read one shared URL database.
+  B["Browser"] -->|"GET /abc"| L["Load<br/>balancer"]
+  L -->|"Some<br/>requests"| A["URL<br/>server A"]
+  L -->|"Other<br/>requests"| C["URL<br/>server B"]
+  A -->|"Read URL"| D[("Shared<br/>URL<br/>database")]
+  C -->|"Read URL"| D

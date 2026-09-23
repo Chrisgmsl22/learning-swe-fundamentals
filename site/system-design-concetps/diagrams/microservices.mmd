@@ -1,0 +1,7 @@
+flowchart TB
+  accTitle: Separate URL and report services
+  accDescr: A client sends create requests to the URL service and report requests to the report service. Each service owns a separate data store.
+  C["Client"] -->|"Create<br/>short URL"| U["URL<br/>service"]
+  C -->|"Get visit<br/>report"| R["Report<br/>service"]
+  U -->|"Own URL<br/>records"| D[("URL<br/>database")]
+  R -->|"Own report<br/>records"| A[("Report<br/>database")]

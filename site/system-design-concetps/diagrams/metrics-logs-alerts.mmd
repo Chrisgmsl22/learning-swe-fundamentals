@@ -1,0 +1,8 @@
+flowchart TB
+  accTitle: URL service metrics, logs, and alerts
+  accDescr: A browser requests a URL. The URL service emits counts, latency, and errors to a metrics store and event details to a log store. An alert rule notifies an operator from metric conditions.
+  B["Browser"] -->|"GET /abc"| S["URL service"]
+  S -->|"Counts,<br/>latency,<br/>errors"| M[("Metrics")]
+  S -->|"Request event<br/>details"| L[("Logs")]
+  M -->|"Check error<br/>threshold"| A["Alert rule"]
+  A -->|"Notify on-call<br/>operator"| O["Operator"]

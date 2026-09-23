@@ -1,0 +1,6 @@
+flowchart TB
+ accTitle: Denormalisation example
+ accDescr: The feed stores a copy of each author name. Here, profile changes later update the copies. The diagram omits the update worker and replies.
+ U["Profile update"] -->|"1. Save<br/>current name"| P[("User profiles")]
+ P -->|"2. Copy new<br/>name"| F[("Feed rows with<br/>author name")]
+ A["Feed API"] -->|"3. Read feed<br/>and name<br/>together"| F

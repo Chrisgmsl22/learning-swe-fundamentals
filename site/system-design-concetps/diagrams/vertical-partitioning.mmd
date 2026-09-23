@@ -1,0 +1,5 @@
+flowchart TB
+  accTitle: Vertical partitioning separates URL fields from preview fields
+  accDescr: The URL retriever reads short code and destination fields from one store. The preview service reads title and description fields from another. Both stores use short code as their key.
+  R["URL<br/>retriever"] -->|"Read by<br/>short code"| U[("Code +<br/>destination<br/>URL")]
+  P["Preview<br/>service"] -->|"Read by<br/>short code"| M[("Code +<br/>title +<br/>description")]

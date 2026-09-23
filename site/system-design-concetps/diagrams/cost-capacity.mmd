@@ -1,0 +1,7 @@
+flowchart TB
+  accTitle: URL service capacity reserves have a resource cost
+  accDescr: Requests enter a load balancer and reach two URL servers, each with spare capacity and a compute cost. Both servers use a database with storage and query costs.
+  L["Load<br/>balancer"] -->|"Share<br/>requests"| A["URL<br/>server A:<br/>spare<br/>capacity"]
+  L -->|"Share<br/>requests"| B["URL<br/>server B:<br/>spare<br/>capacity"]
+  A -->|"Database<br/>work"| D[("Database:<br/>storage +<br/>query<br/>cost")]
+  B -->|"Database<br/>work"| D

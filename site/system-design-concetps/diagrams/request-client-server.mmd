@@ -1,0 +1,7 @@
+flowchart TB
+ accTitle: Client-server example
+ accDescr: The browser requests a short code. The server reads its destination from the database, then returns a redirect. The diagram omits authentication.
+ C["Browser client"] -->|"1. GET /abc"| S["Shortener<br/>server"]
+ S -->|"2. Find abc"| D[("Link database")]
+ D -->|"3. Long URL"| S
+ S -->|"4. Redirect<br/>response"| C

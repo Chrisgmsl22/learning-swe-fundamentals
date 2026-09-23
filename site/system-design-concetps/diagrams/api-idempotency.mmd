@@ -1,0 +1,5 @@
+flowchart TB
+ accTitle: Idempotency example
+ accDescr: The first request creates one order. A retry with the same key and payload returns that order. Concurrent requests need an atomic uniqueness check.
+ C["Client"] -->|"POST<br/>/orders;<br/>same key K<br/>on retry"| A["Order API"]
+ A -->|"First:<br/>atomic<br/>save;<br/>retry:<br/>read saved<br/>result"| D[("Orders and<br/>key<br/>results")]

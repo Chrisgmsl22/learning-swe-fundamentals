@@ -1,0 +1,8 @@
+flowchart TB
+  accTitle: CAP tradeoff during a network partition
+  accDescr: Side A acknowledges a completed URL write to client A. A network partition blocks updates to side B. After that write completes, client B reads side B. Side B must reject or delay the read for consistency, or permit an old URL for availability.
+  A["Client A"] -->|"Write new URL"| X[("Side A: new<br/>URL")]
+  X -->|"Write<br/>complete:<br/>acknowledgment"| A
+  X -. "Partition:<br/>updates<br/>blocked" .-> Y[("Side B: old<br/>URL")]
+  B["Client B"] -->|"Read after<br/>write<br/>completes"| Y
+  Y -->|"Reject or<br/>wait; or<br/>permit old URL"| B

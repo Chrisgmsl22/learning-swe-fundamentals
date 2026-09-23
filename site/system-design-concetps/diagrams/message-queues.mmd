@@ -1,0 +1,8 @@
+flowchart TB
+  accTitle: A queue separates redirect requests from visit totals
+  accDescr: A browser receives a redirect from the URL service. The service submits a visit event to a queue. A worker consumes the event and updates visit totals.
+  B["Browser"] -->|"GET /abc"| S["URL service"]
+  S -->|"Redirect<br/>response"| B
+  S -->|"Submit visit<br/>event"| Q["Message queue"]
+  Q -->|"Deliver event"| W["Visit worker"]
+  W -->|"Update total"| D[("Visit totals")]
