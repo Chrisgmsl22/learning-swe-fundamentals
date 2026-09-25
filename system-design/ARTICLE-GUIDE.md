@@ -10,7 +10,8 @@ Keep all pages local and standalone. Both Codex and Claude use this guide.
 ## Study pace
 
 Normal system design sessions last 45 minutes. The 20-minute session on 2026-09-21 was an exception.
-The learner plans to read one short article per day. This is a pace, not a catch-up obligation.
+The learner plans to read one new chapter per day. This is a pace, not a catch-up obligation.
+Select one idea to apply. A new chapter does not add new completion requirements to the current exercise.
 Use articles within the existing study time. Preserve rest days and the current workload limits.
 An article can precede practice. Do not require the learner to invent an unfamiliar concept before an explanation.
 Keep the learner's own design attempt before the full solution to that exercise.

@@ -3,6 +3,7 @@
 System design and cloud/DevOps fundamentals. One of two repos in a three-track study plan.
 
 **Resume here: [PROGRESS.md](PROGRESS.md).** Use [SCHEDULE.md](SCHEDULE.md) for the weekly slots.
+Use the [exercise index](system-design/EXERCISES.md) for upcoming problems, small scopes, and instructions for a new session.
 
 The broader goal is SWE skill across application design, code, infrastructure, and operation.
 This repo supplies guided system design practice and cloud/operations at fundamentals depth.
@@ -24,7 +25,7 @@ PROGRESS.md      session log
 | Track | Repo | Cadence |
 | --- | --- | --- |
 | DSA | `dsa-tech-prep` | 3 reps daily · 3 new problems a week |
-| **System design** | **here** | 1 design a week, across 3 sessions |
+| **System design** | **here** | Usually one small design a week, across one to three sessions |
 | LLD / organic projects | `dsa-tech-prep` | 1 pattern a week · 1 full problem every ~4 weeks |
 
 ## The system design loop
@@ -32,10 +33,11 @@ PROGRESS.md      session log
 | Usual slot | Stage | Artifact |
 | --- | --- | --- |
 | Mon | Guided attempt | `attempt.md` and a sketch |
-| Wed | Guided evaluation and the 3×3 sweep | Questions in `gaps.md` |
+| Wed | Guided evaluation with a scoped checklist | Questions in `gaps.md` |
 | Fri | Close one gap | A concept note and a diagram |
 
-Stages can continue across slots. Resume unfinished work instead of a forced restart.
+Stages can continue within the three-session allowance. Save unresolved questions and move on when the allowance ends.
+Extend only at the learner's explicit choice, within an existing slot. Do not restart completed work or add study hours.
 Every third Friday replaces gap closure with a revisit from [REVIEW-QUEUE.md](system-design/REVIEW-QUEUE.md).
 
 Use the [start guide](system-design/README.md), [method](system-design/FRAMEWORK.md), and [topic map](system-design/TOPICS.md).
@@ -53,7 +55,7 @@ open site/schedule.html
 
 | Page | Covers |
 | --- | --- |
-| [System design concepts](site/system-design-concetps/index.html) | Planned concept articles; shared format in [ARTICLE-GUIDE.md](system-design/ARTICLE-GUIDE.md) |
+| [System design concepts](site/system-design-concetps/index.html) | Six category pages with 37 Mermaid examples; shared format in [ARTICLE-GUIDE.md](system-design/ARTICLE-GUIDE.md) |
 | **`schedule.html`** | **The week, colour-coded by track, with today highlighted** |
 | `day-01-network-spine.html` | CIDR, subnets, route tables, NAT, security groups, the 2-AZ VPC |
 | `day-02-iac-and-containers.html` | Terraform vs CloudFormation vs Ansible, file permissions, Docker layers and PID 1 |

@@ -5,16 +5,22 @@
 Current phase: the **long-term three-track plan**, started 2026-09-07.
 The week is in `SCHEDULE.md`. The system design loop is in `system-design/FRAMEWORK.md`.
 
-## Current state — guided evaluation, 2026-09-21
+## Current state — guided evaluation, 2026-09-23
 
 - **Exercise:** URL shortener. Reuse the existing `attempt.md` and `attempt.png`.
-- **Stage:** Evaluation in progress. The learner has not completed the guided walkthrough.
-- **Next action:** Resume cache timeout budgets. Use a concrete redirect target and ask about the gain and loss of a shorter timeout.
-- **Latest session:** [2026-09-21 mentor notes](system-design/problems/01-url-shortener/session-2026-09-21.md). The learner explained cache-aside and distinguished a cache failure from a miss.
-- The session addressed redirect responses, destination ownership, and database fallback. Timeout tradeoffs still need learner application.
+- **Stage:** Bounded final pass planned. The full guided evaluation remains incomplete; do not extend it indefinitely.
+- **Active scope:** At most 10–15 minutes on short-code creation and collisions in the next scheduled session, then move to the rate-limited API.
+- **Next action:** Ask: "How would your URL generator create a short code and handle a code that already exists?"
+- **Next exercise:** [Rate-limited API](system-design/problems/02-rate-limiter/PROBLEM.md), with one server and one endpoint. Use the [exercise index](system-design/EXERCISES.md).
+- **Practice record:** Four session dates appear in the log: September 7, 10, 21, and 23. Durations vary or are unknown.
+- Archive work does not count as design practice. Do not infer four complete 45-minute sessions from these dates.
+- **Latest session:** [2026-09-23 mentor notes](system-design/problems/01-url-shortener/session-2026-09-23.md). The learner read request flow and wrote [notes](system-design/concepts/data-flow.md).
+- The learner explained DNS failure, gateway versus controller ownership, the overall latency budget, and extra database traffic after cache timeouts.
+- Timeout examples were guided. A learner-written selection rule and a justified timeout remain open, but they do not block the next exercise.
+- Do not repeat the request-flow or timeout quiz. Use an optional brief recap only if it helps the next step.
 - The learner shared an updated sketch in chat. The repository's `attempt.png` remains the original image.
 - Ask what each box represents before you judge separate services or deployments.
-- Continue through request flow, estimates, lookup, code generation, redirects, and expiry as questions arise.
+- Defer further estimates, expiry across cache and database, and capacity justification to later practice. Preserve these gaps without a mastery claim.
 - Do not require another arithmetic quiz before the walkthrough.
 - Use the learner's **1 kB per link** assumption when relevant. The historical reference used **500 bytes**.
 - `gaps.md` does not exist yet. The earlier log proposed seven gaps; it did not record seven completed learner entries.
@@ -25,7 +31,9 @@ The week is in `SCHEDULE.md`. The system design loop is in `system-design/FRAMEW
 ### Agreements for later sessions
 
 - Normal system design sessions last **45 minutes**. The 2026-09-21 session was a 20-minute exception.
-- Article preference: one short article per day, with explanation before application, within existing study time and rest rules. No catch-up quota.
+- Article preference: one new chapter per day, with explanation before application, within existing study time and rest rules. No catch-up quota.
+- Small exercises use one to three sessions. Stop early when sufficient; after three sessions, defer open questions and move on by default.
+- Extend only at the learner's explicit choice within the existing schedule. A new chapter does not expand the active problem's completion requirements.
 - Use the local [concept archive](site/system-design-concetps/index.html) and shared [article guide](system-design/ARTICLE-GUIDE.md).
 - Archive format: six category pages, with one simple Mermaid design per subtopic. Use vertical space and no horizontal scroll.
 - Diagram style: compact boxes, monospace labels, thin borders, clear groups, and a light theme. The archive has 37 examples, not new mastery evidence.
@@ -48,8 +56,8 @@ The week is in `SCHEDULE.md`. The system design loop is in `system-design/FRAMEW
 | # | Design | Attempted | Checked | Gaps closed | Next re-draw |
 | --- | --- | --- | --- | --- | --- |
 | 01 | URL shortener | **2026-09-07** (37 min) | Started 2026-09-10; incomplete | — | ~2026-10-01, provisional |
-| 02 | Rate limiter | — | — | — | — |
-| 03 | Async job service | — | — | — | — |
+
+Planned exercises and their order live in [EXERCISES.md](system-design/EXERCISES.md). Add a log row when an exercise actually starts.
 
 ## Concepts closed
 
@@ -72,6 +80,17 @@ _(one line per note in `system-design/concepts/`. This list is the honest covera
 Historical entries remain below. The current state above supersedes any conflicting completion or next-step claim.
 
 _(newest first)_
+
+### 2026-09-23 · design 01 — request flow and timeout practice
+
+- The learner completed the request-flow chapter and wrote concept notes.
+- He explained why DNS failure prevents the request from reaching the retriever, and assigned the route and controller to the application server.
+- After mentor examples, he distinguished the cache timeout from the complete redirect budget and predicted extra database queries after timeouts.
+- The mentor corrected path-versus-directory confusion, outage inference, and the difference between more load and overload.
+- No production timeout was selected. The final timeout-selection note remains open; the full URL shortener evaluation is incomplete.
+- Next: one brief timeout recap, then short-code creation and uniqueness. See the [session record](system-design/problems/01-url-shortener/session-2026-09-23.md).
+- Later planning agreement: cap the remaining shortener discussion at 10–15 minutes, then start the rate-limited API. Defer other gaps.
+- The agreed sequence is rate-limited API, photo upload, then background thumbnails. The index and prompts define their small initial scopes.
 
 ### 2026-09-21 · design 01 — guided evaluation, 20 minutes
 

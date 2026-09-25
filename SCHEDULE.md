@@ -58,7 +58,9 @@ thing that forces one pattern, by hand, in Python.
 **One design a week is the usual pace.** Keep the three slots below.
 Normal system design sessions last **45 minutes**. Tuesday and Thursday LLD slots remain **40 minutes**.
 Attempt, evaluation, and gap closure are stages, independent of the weekday.
-Continue an unfinished stage in the next slot. Do not add hours or restart the current exercise.
+Use one to three sessions per small exercise. Continue within that allowance; after it ends, save unresolved questions and move on.
+Extend only at the learner's explicit choice, within an existing slot. Do not add hours or restart the current exercise.
+See the [exercise index](system-design/EXERCISES.md) for the sequence and initial scope.
 Use [PROGRESS.md](PROGRESS.md) for the next action and [FRAMEWORK.md](system-design/FRAMEWORK.md) for the method.
 
 | Usual slot | What you do | Artifact |

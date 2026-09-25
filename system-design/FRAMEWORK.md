@@ -23,7 +23,7 @@ Use the framework at any stage. It is a guide, not a test the learner must pass 
 | Gap closure | Select one gap. Explain it with numbers, then ask for an application. | A concept note and a diagram the learner draws |
 
 These are stages, not weekday gates. Monday, Wednesday, and Friday supply the usual slots.
-Continue an unfinished stage within the next available slot. Do not add hours or require a new exercise.
+Continue an unfinished stage within the exercise allowance. Do not add hours or restart the exercise.
 Every third Friday replaces gap closure with a revisit from [REVIEW-QUEUE.md](REVIEW-QUEUE.md).
 
 Short videos, explanations, and small worked examples can precede application.
@@ -36,6 +36,25 @@ Ask what each ambiguous box or arrow means before you judge it.
 A box can represent a responsibility without a separate deployment.
 Explain unknown concepts directly. Do not turn every gap into a quiz or a resource list.
 Use the learner's stated assumptions unless a constraint contradicts them.
+
+## Bounded practice and completion
+
+Use the [exercise index](EXERCISES.md) for small, realistic prompts with two or three main concepts.
+Explain unfamiliar concepts, let the learner attempt a minimal design, then introduce one complication.
+Use one to three normal 45-minute sessions. Three is the default allowance, not a minimum.
+
+A first pass is sufficient when the learner can:
+
+1. Explain the main request paths and how the system stores and retrieves data.
+2. Explain two important choices, with a gain and loss for each.
+3. Explain one failure case and what the client experiences.
+
+Do not require complete production readiness. Stop repeated variations once the learner explains the relevant tradeoff correctly.
+After three sessions, record unresolved questions and move on by default, even if a criterion remains incomplete.
+Record that outcome as deferred work, not mastery or a completed evaluation.
+Extend only at the learner's explicit choice and within an existing study slot.
+Use later problems and scheduled revisits to practice deferred topics.
+One new chapter can supply one idea for practice. It must not expand the current exercise indefinitely.
 
 ## A typical design artifact
 
@@ -85,6 +104,7 @@ It is not an exact representation of the six AWS Well-Architected pillars.
 | Data | Access control and encryption | Storage, indexes, retention | Slow queries, queue depth, replication lag |
 
 Use each cell as a question about this design. A blank cell can expose a gap.
+Select questions that fit the exercise scope. Every cell is not a required completion gate for a small problem.
 Mark a cell as irrelevant only with a reason. Do not add components merely to fill the grid.
 
 The grid does not replace these checks:
@@ -105,6 +125,7 @@ At the end of a session:
 
 1. Save the learner's artifact or its update.
 2. Record the current stage, open questions, and next action in [PROGRESS.md](../PROGRESS.md).
+   Include the active scope, known session count, latest artifacts, and next question for an agent without the previous chat.
 3. Update topic evidence only when the session supports it.
 4. Record concept closure only after the learner produces the application and note.
 

@@ -27,16 +27,16 @@ Record demonstrations as they arise in normal guided practice.
 | --- | --- | --- | --- |
 | Request path | Client-server | Not assessed | Legacy request-path coverage claim; current attempt asks about frontend and backend roles. See [attempt](problems/01-url-shortener/attempt.md). |
 | Request path | IP | Not assessed | [Cloud session log](../PROGRESS.md) records network practice; current independent use is not assessed. |
-| Request path | DNS | Not assessed | Legacy request-path coverage claim; [network notes](../notes/01-networking-spine.md) provide the prior reference. |
+| Request path | DNS | Introduced | [2026-09-23 session](problems/01-url-shortener/session-2026-09-23.md): the learner explained that resolution failure prevents the request from reaching the retriever. The mentor clarified hostname versus path. |
 | Request path | Proxy / reverse proxy | Not assessed | Legacy request-path coverage claim; application needs assessment. |
-| Request path | Latency | Not assessed | [Attempt](problems/01-url-shortener/attempt.md) asks about latency targets; no derived target yet. |
+| Request path | Latency | Introduced | [2026-09-23 session](problems/01-url-shortener/session-2026-09-23.md): after worked examples, the learner explained that cache time belongs within the complete request budget. No measured or learner-derived target yet. |
 | Request path | HTTP/HTTPS | Not assessed | [Cloud session log](../PROGRESS.md) and [network notes](../notes/01-networking-spine.md); redirect semantics need evaluation. |
 | APIs | APIs | Not assessed | A prompt or component name does not establish an API contract. |
 | APIs | REST | Not assessed | No learner contract supports an assessment yet. |
 | APIs | GraphQL | Not assessed | No learner evidence located. |
 | APIs | WebSockets | Not assessed | No learner evidence located. |
 | APIs | Webhooks | Not assessed | No learner evidence located. |
-| APIs | API gateway | Not assessed | [Historical evaluation log](../PROGRESS.md) discusses this choice; guided evaluation remains incomplete. |
+| APIs | API gateway | Introduced | [2026-09-23 session](problems/01-url-shortener/session-2026-09-23.md): the learner assigned security checks and forwarding to the gateway, and the route/controller to the server. A gateway tradeoff remains open. |
 | APIs | Rate limiting | Not assessed | Legacy coverage claim; [attempt](problems/01-url-shortener/attempt.md) names abuse protection without a mechanism. |
 | APIs | Idempotency | Not assessed | Legacy coverage claim; independent application needs assessment. |
 | Data | Databases | Not assessed | [Historical evaluation log](../PROGRESS.md) records a relational choice; confirm the learner's reason. |
@@ -47,7 +47,7 @@ Record demonstrations as they arise in normal guided practice.
 | Scale | Vertical scaling | Not assessed | Legacy scale coverage claim; independent application needs assessment. |
 | Scale | Horizontal scaling | Not assessed | Legacy scale coverage claim; current [attempt](problems/01-url-shortener/attempt.md) asks what extra servers represent. |
 | Scale | Load balancers | Not assessed | Legacy scale coverage claim; [network notes](../notes/01-networking-spine.md) include the prior reference. |
-| Scale | Caching | Introduced | [2026-09-21 session](problems/01-url-shortener/session-2026-09-21.md): the learner explained fast lookups for a read-heavy service, cache-aside, and outage fallback. Timeout and load tradeoffs still need learner application. |
+| Scale | Caching | Introduced | [2026-09-21 session](problems/01-url-shortener/session-2026-09-21.md): cache-aside and outage fallback. [2026-09-23 session](problems/01-url-shortener/session-2026-09-23.md): guided timeout example led to a correct prediction of extra database load. A justified learner-selected timeout remains open. |
 | Scale | CDN | Not assessed | Legacy scale coverage claim; independent application needs assessment. |
 | Scale | Message queues | Not assessed | Legacy scale coverage claim; no assessed learner application yet. |
 | Distribution | Replication | Not assessed | Legacy coverage claim and [historical evaluation log](../PROGRESS.md); the reason for use remains open. |
@@ -63,7 +63,7 @@ Record demonstrations as they arise in normal guided practice.
 | Requirements and scope | Not assessed | [Attempt, section 1](problems/01-url-shortener/attempt.md) identifies access patterns, expiry, and latency questions. An explained tradeoff and purpose demonstration remain unconfirmed. |
 | Estimates and assumptions | Not assessed | [Attempt, section 2](problems/01-url-shortener/attempt.md) uses a yearly rate and a 1 kB assumption. Arithmetic errors remain unresolved. Purpose and tradeoff evidence remain unconfirmed. |
 | Transactions | Not assessed | No learner evidence located. |
-| Failure behavior and recovery | Not assessed | [Historical evaluation log](../PROGRESS.md) records a failure question; the response needs a guided check. |
+| Failure behavior and recovery | Introduced | [2026-09-23 session](problems/01-url-shortener/session-2026-09-23.md): the learner explained timeout rejection of a slow healthy server and cache-to-database fallback. Examples were guided; a complete recovery policy remains open. |
 | Operations: metrics, logs, and alerts | Not assessed | [Cloud session log](../PROGRESS.md) records vocabulary exposure; [attempt notes](problems/01-url-shortener/attempt.md) name metrics. Application remains unconfirmed. |
 | Security and abuse | Not assessed | [Attempt](problems/01-url-shortener/attempt.md) identifies phishing risk; the proposed controls need evaluation. |
 | Cost and capacity | Not assessed | No complete learner cost or capacity argument yet. |

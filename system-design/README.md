@@ -2,7 +2,8 @@
 
 Use guided practice to build designs you can explain.
 The [schedule](../SCHEDULE.md) supplies three weekly slots, with one design per week as the usual pace.
-Carry unfinished work forward within those slots.
+Use one to three sessions per small problem. Save unresolved questions for later when the allowance ends.
+Use the [exercise index](EXERCISES.md) for the sequence, prompts, and instructions for a fresh session.
 
 ## Start or resume
 
@@ -20,10 +21,11 @@ A reference file does not prove that the learner completed evaluation.
 | File | Purpose |
 | --- | --- |
 | [FRAMEWORK.md](FRAMEWORK.md) | Guided stages, design method, and checklist |
+| [EXERCISES.md](EXERCISES.md) | Small exercise sequence, scope, and resume instructions |
 | [TOPICS.md](TOPICS.md) | Topic evidence: Introduced, Applied, and Revisited |
 | [ATTEMPT-TEMPLATE.md](ATTEMPT-TEMPLATE.md) | A guide for the learner's design artifact |
 | [REVIEW-QUEUE.md](REVIEW-QUEUE.md) | Later design revisits |
-| `problems/NN-name/PROBLEM.md` | Prompt and constraints |
+| `problems/<exercise>/PROBLEM.md` | Prompt and constraints |
 | `problems/NN-name/attempt.md` | The learner's decisions, assumptions, and open questions |
 | `problems/NN-name/attempt.png` | The learner's Excalidraw sketch |
 | `problems/NN-name/reference.md` | One justified solution, available after the learner's attempt |
