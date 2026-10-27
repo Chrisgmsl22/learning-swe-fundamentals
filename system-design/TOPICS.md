@@ -65,7 +65,7 @@ Record demonstrations as they arise in normal guided practice.
 | Transactions | Not assessed | No learner evidence located. |
 | Failure behavior and recovery | Introduced | [2026-09-23 session](problems/01-url-shortener/session-2026-09-23.md): the learner explained timeout rejection of a slow healthy server and cache-to-database fallback. Examples were guided; a complete recovery policy remains open. |
 | Operations: metrics, logs, and alerts | Not assessed | [Cloud session log](../PROGRESS.md) records vocabulary exposure; [attempt notes](problems/01-url-shortener/attempt.md) name metrics. Application remains unconfirmed. |
-| Security and abuse | Not assessed | [Attempt](problems/01-url-shortener/attempt.md) identifies phishing risk; the proposed controls need evaluation. |
+| Security and abuse | Introduced | [2026-10-26 session](problems/01-url-shortener/session-2026-10-26.md): the learner identified guessing public codes as a risk and chose public redirects with login owned by the destination. Random-code mitigation was explained by the mentor; no independently justified security tradeoff yet. The [attempt](problems/01-url-shortener/attempt.md) also identifies phishing risk. |
 | Cost and capacity | Not assessed | No complete learner cost or capacity argument yet. |
 
 Update a row with an artifact and date when new evidence supports it.

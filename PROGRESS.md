@@ -5,16 +5,17 @@
 Current phase: the **long-term three-track plan**, started 2026-09-07.
 The week is in `SCHEDULE.md`. The system design loop is in `system-design/FRAMEWORK.md`.
 
-## Current state — guided evaluation, 2026-09-23
+## Current state: shortener wrap-up ended, 2026-10-26
 
 - **Exercise:** URL shortener. Reuse the existing `attempt.md` and `attempt.png`.
-- **Stage:** Bounded final pass planned. The full guided evaluation remains incomplete; do not extend it indefinitely.
-- **Active scope:** At most 10–15 minutes on short-code creation and collisions in the next scheduled session, then move to the rate-limited API.
-- **Next action:** Ask: "How would your URL generator create a short code and handle a code that already exists?"
+- **Stage:** Bounded final pass ended at the agreed scope boundary. Full guided evaluation remains incomplete; defer remaining gaps and move on. Do not claim all first-pass criteria were met.
+- **Active scope:** Introduce the next exercise, one rate-limited endpoint on one server. Its learner attempt has not started yet.
+- **Next action:** Explain the fixed calendar-minute rule, then ask: "What information does the server need to track to enforce 100 requests per user per minute?"
 - **Next exercise:** [Rate-limited API](system-design/problems/02-rate-limiter/PROBLEM.md), with one server and one endpoint. Use the [exercise index](system-design/EXERCISES.md).
-- **Practice record:** Four session dates appear in the log: September 7, 10, 21, and 23. Durations vary or are unknown.
-- Archive work does not count as design practice. Do not infer four complete 45-minute sessions from these dates.
-- **Latest session:** [2026-09-23 mentor notes](system-design/problems/01-url-shortener/session-2026-09-23.md). The learner read request flow and wrote [notes](system-design/concepts/data-flow.md).
+- **Practice record:** Five practice dates: September 7, 10, 21, 23, and October 26. Durations vary or are unknown.
+- Archive work does not count as design practice. Do not infer five complete 45-minute sessions from these dates.
+- **Latest session:** [2026-10-26 mentor notes](system-design/problems/01-url-shortener/session-2026-10-26.md). The learner identified a race condition and chose public redirects with login owned by the destination. Unique constraints, indexed lookups, and retry tradeoffs were mentor explanations, not independent learner demonstrations.
+- Earlier request-flow practice and [learner notes](system-design/concepts/data-flow.md) remain relevant. Do not repeat the collision discussion as a completion gate.
 - The learner explained DNS failure, gateway versus controller ownership, the overall latency budget, and extra database traffic after cache timeouts.
 - Timeout examples were guided. A learner-written selection rule and a justified timeout remain open, but they do not block the next exercise.
 - Do not repeat the request-flow or timeout quiz. Use an optional brief recap only if it helps the next step.
@@ -55,7 +56,7 @@ The week is in `SCHEDULE.md`. The system design loop is in `system-design/FRAMEW
 
 | # | Design | Attempted | Checked | Gaps closed | Next re-draw |
 | --- | --- | --- | --- | --- | --- |
-| 01 | URL shortener | **2026-09-07** (37 min) | Started 2026-09-10; incomplete | — | ~2026-10-01, provisional |
+| 01 | URL shortener | **2026-09-07** (37 min) | Bounded wrap-up ended 2026-10-26; full evaluation incomplete, remaining gaps deferred | — | Due for a later scheduled revisit |
 
 Planned exercises and their order live in [EXERCISES.md](system-design/EXERCISES.md). Add a log row when an exercise actually starts.
 
@@ -80,6 +81,14 @@ _(one line per note in `system-design/concepts/`. This list is the honest covera
 Historical entries remain below. The current state above supersedes any conflicting completion or next-step claim.
 
 _(newest first)_
+
+### 2026-10-26: design 01, bounded wrap-up
+
+- Discussed short-code identity, collisions, indexed lookups, and public-link access. Duration was not measured.
+- The learner proposed check-and-retry and recognized the concurrent-write race condition. A queue was a learner suggestion; database uniqueness and bounded retries were mentor explanations.
+- The learner chose redirects accessible to everyone, with destination login outside the shortener's responsibility.
+- Ended at the agreed scope boundary. The full evaluation remains incomplete, with other gaps deferred and no concept closure.
+- Next exercise: rate-limited API, one server and one endpoint. No learner attempt yet. See the [session record](system-design/problems/01-url-shortener/session-2026-10-26.md).
 
 ### 2026-09-23 · design 01 — request flow and timeout practice
 
