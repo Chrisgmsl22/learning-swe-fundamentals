@@ -24,21 +24,23 @@ PROGRESS.md      session log
 
 | Track | Repo | Cadence |
 | --- | --- | --- |
-| DSA | `dsa-tech-prep` | 3 reps daily · 3 new problems a week |
-| **System design** | **here** | Usually one small design a week, across one to three sessions |
+| DSA | `dsa-tech-prep` | 3 reps in the weekday 17:00–18:00 window · up to 2 optional new problems on Tue/Thu |
+| **System design** | **here** | Usually one small design a week; Mon/Wed are usual sessions, Friday is optional |
 | LLD / organic projects | `dsa-tech-prep` | 1 pattern a week · 1 full problem every ~4 weeks |
 
 ## The system design loop
 
-| Usual slot | Stage | Artifact |
+Monday and Wednesday are the usual system design slots. Friday 18:00–18:45 is optional. The full schedule, including job applications, the Friday personal project, and Sunday build duration, is in [SCHEDULE.md](SCHEDULE.md).
+
+| Slot | Stage | Artifact |
 | --- | --- | --- |
 | Mon | Guided attempt | `attempt.md` and a sketch |
 | Wed | Guided evaluation with a scoped checklist | Questions in `gaps.md` |
-| Fri | Close one gap | A concept note and a diagram |
+| Fri, optional | Close one gap or, every third Friday when attending, revisit an older design in the same slot | A concept note or revisit record |
 
 Stages can continue within the three-session allowance. Save unresolved questions and move on when the allowance ends.
 Extend only at the learner's explicit choice, within an existing slot. Do not restart completed work or add study hours.
-Every third Friday replaces gap closure with a revisit from [REVIEW-QUEUE.md](system-design/REVIEW-QUEUE.md).
+Every third Friday, when attending, replaces gap closure with a revisit in the same slot. See [REVIEW-QUEUE.md](system-design/REVIEW-QUEUE.md).
 
 Use the [start guide](system-design/README.md), [method](system-design/FRAMEWORK.md), and [topic map](system-design/TOPICS.md).
 Short explanations, videos, and small examples can precede application.

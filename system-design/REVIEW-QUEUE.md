@@ -5,7 +5,8 @@ queue of 8 items does not need a web app. Revisit the format at ~30 designs.
 
 ## How a re-draw works
 
-**Every third Friday**, replace gap closure with a revisit in the same slot:
+**Every third Friday**, if you attend the optional Friday system design slot, replace gap closure
+with a revisit in that same 18:00–18:45 slot. Do not add another session:
 
 1. Open the prompt for a design that is due.
 2. Draw what you recall on a clean page.

@@ -73,16 +73,16 @@ Keep planned articles distinct from available articles. Use TOPICS.md for learne
 
 | Track | Repo | Cadence |
 | --- | --- | --- |
-| DSA | `dsa-tech-prep` | 3 reps daily · 3 new problems a week |
+| DSA | `dsa-tech-prep` | 3 reps in the weekday window · up to 2 optional new problems a week |
 | System design | This repo | Usually one small design per week; one to three sessions, then defer open questions |
 | LLD / organic projects | `dsa-tech-prep` | 1 pattern a week · 1 full problem every ~4 weeks |
 
 LLD and organic projects are one track: build a small Python project that requires one pattern, by hand.
-Keep the existing weekly slots and the total workload of about 9–10 hours.
-Saturday is off. Friday ends early. Do not add work to compensate for an unfinished stage.
+Use the slots in [SCHEDULE.md](SCHEDULE.md). Do not state a weekly hour total because Friday is optional and the personal project duration is unknown.
+Saturday is off. Friday system design is optional. Do not add work to compensate for an unfinished stage.
 The 17:00–18:00 DSA slot is a window, not a quota. Stop after the three reps.
-Five Full nights exceed the plan. Do not suggest more work.
-Every third Friday replaces gap closure with a revisit of an older design, within the same slot.
+Friday’s personal project is separate from Sunday LLD; do not add an evening quota for work-hours AI practice.
+Every third Friday, if attending the optional Friday system design slot, replaces gap closure with a revisit in that same slot.
 
 ## Shared memory for Codex and Claude
 

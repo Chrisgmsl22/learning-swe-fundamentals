@@ -22,9 +22,9 @@ Use the framework at any stage. It is a guide, not a test the learner must pass 
 | Evaluation | Understand the attempt, then compare choices and run the checklist. | Updates to the attempt and questions in `gaps.md` |
 | Gap closure | Select one gap. Explain it with numbers, then ask for an application. | A concept note and a diagram the learner draws |
 
-These are stages, not weekday gates. Monday, Wednesday, and Friday supply the usual slots.
+These are stages, not weekday gates. Monday and Wednesday supply the usual slots. Friday's 18:00–18:45 system design slot is optional.
 Continue an unfinished stage within the exercise allowance. Do not add hours or restart the exercise.
-Every third Friday replaces gap closure with a revisit from [REVIEW-QUEUE.md](REVIEW-QUEUE.md).
+Every third Friday, when attending, replaces gap closure with a revisit from [REVIEW-QUEUE.md](REVIEW-QUEUE.md) in the same slot. There is no extra session.
 
 Short videos, explanations, and small worked examples can precede application.
 The learner must produce an attempt before the full reference solution for that exercise.

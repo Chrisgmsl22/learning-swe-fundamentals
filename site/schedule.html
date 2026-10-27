@@ -21,6 +21,11 @@
   --accent-soft:#DCF0F1;
   --good:#2C6E49;
   --good-soft:#DFF0E6;
+  --job:#7A4A12; --job-soft:#F7EBDD;
+  --project:#315C3B; --project-soft:#E6F0E7;
+  --lld:#7A4FA3; --lld-soft:#F0E9F7;
+  --sd:#0E7C86;  --sd-soft:#DCF0F1;
+  --dsa:#4A5568; --dsa-soft:#EDF0F4;
   --bad:#A82820;
   --bad-soft:#FBE6E4;
   --shadow:0 1px 2px rgba(20,25,34,.05), 0 8px 24px -16px rgba(20,25,34,.28);
@@ -31,12 +36,6 @@
   --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
 }
 /* Light theme only — locked by preference. Do not add dark overrides. */
-
-
-  --lld:#7A4FA3; --lld-soft:#F0E9F7;
-  --sd:#0E7C86;  --sd-soft:#DCF0F1;
-  --dsa:#4A5568; --dsa-soft:#EDF0F4;
-}
 *{box-sizing:border-box}
 body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1280px;margin:0 auto;padding:26px 24px 70px}
@@ -50,6 +49,8 @@ h1{font-family:var(--sans);font-weight:700;font-size:clamp(2rem,4.4vw,3rem);line
 .intro{color:var(--muted);margin:0 0 20px;max-width:70ch}
 
 .tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;box-shadow:var(--shadow)}
+.scroll-hint{display:none;margin:7px 2px 0;color:var(--muted);font:11px var(--mono)}
+@media (max-width:760px){.scroll-hint{display:block}}
 table.week{width:100%;min-width:820px;border-collapse:collapse;font-family:var(--sans)}
 table.week th{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:700;padding:11px 14px;text-align:left;background:var(--surface);border-bottom:1px solid var(--rule)}
 table.week th.day{width:74px;font-size:13px;letter-spacing:.04em;color:var(--ink);text-transform:none;font-family:var(--sans);font-weight:700;background:var(--surface);border-right:1px solid var(--rule)}
@@ -60,6 +61,8 @@ table.week td span{display:block;font-family:var(--mono);font-size:11px;font-wei
 td.t-dsa{background:var(--dsa-soft);color:var(--dsa)}
 td.t-sd{background:var(--sd-soft);color:var(--sd)}
 td.t-lld{background:var(--lld-soft);color:var(--lld)}
+td.t-job{background:var(--job-soft);color:var(--job)}
+td.t-project{background:var(--project-soft);color:var(--project)}
 td.t-off,td.t-free{background:var(--good-soft);color:var(--good)}
 td.t-none{color:var(--faint)}
 td.din{background:var(--ground);color:var(--faint);font-weight:400;font-style:italic}
@@ -74,6 +77,8 @@ tr.is-today td{box-shadow:inset 0 2px 0 var(--accent),inset 0 -2px 0 var(--accen
 .k-dsa{background:var(--dsa-soft);border:1px solid var(--dsa)}
 .k-sd{background:var(--sd-soft);border:1px solid var(--sd)}
 .k-lld{background:var(--lld-soft);border:1px solid var(--lld)}
+.k-job{background:var(--job-soft);border:1px solid var(--job)}
+.k-project{background:var(--project-soft);border:1px solid var(--project)}
 .k-off{background:var(--good-soft);border:1px solid var(--good)}
 
 .warn{border:1px solid var(--accent);background:var(--accent-soft);border-radius:9px;padding:15px 18px;margin:0 0 24px;font-size:14.5px;max-width:88ch}
@@ -127,7 +132,7 @@ code{font-family:var(--mono);font-size:.86em;background:var(--ground);border:1px
   </div>
 </header>
 
-<p class="intro">Three tracks. Roughly 9&ndash;10 hours a week, <strong>deliberately under capacity</strong>. The daily labels show usual stages. Resume the current stage from PROGRESS.md.</p>
+<p class="intro">Three learning tracks, with weekday windows and evening sessions. Friday system design is optional. Resume the current stage from PROGRESS.md.</p>
 
 <div class="tablewrap">
 <table class="week">
@@ -137,44 +142,44 @@ code{font-family:var(--mono);font-size:.86em;background:var(--ground);border:1px
       <th>17:00 &ndash; 18:00</th>
       <th>18:00 &ndash; 19:00</th>
       <th class="din">19:00 &ndash; 20:00</th>
-      <th>20:00 evening block</th>
+      <th>Evening</th>
     </tr>
   </thead>
   <tbody>
     <tr data-day="1">
       <th class="day">Mon</th>
       <td class="t-dsa">3 DSA reps</td>
-      <td class="t-dsa opt">1 new DSA problem<span>optional</span></td>
+      <td class="t-job">Job applications</td>
       <td class="din">dinner</td>
-      <td class="t-sd">System design<span>guided attempt &mdash; or resume · 45 min</span></td>
+      <td class="t-sd">20:00 · System design<span>guided attempt or resume · 45 min</span></td>
     </tr>
     <tr data-day="2">
       <th class="day">Tue</th>
       <td class="t-dsa">3 DSA reps</td>
       <td class="t-dsa opt">1 new DSA problem<span>optional</span></td>
       <td class="din">dinner</td>
-      <td class="t-lld">LLD<span>study one pattern · 40 min</span></td>
+      <td class="t-lld">20:00 · LLD<span>study one pattern · 40 min</span></td>
     </tr>
     <tr data-day="3">
       <th class="day">Wed</th>
       <td class="t-dsa">3 DSA reps</td>
-      <td class="t-dsa opt">1 new DSA problem<span>optional</span></td>
+      <td class="t-job">Job applications</td>
       <td class="din">dinner</td>
-      <td class="t-sd">System design<span>guided check &mdash; or resume · 45 min</span></td>
+      <td class="t-sd">20:00 · System design<span>guided check or resume · 45 min</span></td>
     </tr>
     <tr data-day="4">
       <th class="day">Thu</th>
       <td class="t-dsa">3 DSA reps</td>
-      <td class="t-none">&mdash;</td>
+      <td class="t-dsa opt">1 new DSA problem<span>optional</span></td>
       <td class="din">dinner</td>
-      <td class="t-lld">LLD<span>sketch Sunday's build · 40 min</span></td>
+      <td class="t-lld">20:00 · LLD<span>sketch one finishable behavior · 40 min</span></td>
     </tr>
     <tr data-day="5">
       <th class="day">Fri</th>
       <td class="t-dsa">3 DSA reps</td>
-      <td class="t-sd">System design<span>close one gap · 18:00&ndash;18:45</span></td>
+      <td class="t-sd opt">System design<span>optional · 18:00–18:45</span></td>
       <td class="din">dinner</td>
-      <td class="t-free">free</td>
+      <td class="t-project">Around 21:00<span>Fast Expense Tracker · duration not set</span></td>
     </tr>
     <tr data-day="6">
       <th class="day">Sat</th>
@@ -182,47 +187,49 @@ code{font-family:var(--mono);font-size:.86em;background:var(--ground);border:1px
     </tr>
     <tr data-day="0">
       <th class="day">Sun</th>
-      <td class="t-lld" colspan="4"><b>LLD build</b>, 1.5&ndash;2 hours<span>write it by hand, in Python</span></td>
+      <td class="t-lld" colspan="4"><b>Small LLD build</b>, 60–90 min<span>write it by hand, in Python</span></td>
     </tr>
   </tbody>
 </table>
 </div>
+<p class="scroll-hint">Swipe the table to see all time slots.</p>
 
 <div class="key">
   <span><i class="k-dsa"></i>DSA</span>
   <span><i class="k-sd"></i>System design</span>
   <span><i class="k-lld"></i>LLD / organic projects</span>
+  <span><i class="k-job"></i>Job applications</span>
+  <span><i class="k-project"></i>Personal project</span>
   <span><i class="k-off"></i>Rest</span>
 </div>
 
 <div class="warn">
   <b>17:00&ndash;18:00 is a window, not a quota.</b>
   The work is <b>3 reps</b>, which takes 35&ndash;45 minutes. If you finish at 17:40, you stop.
-  Do not fill the hour &mdash; filling it is how 9 hours becomes 12 and the plan dies.
+  Do not fill the hour.
 </div>
 
 <div class="cols">
 
   <section class="card">
-    <h2>The three levels of a day</h2>
-    <p class="sub">Say this to yourself when you feel behind.</p>
+    <h2>Keep the DSA window bounded</h2>
+    <p class="sub">The weekday 17:00–18:00 slot is a window for the 3 reps.</p>
     <div class="lvl">
-      <div><b>Floor</b><span class="m">35 min</span><p>3 reps, nothing else. On a rough night this is a <b>win</b>. The streak survives.</p></div>
-      <div><b>Standard</b><span class="m">~75 min</span><p>3 reps plus the evening block.</p></div>
-      <div><b>Full</b><span class="m">~2 h</span><p>Adds the new DSA problem. <b>3 times a week, Mon&ndash;Wed</b> &mdash; energy falls across the week.</p></div>
+      <div><b>3 reps</b><span class="m">35–45 min</span><p>Stop when they are done. Do not fill the hour.</p></div>
+      <div><b>Optional new problems</b><span class="m">Tue and Thu</span><p>Use these separate 18:00–19:00 slots when you choose.</p></div>
     </div>
-    <p class="note"><b>The new DSA problem is optional by design.</b> A night at Floor is not a miss.</p>
+    <p class="note">Monday and Wednesday 18:00–19:00 are for job applications.</p>
   </section>
 
   <section class="card">
     <h2>System design &mdash; the weekly cycle</h2>
-    <p class="sub">One design a week is the usual pace. Normal sessions last 45 minutes. Stages can cross slots; <em>resume unfinished work</em> without extra hours.</p>
+    <p class="sub">One design a week is the usual pace. Monday and Wednesday are usual 45-minute sessions. Friday is optional; resume unfinished work within the scheduled slots.</p>
     <ol class="cyc">
       <li><b>Mon 20:00&ndash;20:45 &mdash; Attempt.</b> Use one question at a time. State assumptions and draw your own design.<span>&rarr; attempt.md + sketch</span></li>
       <li><b>Wed 20:00&ndash;20:45 &mdash; Check.</b> Explain your intent, then compare choices. Run the 3&times;3 sweep. Record open questions.<span>&rarr; gaps.md</span></li>
-      <li><b>Fri 18:00&ndash;18:45 &mdash; Close one gap.</b> Apply one item from gaps.md with numbers and your own diagram.<span>&rarr; a note in concepts/</span></li>
+      <li><b>Fri 18:00&ndash;18:45 &mdash; Optional.</b> Close one gap, or every third Friday revisit an older design if attending.<span>&rarr; a note or revisit record</span></li>
     </ol>
-    <p class="note"><b>Every third Friday</b>, revisit an old design within the same slot. See <code>REVIEW-QUEUE.md</code>.</p>
+    <p class="note"><b>Every third Friday</b>, if attending, replace gap closure with a revisit in the same slot. No extra session. See <code>REVIEW-QUEUE.md</code>.</p>
   </section>
 
   <section class="card">
@@ -230,18 +237,18 @@ code{font-family:var(--mono);font-size:.86em;background:var(--ground);border:1px
     <p class="sub">One pattern a week. Every ~4 weeks, one full problem combining several.</p>
     <ol class="cyc">
       <li><b>Tue</b> &mdash; Study one pattern. What problem it solves, and <b>what it costs</b>.</li>
-      <li><b>Thu</b> &mdash; Sketch Sunday's build: the class list and the interfaces, on paper.</li>
-      <li><b>Sun</b> &mdash; Build it in Python, by hand, 1.5&ndash;2 hours.</li>
+      <li><b>Thu</b> &mdash; Bound one finishable behavior for Sunday's build.</li>
+      <li><b>Sun</b> &mdash; Build a small problem in Python, by hand, 60–90 minutes.</li>
     </ol>
-    <p class="note"><b>Build the wrong version too</b>, so you can feel why the pattern exists. The goal is taste, not a finished app.</p>
+    <p class="note">On Sunday, build by hand the one finishable behavior you selected on Thursday. The Fast Expense Tracker is a separate personal project around 21:00 Friday; its duration is not set. AI integration is a learning direction, not a required feature.</p>
   </section>
 
   <section class="card rules">
     <h2>The rules</h2>
     <ol class="num">
       <li><b>End each session with an artifact or an update.</b> Short videos, explanations, and small examples can help. <b>Then apply the concept yourself.</b></li>
-      <li><b>Saturday is off, and Friday ends early.</b> Rest pays for the other six days. It is not what is left over.</li>
-      <li><b>Do not add more.</b> Hitting Full five nights a week is overdrawing, not dedication.</li>
+      <li><b>Saturday is off. Dinner stays 19:00–20:00.</b></li>
+      <li><b>Do not add work to compensate for an unfinished stage.</b> AI practice during work hours adds no evening quota.</li>
       <li><b>Use real questions to select concepts.</b> The gap list guides depth. <b>The topic map records evidence.</b></li>
       <li><b>Keep your own attempt before the full reference solution.</b> Strict silent or timed simulation requires an explicit request.</li>
     </ol>
@@ -254,19 +261,19 @@ code{font-family:var(--mono);font-size:.86em;background:var(--ground);border:1px
   <div><b>dsa-tech-prep</b><span>LeetCode &middot; LLD &middot; organic projects &middot; the spaced-repetition tracker</span></div>
 </div>
 
-<footer class="foot">Slots set 2026-09-04; system design durations updated 2026-09-21 &middot; source of truth: <code>SCHEDULE.md</code> &middot; framework: <code>system-design/FRAMEWORK.md</code></footer>
+<footer class="foot">Schedule updated 2026-10-26; system design durations set 2026-09-21 &middot; source of truth: <code>SCHEDULE.md</code> &middot; framework: <code>system-design/FRAMEWORK.md</code></footer>
 </div>
 
 <script>
 (function () {
   var COPY = {
-    1: "Monday &mdash; 3 reps, a new problem if you have it, then <b>attempt this week's design</b> at 20:00.",
-    2: "Tuesday &mdash; 3 reps, a new problem if you have it, then <b>study one LLD pattern</b> at 20:00.",
-    3: "Wednesday &mdash; 3 reps, a new problem if you have it, then <b>check your design</b> and write gaps.md at 20:00.",
-    4: "Thursday &mdash; 3 reps, no new problem, then <b>sketch Sunday's build</b> at 20:00.",
-    5: "Friday &mdash; 3 reps, then <b>close one gap</b> at 18:00. Evening free.",
+    1: "Monday &mdash; 3 reps, job applications 18:00–19:00, then <b>attempt this week's design</b> at 20:00.",
+    2: "Tuesday &mdash; 3 reps, an optional new problem 18:00–19:00, then <b>study one LLD pattern</b> at 20:00.",
+    3: "Wednesday &mdash; 3 reps, job applications 18:00–19:00, then <b>check your design</b> at 20:00.",
+    4: "Thursday &mdash; 3 reps, an optional new problem 18:00–19:00, then <b>bound one behavior for Sunday's build</b> at 20:00.",
+    5: "Friday &mdash; 3 reps, optional system design 18:00–18:45, dinner, then Fast Expense Tracker around 21:00.",
     6: "Saturday &mdash; <b>off.</b> Family and friends.",
-    0: "Sunday &mdash; <b>LLD build</b>, 1.5&ndash;2 hours. Write it by hand."
+    0: "Sunday &mdash; <b>small LLD build</b>, 60–90 minutes. Write it by hand in Python."
   };
   try {
     var d = new Date().getDay();

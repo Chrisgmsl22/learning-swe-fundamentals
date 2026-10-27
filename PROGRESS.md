@@ -45,7 +45,7 @@ The week is in `SCHEDULE.md`. The system design loop is in `system-design/FRAMEW
 - Treat attempt, evaluation, and gap closure as stages, independent of the weekday.
 - Use strict silent or timed simulation only on explicit request.
 - Ask about time only for an explicit timed session.
-- Keep the three tracks, weekly slots, Saturday rest, early Friday finish, and total workload.
+- Keep the three learning tracks and weekly slots in [SCHEDULE.md](SCHEDULE.md). Saturday stays off. Friday system design is optional, and no weekly hour total is set.
 - Use the [shared brief](CLAUDE.md), [framework](system-design/FRAMEWORK.md), and [topic map](system-design/TOPICS.md) across agents.
 - Resolve conflicts in old records with current artifacts and the learner's latest statement.
 
